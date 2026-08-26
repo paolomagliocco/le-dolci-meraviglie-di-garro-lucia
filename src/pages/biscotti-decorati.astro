@@ -1,0 +1,699 @@
+---
+const seoTitle = 'Biscotti decorati personalizzati | Le Dolci Meraviglie di Lucy Garro';
+const seoDescription = 'Scopri i biscotti decorati artigianali di Lucia Garro per battesimi, baby shower, comunioni, cresime, compleanni e occasioni speciali. Acquista online su Etsy.';
+
+const prodotti = [
+  {
+    titolo: 'Biscotti con orsetti per primo complimese',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati con teneri orsetti per festeggiare il primo complimese e i primi momenti speciali del bambino.',
+    immagine: '/images/biscotti-con-orsetti-per-primo-complimese.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Piccolo Principe',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati ispirati al Piccolo Principe, ideali per compleanni e feste a tema.',
+    immagine: '/images/biscotti-decorati--per-compleanno-a-tema-piccolo-principe.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema I Tesori del Mare',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati ispirati ai tesori del mare, perfetti per feste e compleanni dal tema marino.',
+    immagine: '/images/biscotti-decorati-a-tema-i-tesori-del-mare.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Rose e Cuori',
+    categoria: 'Matrimonio / Evento',
+    descrizione: 'Biscotti decorati con rose e cuori, ideali per ricorrenze romantiche, matrimoni e occasioni speciali.',
+    immagine: '/images/biscotti-decorati-a-tema-rose-e-cuori.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti siciliani con maioliche e limoni',
+    categoria: 'Matrimonio / Evento',
+    descrizione: 'Biscotti decorati ispirati alla Sicilia, con maioliche e limoni, perfetti per eventi e cerimonie a tema siciliano.',
+    immagine: '/images/biscotti-decorati-a-tema-siciliano-con-maioliche-e-limoni.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Sirenetta',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati a tema sirenetta, ideali per compleanni e feste dedicate al mondo del mare.',
+    immagine: '/images/biscotti-decorati-a-tema-sirenetta.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Stelle Marine',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con stelle marine e dettagli marini, perfetti per compleanni ed eventi estivi.',
+    immagine: '/images/biscotti-decorati-a-tema-stelle-marine.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Unicorno',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti artigianali decorati a tema unicorno, ideali per compleanni e sweet table personalizzati.',
+    immagine: '/images/biscotti-decorati-a-tema-unicorno_sweet_table.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti con orsetti per Battesimo',
+    categoria: 'Battesimo',
+    descrizione: 'Delicati biscotti decorati con orsetti, perfetti per battesimi, bomboniere e tavoli dei dolci coordinati.',
+    immagine: '/images/biscotti-decorati-conorsetti-per-battesimo.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti Gender Reveal con orsetti Boy or Girl',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati con orsetti rosa e azzurri per Gender Reveal e Baby Shower.',
+    immagine: '/images/biscotti-decorati-Gender-Reveal-con-orsetti–Boy-or-Girl.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti Gender Reveal e Baby Shower',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti personalizzati per annunciare l\'arrivo di un bebè o rendere speciale un Gender Reveal.',
+    immagine: '/images/biscotti-decorati-gender-reveal-nascita-baby-shower.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per 18° compleanno a tema floreale',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati a tema floreale per festeggiare il diciottesimo compleanno con uno stile elegante e raffinato.',
+    immagine: '/images/biscotti-decorati-per-18-esimo-compleanno-a-tema-floreale.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per Battesimo a tema Angeli',
+    categoria: 'Battesimo',
+    descrizione: 'Biscotti delicati a tema angeli, pensati per battesimi e cerimonie dal carattere dolce ed elegante.',
+    immagine: '/images/biscotti-decorati-per-battesimo-a-tema-angeli.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Animali della Fattoria',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con gli animali della fattoria, ideali per feste di compleanno dei più piccoli.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-della-fattoria.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Animali della Giungla',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con animali della giungla per compleanni e feste a tema safari.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-della-giungla.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Animali Marini',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con simpatici animali marini, perfetti per compleanni a tema oceano.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-marini.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Arcobaleno',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con arcobaleni e colori pastello per compleanni allegri e colorati.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-arcobaleno.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti a tema Fiorito',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con motivi floreali, ideali per compleanni ed eventi primaverili.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-fiorito.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per compleanno a tema Unicorno',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti personalizzati a tema unicorno per compleanni e feste coordinate.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-unicorno.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti Unicorno Rosa',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati a tema unicorno rosa, perfetti per compleanni romantici e fiabeschi.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-unicorno-rosa.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per Comunione e Cresima',
+    categoria: 'Comunione / Cresima',
+    descrizione: 'Biscotti eleganti e personalizzabili per Comunione e Cresima, ideali come ricordo della cerimonia.',
+    immagine: '/images/biscotti-decorati-per-comunione-e-cresima.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per Cresima e Comunione',
+    categoria: 'Comunione / Cresima',
+    descrizione: 'Creazioni artigianali coordinate per Cresima e Comunione, con dettagli raffinati e personalizzabili.',
+    immagine: '/images/biscotti-decorati-per-cresima-e-comunione.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per eventi con Cuore e Rose',
+    categoria: 'Matrimonio / Evento',
+    descrizione: 'Biscotti decorati con cuore e rose per matrimoni, anniversari e occasioni romantiche.',
+    immagine: '/images/biscotti-decorati-per-eventi-con-cuore-e-rose.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti decorati Gender Reveal',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati rosa e azzurri per Gender Reveal, nascita e Baby Shower.',
+    immagine: '/images/biscotti-decorati-per-gender-reveal.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti Gender Reveal personalizzati',
+    categoria: 'Baby shower',
+    descrizione: 'Una proposta coordinata per Gender Reveal e Baby Shower, personalizzabile nei colori e nei dettagli.',
+    immagine: '/images/biscotti-decorati-per-gender-reveal-2.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per Matrimonio a tema Nuziale',
+    categoria: 'Matrimonio / Evento',
+    descrizione: 'Biscotti decorati per matrimonio, coordinabili con colori e stile delle nozze.',
+    immagine: '/images/biscotti-decorati-per-matrimonio-a-tema-nuziale.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per nascita bambino con orsetti',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati con orsetti per celebrare la nascita di un bambino, personalizzabili nei dettagli.',
+    immagine: '/images/biscotti-decorati-per-nascita-bambino-con-orsetti.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti personalizzati Cuore e Rose Rosa',
+    categoria: 'Matrimonio / Evento',
+    descrizione: 'Biscotti decorati con cuori e rose rosa per eventi romantici, matrimoni e anniversari.',
+    immagine: '/images/biscotti-decorati-personalizzati-a-tema-cuore-e-rose-rosa.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti per Cresima con fiori',
+    categoria: 'Comunione / Cresima',
+    descrizione: 'Biscotti personalizzati per Cresima con decorazioni floreali eleganti e delicate.',
+    immagine: '/images/biscotti-decorati-personalizzati-per-Cresima-con-fiori.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti primo compleanno a tema Caramelle',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti colorati a tema caramelle per festeggiare il primo compleanno.',
+    immagine: '/images/biscotti-decorati-primo-compeanno-a-tema-caramelle.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti primo compleanno Foglie d\'Autunno',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti decorati con foglie d\'autunno e tonalità calde per un primo compleanno stagionale.',
+    immagine: '/images/biscotti-decorati-primo-compleanno-a-tema-foglie-di-autunno.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti primo compleanno rosa con fiocchi',
+    categoria: 'Compleanno',
+    descrizione: 'Biscotti rosa con fiocchi per un primo compleanno delicato ed elegante.',
+    immagine: '/images/biscotti-decorati-primo-compleanno-rosa-con-fiocchi.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti decorati per nascita bambina',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti delicati per celebrare la nascita di una bambina, personalizzabili con colori, nome e dettagli.',
+    immagine: '/images/biscotti_decorati_nascita_bambina.png',
+    etsy: 'https://www.etsy.com/'
+  },
+  {
+    titolo: 'Biscotti Baby Shower con orsetti azzurri',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti a tema orsetti azzurri per Baby Shower, nascita e battesimo.',
+    immagine: '/images/biscotti_decorati_per_baby_shower_a_tema_orsetti_azzurri.png',
+    etsy: 'https://www.etsy.com/'
+  },
+];
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seoTitle}</title>
+    <meta name="description" content={seoDescription} />
+    <meta name="robots" content="index,follow" />
+
+    <style>
+      :root {
+        --cream: #fffaf5;
+        --paper: #ffffff;
+        --ink: #302820;
+        --muted: #786b60;
+        --rose-dark: #b76773;
+        --beige: #efe4d7;
+        --line: #eadfd5;
+        --shadow: 0 14px 40px rgba(72, 48, 34, .08);
+      }
+
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+      a { color: inherit; text-decoration: none; }
+      .wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+      header { position: sticky; top: 0; z-index: 20; background: rgba(255,250,245,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+      .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+      .brand { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; }
+      .brand span { color: var(--rose-dark); }
+      nav { display: flex; gap: 22px; font-size: .95rem; }
+
+      .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 13px 20px; font-weight: 700; transition: .2s ease; }
+      .btn:hover { transform: translateY(-2px); }
+      .btn-primary { background: var(--rose-dark); color: white; }
+
+      .hero { padding: 82px 0 54px; text-align: center; }
+      .eyebrow { display: inline-block; background: var(--beige); padding: 7px 12px; border-radius: 999px; font-size: .82rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
+      h1, h2, h3 { font-family: Georgia, serif; line-height: 1.1; margin-top: 0; }
+      h1 { font-size: clamp(2.8rem, 6vw, 5rem); margin: 18px auto; max-width: 900px; }
+      h1 em { color: var(--rose-dark); font-style: normal; }
+      .lead { max-width: 840px; margin: 0 auto; color: var(--muted); font-size: 1.1rem; }
+
+      .catalogo { padding: 30px 0 84px; }
+      .products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+
+      .product-card { min-width: 0; overflow: hidden; display: flex; flex-direction: column; background: var(--paper); border: 1px solid var(--line); border-radius: 26px; box-shadow: var(--shadow); }
+      .product-image { width: 100%; height: 275px; overflow: hidden; background: #f6eee8; }
+      .product-image img { width: 100%; height: 100%; display: block; object-fit: cover; transition: transform .3s ease; }
+      .product-card:hover .product-image img { transform: scale(1.025); }
+
+      .product-body { display: flex; flex: 1; flex-direction: column; padding: 24px; }
+      .category { color: var(--rose-dark); font-size: .78rem; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+      .product-body h2 { font-size: 1.55rem; margin: 8px 0 12px; }
+      .product-body p { color: var(--muted); margin: 0 0 22px; }
+
+      .product-actions { margin-top: auto; display: flex; gap: 10px; flex-wrap: wrap; }
+      .etsy-btn { background: var(--rose-dark); color: white; }
+      .whatsapp-btn { background: white; border: 1px solid var(--line); }
+
+      .product-card {
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease;
+      }
+
+      .product-card *,
+      .product-card .product-image,
+      .product-card h2 {
+        cursor: pointer;
+      }
+
+      .product-card a,
+      .product-card button {
+        cursor: pointer;
+      }
+
+      .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 46px rgba(72, 48, 34, .13);
+      }
+
+      .product-card:focus-visible {
+        outline: 3px solid rgba(183,103,115,.35);
+        outline-offset: 3px;
+      }
+
+      .product-modal {
+        position: relative;
+        width: min(980px, calc(100% - 32px));
+        max-height: 90vh;
+        padding: 0;
+        border: 0;
+        border-radius: 28px;
+        overflow: hidden;
+        background: var(--paper);
+        color: var(--ink);
+        box-shadow: 0 30px 90px rgba(31, 20, 14, .28);
+      }
+
+      .product-modal::backdrop {
+        background: rgba(36, 27, 23, .68);
+        backdrop-filter: blur(5px);
+      }
+
+      .modal-grid {
+        display: grid;
+        grid-template-columns: 1.08fr .92fr;
+        min-height: 560px;
+      }
+
+      .modal-image-wrap {
+        min-width: 0;
+        min-height: 560px;
+        background: #f6eee8;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+      }
+
+      .modal-image-wrap img {
+        width: 100%;
+        height: 100%;
+        max-height: 78vh;
+        display: block;
+        object-fit: contain;
+      }
+
+      .modal-content {
+        position: relative;
+        padding: 48px 40px 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .modal-content h2 {
+        font-size: clamp(2rem, 4vw, 3rem);
+        margin: 10px 0 16px;
+      }
+
+      .modal-content p {
+        color: var(--muted);
+        font-size: 1.05rem;
+        margin: 0;
+      }
+
+      .modal-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 28px;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        z-index: 20;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        border: 2px solid rgba(255,255,255,.9);
+        border-radius: 50%;
+        background: var(--rose-dark);
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 1.75rem;
+        font-weight: 400;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 8px 22px rgba(48, 40, 32, .22);
+        transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      }
+
+      .modal-close:hover {
+        transform: scale(1.08);
+        background: #9f5561;
+        box-shadow: 0 10px 28px rgba(48, 40, 32, .28);
+      }
+
+      .modal-close:focus-visible {
+        outline: 3px solid rgba(183,103,115,.30);
+        outline-offset: 3px;
+      }
+
+      .info-box { margin-top: 56px; padding: 38px; border-radius: 30px; background: #f4ece4; text-align: center; }
+      .info-box h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 12px; }
+      .info-box p { max-width: 760px; margin: 0 auto 22px; color: var(--muted); }
+
+      footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; }
+
+      .whatsapp-floating { position: fixed; right: 24px; bottom: 24px; z-index: 1000; display: flex; align-items: center; gap: 10px; padding: 14px 20px; border-radius: 999px; background: #25D366; color: white; font-weight: 800; box-shadow: 0 10px 30px rgba(0,0,0,.20); }
+
+      @media (max-width: 900px) {
+        nav { display: none; }
+        .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+
+      @media (max-width: 600px) {
+        .nav .btn { display: none; }
+        .hero { padding-top: 56px; }
+        .products { grid-template-columns: 1fr; }
+        .product-image { height: 250px; }
+        .whatsapp-floating { right: 16px; bottom: 16px; padding: 12px 16px; }
+
+        .product-modal {
+          width: calc(100% - 20px);
+          max-height: 94vh;
+          border-radius: 22px;
+        }
+
+        .modal-grid {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .modal-image-wrap {
+          min-height: 280px;
+          height: 42vh;
+        }
+
+        .modal-content {
+          padding: 28px 22px 24px;
+        }
+
+        .modal-actions {
+          flex-direction: column;
+        }
+
+        .modal-actions .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="/">Le Dolci Meraviglie<span> di Lucy Garro</span></a>
+
+        <nav aria-label="Navigazione principale">
+          <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/sweet-table">Sweet Table</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
+          <a href="/certificazioni">Certificazioni</a>
+          <a href="/#contatti">Contatti</a>
+        </nav>
+
+        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">
+          Vai su Etsy per Acquistare Online
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <span class="eyebrow">Catalogo biscotti decorati</span>
+          <h1>Biscotti decorati <em>per ogni occasione</em></h1>
+          <p class="lead">
+            Scopri le creazioni artigianali di Lucia Garro: biscotti decorati e personalizzati
+            per compleanni, battesimi, nascita, baby shower, Gender Reveal, Comunione, Cresima
+            e occasioni speciali. Scegli il modello che preferisci e completa l’acquisto su Etsy.
+          </p>
+        </div>
+      </section>
+
+      <section class="catalogo">
+        <div class="wrap">
+          <div class="products">
+            {prodotti.map((prodotto) => (
+              <article
+                class="product-card"
+                data-product-card
+                data-title={prodotto.titolo}
+                data-category={prodotto.categoria}
+                data-description={prodotto.descrizione}
+                data-image={prodotto.immagine}
+                data-etsy={prodotto.etsy}
+                tabindex="0"
+                role="button"
+                aria-label={`Apri i dettagli di ${prodotto.titolo}`}
+              >
+                <div class="product-image">
+                  <img
+                    src={prodotto.immagine}
+                    alt={`${prodotto.titolo} realizzati da Lucia Garro`}
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="product-body">
+                  <span class="category">{prodotto.categoria}</span>
+                  <h2>{prodotto.titolo}</h2>
+                  <p>{prodotto.descrizione}</p>
+
+                  <div class="product-actions">
+                    <a class="btn etsy-btn" href={prodotto.etsy} target="_blank" rel="noopener noreferrer">
+                      Acquista su Etsy
+                    </a>
+
+                    <a
+                      class="btn whatsapp-btn"
+                      href={`https://wa.me/393519425808?text=${encodeURIComponent(`Ciao Lucia, vorrei avere informazioni su: ${prodotto.titolo}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Chiedi informazioni
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div class="info-box">
+            <span class="eyebrow">Personalizzazioni</span>
+            <h2>Vuoi un biscotto creato apposta per il tuo evento?</h2>
+            <p>
+              Colori, tema, nome, data e dettagli decorativi possono essere personalizzati.
+              Scrivi direttamente a Lucia Garro su WhatsApp per raccontarle la tua idea.
+            </p>
+            <a
+              class="btn btn-primary"
+              href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20sui%20biscotti%20decorati%20personalizzati."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contatta Lucia su WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        © 2026 Le Dolci Meraviglie di Lucy Garro · Biscotti decorati artigianali · Privacy · Cookie
+      </div>
+    </footer>
+
+
+    <dialog id="product-modal" class="product-modal" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" aria-label="Chiudi finestra">×</button>
+
+      <div class="modal-grid">
+        <div class="modal-image-wrap">
+          <img id="modal-image" src="" alt="" />
+        </div>
+
+        <div class="modal-content">
+          <span id="modal-category" class="category"></span>
+          <h2 id="modal-title"></h2>
+          <p id="modal-description"></p>
+
+          <div class="modal-actions">
+            <a
+              id="modal-etsy"
+              class="btn etsy-btn"
+              href="https://www.etsy.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Acquista su Etsy
+            </a>
+
+            <a
+              id="modal-whatsapp"
+              class="btn whatsapp-btn"
+              href="#"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Chiedi informazioni
+            </a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <a
+      class="whatsapp-floating"
+      href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20sui%20biscotti%20decorati%20personalizzati."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contatta Lucia Garro su WhatsApp"
+    >
+      WhatsApp
+    </a>
+
+    <script>
+      const modal = document.querySelector('#product-modal');
+      const cards = document.querySelectorAll('[data-product-card]');
+      const modalImage = document.querySelector('#modal-image');
+      const modalTitle = document.querySelector('#modal-title');
+      const modalCategory = document.querySelector('#modal-category');
+      const modalDescription = document.querySelector('#modal-description');
+      const modalEtsy = document.querySelector('#modal-etsy');
+      const modalWhatsapp = document.querySelector('#modal-whatsapp');
+      const closeButton = document.querySelector('.modal-close');
+
+      function openProductModal(card) {
+        const title = card.dataset.title ?? '';
+        const category = card.dataset.category ?? '';
+        const description = card.dataset.description ?? '';
+        const image = card.dataset.image ?? '';
+        const etsy = card.dataset.etsy ?? 'https://www.etsy.com/';
+
+        modalImage.src = image;
+        modalImage.alt = `${title} - immagine ingrandita`;
+
+        modalTitle.textContent = title;
+        modalCategory.textContent = category;
+        modalDescription.textContent = description;
+        modalEtsy.href = etsy;
+
+        const whatsappMessage = encodeURIComponent(
+          `Ciao Lucia, vorrei avere informazioni su: ${title}`
+        );
+        modalWhatsapp.href = `https://wa.me/393519425808?text=${whatsappMessage}`;
+
+        modal.showModal();
+      }
+
+      cards.forEach((card) => {
+        card.addEventListener('click', (event) => {
+          if (event.target.closest('a')) return;
+          openProductModal(card);
+        });
+
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openProductModal(card);
+          }
+        });
+      });
+
+      closeButton?.addEventListener('click', () => {
+        modal.close();
+      });
+
+      modal?.addEventListener('click', (event) => {
+        if (event.target === modal) {
+          modal.close();
+        }
+      });
+    </script>
+
+  </body>
+</html>

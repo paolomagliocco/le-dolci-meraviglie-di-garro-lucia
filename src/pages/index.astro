@@ -1,0 +1,1619 @@
+---
+const categorie = [
+  { nome: 'Compleanni', emoji: '🎂', testo: 'Biscotti personalizzati per feste, età e temi speciali.' },
+  { nome: 'Battesimi', emoji: '🕊️', testo: 'Set delicati per battesimi, bomboniere e sweet table.' },
+  { nome: 'Baby shower', emoji: '🧸', testo: 'Orsetti, nuvole, stelline e colori su misura.' },
+  { nome: 'Comunioni', emoji: '🤍', testo: 'Biscotti eleganti per una giornata da ricordare.' },
+  { nome: 'Matrimoni', emoji: '💍', testo: 'Segnaposto e biscotti coordinati al tema delle nozze.' },
+  { nome: 'Lauree', emoji: '🎓', testo: 'Tocco, pergamena e dettagli personalizzati.' },
+];
+
+const prodotti = [
+  {
+    nome: 'Biscotti a tema Unicorno',
+    categoria: 'Compleanno',
+    prezzo: 'Prezzo su richiesta',
+    immagine: '/images/biscotti-decorati-a-tema-unicorno_sweet_table.png'
+  },
+  {
+    nome: 'Biscotti con orsetti per Battesimo',
+    categoria: 'Battesimo',
+    prezzo: 'Prezzo su richiesta',
+    immagine: '/images/biscotti-decorati-conorsetti-per-battesimo.png'
+  },
+  {
+    nome: 'Biscotti Gender Reveal',
+    categoria: 'Baby Shower',
+    prezzo: 'Prezzo su richiesta',
+    immagine: '/images/biscotti-decorati-Gender-Reveal-con-orsetti-Boy-or-Girl.png'
+  },
+  {
+    nome: 'Biscotti Comunione e Cresima',
+    categoria: 'Comunione',
+    prezzo: 'Prezzo su richiesta',
+    immagine: '/images/biscotti-decorati-per-comunione-e-cresima.png'
+  },
+];
+
+
+const biscottiCategorie = [
+  {
+    titolo: 'Biscotti con orsetti per primo complimese',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati con teneri orsetti per festeggiare il primo complimese e i primi momenti speciali del bambino.',
+    immagine: '/images/biscotti-con-orsetti-per-primo-complimese.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Piccolo Principe',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati ispirati al Piccolo Principe, ideali per compleanni e feste a tema.',
+    immagine: '/images/biscotti-decorati--per-compleanno-a-tema-piccolo-principe.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema I Tesori del Mare',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati ispirati ai tesori del mare, perfetti per feste e compleanni dal tema marino.',
+    immagine: '/images/biscotti-decorati-a-tema-i-tesori-del-mare.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Rose e Cuori',
+    categoria: 'Matrimoni',
+    descrizione: 'Biscotti decorati con rose e cuori, ideali per ricorrenze romantiche, matrimoni e occasioni speciali.',
+    immagine: '/images/biscotti-decorati-a-tema-rose-e-cuori.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti siciliani con maioliche e limoni',
+    categoria: 'Matrimoni',
+    descrizione: 'Biscotti decorati ispirati alla Sicilia, con maioliche e limoni, perfetti per eventi e cerimonie a tema siciliano.',
+    immagine: '/images/biscotti-decorati-a-tema-siciliano-con-maioliche-e-limoni.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Sirenetta',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati a tema sirenetta, ideali per compleanni e feste dedicate al mondo del mare.',
+    immagine: '/images/biscotti-decorati-a-tema-sirenetta.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Stelle Marine',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con stelle marine e dettagli marini, perfetti per compleanni ed eventi estivi.',
+    immagine: '/images/biscotti-decorati-a-tema-stelle-marine.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Unicorno',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti artigianali decorati a tema unicorno, ideali per compleanni e sweet table personalizzati.',
+    immagine: '/images/biscotti-decorati-a-tema-unicorno_sweet_table.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti con orsetti per Battesimo',
+    categoria: 'Battesimi',
+    descrizione: 'Delicati biscotti decorati con orsetti, perfetti per battesimi, bomboniere e tavoli dei dolci coordinati.',
+    immagine: '/images/biscotti-decorati-conorsetti-per-battesimo.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti Gender Reveal con orsetti Boy or Girl',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati con orsetti rosa e azzurri per Gender Reveal e Baby Shower.',
+    immagine: '/images/biscotti-decorati-Gender-Reveal-con-orsetti-Boy-or-Girl.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti Gender Reveal e Baby Shower',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti personalizzati per annunciare l\'arrivo di un bebè o rendere speciale un Gender Reveal.',
+    immagine: '/images/biscotti-decorati-gender-reveal-nascita-baby-shower.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per 18° compleanno a tema floreale',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati a tema floreale per festeggiare il diciottesimo compleanno con uno stile elegante e raffinato.',
+    immagine: '/images/biscotti-decorati-per-18-esimo-compleanno-a-tema-floreale.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per Battesimo a tema Angeli',
+    categoria: 'Battesimi',
+    descrizione: 'Biscotti delicati a tema angeli, pensati per battesimi e cerimonie dal carattere dolce ed elegante.',
+    immagine: '/images/biscotti-decorati-per-battesimo-a-tema-angeli.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Animali della Fattoria',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con gli animali della fattoria, ideali per feste di compleanno dei più piccoli.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-della-fattoria.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Animali della Giungla',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con animali della giungla per compleanni e feste a tema safari.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-della-giungla.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Animali Marini',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con simpatici animali marini, perfetti per compleanni a tema oceano.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-marini.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Arcobaleno',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con arcobaleni e colori pastello per compleanni allegri e colorati.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-arcobaleno.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti a tema Fiorito',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con motivi floreali, ideali per compleanni ed eventi primaverili.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-fiorito.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per compleanno a tema Unicorno',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti personalizzati a tema unicorno per compleanni e feste coordinate.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-unicorno.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti Unicorno Rosa',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati a tema unicorno rosa, perfetti per compleanni romantici e fiabeschi.',
+    immagine: '/images/biscotti-decorati-per-compleanno-a-tema-unicorno-rosa.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per Comunione e Cresima',
+    categoria: 'Comunioni',
+    descrizione: 'Biscotti eleganti e personalizzabili per Comunione e Cresima, ideali come ricordo della cerimonia.',
+    immagine: '/images/biscotti-decorati-per-comunione-e-cresima.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per Cresima e Comunione',
+    categoria: 'Comunioni',
+    descrizione: 'Creazioni artigianali coordinate per Cresima e Comunione, con dettagli raffinati e personalizzabili.',
+    immagine: '/images/biscotti-decorati-per-cresima-e-comunione.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per eventi con Cuore e Rose',
+    categoria: 'Matrimoni',
+    descrizione: 'Biscotti decorati con cuore e rose per matrimoni, anniversari e occasioni romantiche.',
+    immagine: '/images/biscotti-decorati-per-eventi-con-cuore-e-rose.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti decorati Gender Reveal',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati rosa e azzurri per Gender Reveal, nascita e Baby Shower.',
+    immagine: '/images/biscotti-decorati-per-gender-reveal.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti Gender Reveal personalizzati',
+    categoria: 'Baby shower',
+    descrizione: 'Una proposta coordinata per Gender Reveal e Baby Shower, personalizzabile nei colori e nei dettagli.',
+    immagine: '/images/biscotti-decorati-per-gender-reveal-2.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per Matrimonio a tema Nuziale',
+    categoria: 'Matrimoni',
+    descrizione: 'Biscotti decorati per matrimonio, coordinabili con colori e stile delle nozze.',
+    immagine: '/images/biscotti-decorati-per-matrimonio-a-tema-nuziale.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per nascita bambino con orsetti',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti decorati con orsetti per celebrare la nascita di un bambino, personalizzabili nei dettagli.',
+    immagine: '/images/biscotti-decorati-per-nascita-bambino-con-orsetti.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti personalizzati Cuore e Rose Rosa',
+    categoria: 'Matrimoni',
+    descrizione: 'Biscotti decorati con cuori e rose rosa per eventi romantici, matrimoni e anniversari.',
+    immagine: '/images/biscotti-decorati-personalizzati-a-tema-cuore-e-rose-rosa.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti per Cresima con fiori',
+    categoria: 'Comunioni',
+    descrizione: 'Biscotti personalizzati per Cresima con decorazioni floreali eleganti e delicate.',
+    immagine: '/images/biscotti-decorati-personalizzati-per-Cresima-con-fiori.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti primo compleanno a tema Caramelle',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti colorati a tema caramelle per festeggiare il primo compleanno.',
+    immagine: '/images/biscotti-decorati-primo-compeanno-a-tema-caramelle.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti primo compleanno Foglie d\'Autunno',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti decorati con foglie d\'autunno e tonalità calde per un primo compleanno stagionale.',
+    immagine: '/images/biscotti-decorati-primo-compleanno-a-tema-foglie-di-autunno.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti primo compleanno rosa con fiocchi',
+    categoria: 'Compleanni',
+    descrizione: 'Biscotti rosa con fiocchi per un primo compleanno delicato ed elegante.',
+    immagine: '/images/biscotti-decorati-primo-compleanno-rosa-con-fiocchi.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti decorati per nascita bambina',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti delicati per celebrare la nascita di una bambina, personalizzabili con colori, nome e dettagli.',
+    immagine: '/images/biscotti_decorati_nascita_bambina.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+  {
+    titolo: 'Biscotti Baby Shower con orsetti azzurri',
+    categoria: 'Baby shower',
+    descrizione: 'Biscotti a tema orsetti azzurri per Baby Shower, nascita e battesimo.',
+    immagine: '/images/biscotti_decorati_per_baby_shower_a_tema_orsetti_azzurri.png',
+    prezzo: 'Prezzo su richiesta'
+  },
+];
+
+const seoTitle = 'Biscotti decorati personalizzati | Dolci Meraviglie di Lucy Garro';
+const seoDescription = 'Biscotti decorati artigianali personalizzati per compleanni, battesimi, baby shower, comunioni, matrimoni e lauree. Scopri i modelli e acquista su Etsy.';
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seoTitle}</title>
+    <meta name="description" content={seoDescription} />
+    <meta name="robots" content="index,follow" />
+    <link rel="canonical" href="https://www.esempio-biscotti.it/" />
+    <style>
+      :root {
+        --cream: #fffaf5;
+        --paper: #ffffff;
+        --ink: #302820;
+        --muted: #786b60;
+        --rose: #e9b7bd;
+        --rose-dark: #b76773;
+        --beige: #efe4d7;
+        --line: #eadfd5;
+        --shadow: 0 14px 40px rgba(72, 48, 34, .08);
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--cream);
+        line-height: 1.6;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      .wrap { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255,250,245,.94);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand { font-family: Georgia, serif; font-size: 1.25rem; font-weight: 700; }
+      .brand span { color: var(--rose-dark); }
+      nav { display: flex; gap: 22px; font-size: .95rem; }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 13px 20px;
+        font-weight: 700;
+        transition: .2s ease;
+      }
+      .btn:hover { transform: translateY(-1px); }
+      .btn-primary { background: var(--rose-dark); color: white; }
+      .btn-secondary { background: white; border: 1px solid var(--line); }
+
+      .hero {
+        padding: 76px 0 56px;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.05fr .95fr;
+        gap: 48px;
+        align-items: center;
+      }
+      .eyebrow {
+        display: inline-block;
+        background: var(--beige);
+        padding: 7px 12px;
+        border-radius: 999px;
+        font-size: .82rem;
+        font-weight: 800;
+        letter-spacing: .04em;
+        text-transform: uppercase;
+      }
+      h1, h2, h3 { font-family: Georgia, serif; line-height: 1.1; margin-top: 0; }
+      h1 { font-size: clamp(2.7rem, 6vw, 5.8rem); margin: 18px 0; }
+      h1 em { color: var(--rose-dark); font-style: normal; }
+      .lead { font-size: 1.12rem; color: var(--muted); max-width: 680px; }
+      .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+      .hero-card {
+        min-height: 520px;
+        border-radius: 36px;
+        background:
+          radial-gradient(circle at 20% 22%, rgba(255,255,255,.95) 0 6%, transparent 7%),
+          radial-gradient(circle at 76% 28%, #f4c9cf 0 11%, transparent 12%),
+          radial-gradient(circle at 32% 68%, #ead4b7 0 14%, transparent 15%),
+          radial-gradient(circle at 72% 72%, #d8b7a2 0 13%, transparent 14%),
+          linear-gradient(145deg, #f5e7dc, #f8d8dd);
+        box-shadow: var(--shadow);
+        display: grid;
+        place-items: center;
+        padding: 28px;
+        position: relative;
+        overflow: hidden;
+              cursor: pointer;
+        transition: transform .22s ease, box-shadow .22s ease;
+      }
+
+      .hero-card *,
+      .hero-card .cookie-board,
+      .hero-card .cookie-grid,
+      .hero-card .cookie,
+      .hero-card img {
+        cursor: pointer;
+      }
+
+      .hero-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 22px 54px rgba(72,48,34,.16);
+      }
+
+      .hero-card:focus-visible {
+        outline: 3px solid rgba(183,103,115,.42);
+        outline-offset: 4px;
+      }
+      .cookie-board {
+        width: min(420px, 92%);
+        background: rgba(255,255,255,.84);
+        border: 1px solid rgba(255,255,255,.8);
+        border-radius: 30px;
+        padding: 24px;
+        box-shadow: 0 24px 60px rgba(95, 62, 48, .18);
+        transform: rotate(-2deg);
+      }
+      .cookie-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+
+    .cookie {
+      aspect-ratio: 1;
+      border-radius: 28px;
+      background: #fff7ef;
+      border: 1px solid #f2dfcf;
+      overflow: hidden;
+    }
+
+    .cookie img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+
+      .hero-gallery-dialog {
+        position: relative;
+        width: min(1180px, calc(100% - 28px));
+        height: min(900px, 94vh);
+        max-height: 94vh;
+        padding: 0;
+        border: 0;
+        border-radius: 32px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #fff8f5 0%, #f8ece7 100%);
+        color: var(--ink);
+        box-shadow: 0 32px 90px rgba(31,20,14,.30);
+      }
+
+      .hero-gallery-dialog::backdrop {
+        background: rgba(36,27,23,.72);
+        backdrop-filter: blur(6px);
+      }
+
+      .hero-gallery-modal {
+        height: 100%;
+        overflow-y: auto;
+        padding: 42px 44px 50px;
+        scrollbar-gutter: stable;
+      }
+
+      .hero-gallery-head {
+        position: sticky;
+        top: -42px;
+        z-index: 8;
+        margin: -42px -44px 34px;
+        padding: 42px 88px 26px 44px;
+        background: rgba(255,248,245,.96);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(183,103,115,.16);
+      }
+
+      .hero-gallery-head .eyebrow {
+        margin-bottom: 10px;
+      }
+
+      .hero-gallery-head h2 {
+        margin: 0 0 8px;
+        font-size: clamp(2.5rem, 4.8vw, 4rem);
+      }
+
+      .hero-gallery-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.04rem;
+      }
+
+      .hero-featured-list {
+        display: grid;
+        gap: 26px;
+      }
+
+      .hero-featured-product {
+        display: grid;
+        grid-template-columns: 1.05fr .95fr;
+        min-height: 460px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        border-radius: 30px;
+        background: #fff;
+        box-shadow: 0 16px 42px rgba(72,48,34,.10);
+      }
+
+      .hero-featured-image {
+        min-width: 0;
+        height: 460px;
+        overflow: hidden;
+        background: #f5eee8;
+      }
+
+      .hero-featured-image img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .hero-featured-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 44px 42px;
+        text-align: left;
+      }
+
+      .hero-featured-category {
+        display: inline-flex;
+        align-self: flex-start;
+        margin-bottom: 13px;
+        color: var(--rose-dark);
+        font-size: .8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .075em;
+      }
+
+      .hero-featured-content h3 {
+        margin: 0 0 18px;
+        font-size: clamp(2.1rem, 3.6vw, 3.35rem);
+        line-height: 1.07;
+      }
+
+      .hero-featured-content p {
+        margin: 0;
+        max-width: 520px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.75;
+      }
+
+      .hero-featured-note {
+        display: inline-flex;
+        align-self: flex-start;
+        margin-top: 24px;
+        padding: 8px 14px;
+        border-radius: 999px;
+        background: #f5e7e5;
+        color: var(--rose-dark);
+        font-size: .8rem;
+        font-weight: 800;
+        letter-spacing: .03em;
+      }
+
+      .hero-gallery-close {
+        position: absolute;
+        top: 17px;
+        right: 18px;
+        z-index: 30;
+        width: 50px;
+        height: 50px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        border: 2px solid rgba(255,255,255,.92);
+        border-radius: 50%;
+        background: var(--rose-dark);
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 1.9rem;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 8px 24px rgba(48,40,32,.24);
+        transition: transform .18s ease, background .18s ease;
+      }
+
+      .hero-gallery-close:hover {
+        transform: scale(1.08);
+        background: #9f5561;
+      }
+
+      @media (max-width: 760px) {
+        .hero-gallery-dialog {
+          width: calc(100% - 14px);
+          height: 95vh;
+          max-height: 95vh;
+          border-radius: 22px;
+        }
+
+        .hero-gallery-modal {
+          padding: 56px 14px 22px;
+        }
+
+        .hero-gallery-head {
+          top: -56px;
+          margin: -56px -14px 24px;
+          padding: 58px 66px 20px 18px;
+        }
+
+        .hero-featured-product {
+          grid-template-columns: 1fr;
+          min-height: auto;
+          border-radius: 24px;
+        }
+
+        .hero-featured-image {
+          height: 330px;
+        }
+
+        .hero-featured-content {
+          padding: 28px 24px 30px;
+        }
+
+        .hero-featured-content h3 {
+          font-size: 2rem;
+        }
+
+        .hero-featured-content p {
+          font-size: 1rem;
+        }
+      }
+
+      section { padding: 72px 0; }
+      .section-head { max-width: 760px; margin-bottom: 30px; }
+      .section-head h2 { font-size: clamp(2rem, 4vw, 3.4rem); margin-bottom: 10px; }
+      .section-head p { margin: 0; color: var(--muted); }
+
+      .categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+      .category-icon { font-size: 2rem; }
+      .card h3 { margin: 14px 0 8px; font-size: 1.4rem; }
+      .card p { margin: 0; color: var(--muted); }
+
+      .category-card {
+        cursor: pointer !important;
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+      }
+
+      .category-card *,
+      .category-card .category-icon,
+      .category-card h3,
+      .category-card p {
+        cursor: pointer !important;
+      }
+
+      .category-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 46px rgba(72, 48, 34, .13);
+        border-color: rgba(183,103,115,.32);
+      }
+
+      .category-card:focus-visible {
+        outline: 3px solid rgba(183,103,115,.35);
+        outline-offset: 3px;
+      }
+
+      .category-dialog {
+        position: relative;
+        width: min(980px, calc(100% - 32px));
+        height: min(820px, 90vh);
+        max-height: 90vh;
+        padding: 0;
+        border: 0;
+        border-radius: 30px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #fff8f5 0%, #f8ece7 100%);
+        color: var(--ink);
+        box-shadow: 0 30px 90px rgba(31,20,14,.30);
+      }
+
+      .category-dialog::backdrop {
+        background: rgba(36,27,23,.68);
+        backdrop-filter: blur(5px);
+      }
+
+      .category-dialog-inner {
+        height: 100%;
+        overflow-y: auto;
+        padding: 44px 42px 48px;
+        scrollbar-gutter: stable;
+      }
+
+      .category-dialog-head {
+        position: sticky;
+        top: -44px;
+        z-index: 5;
+        margin: -44px -42px 34px;
+        padding: 44px 74px 26px 42px;
+        background: rgba(255,248,245,.96);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(183,103,115,.16);
+      }
+
+      .category-dialog-head h2 {
+        font-size: clamp(2.2rem, 4vw, 3.4rem);
+        margin: 10px 0 8px;
+      }
+
+      .category-dialog-head p {
+        color: var(--muted);
+        margin: 0;
+        font-size: 1.02rem;
+      }
+
+      .category-products-list {
+        display: grid;
+        gap: 24px;
+      }
+
+      .category-product-row {
+        display: grid;
+        grid-template-columns: 1.08fr .92fr;
+        min-height: 420px;
+        overflow: hidden;
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        box-shadow: 0 14px 40px rgba(72,48,34,.10);
+      }
+
+      .category-product-row-image {
+        min-width: 0;
+        min-height: 420px;
+        background: #f6eee8;
+        overflow: hidden;
+      }
+
+      .category-product-row-image img {
+        width: 100%;
+        height: 100%;
+        min-height: 420px;
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .category-product-row-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 38px 34px;
+        text-align: left;
+      }
+
+      .product-category-label {
+        display: inline-flex;
+        align-self: flex-start;
+        color: var(--rose-dark);
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .07em;
+      }
+
+      .category-product-row-content h4 {
+        margin: 12px 0 14px;
+        font-family: Georgia, serif;
+        font-size: clamp(2rem, 3.5vw, 3.1rem);
+        line-height: 1.08;
+        color: var(--ink);
+      }
+
+      .category-product-row-content h5 {
+        display: none;
+      }
+
+      .category-product-description {
+        margin: 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.7;
+      }
+
+      .category-product-price-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .category-product-price-label {
+        font-size: .76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .07em;
+        color: #aa9485;
+      }
+
+      .category-product-price {
+        color: var(--ink);
+        font-weight: 900;
+        font-size: 1rem;
+      }
+
+      .category-product-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .category-product-actions .btn {
+        padding: 12px 18px;
+        font-size: .92rem;
+      }
+
+      .category-empty {
+        padding: 42px 28px;
+        text-align: center;
+        background: rgba(255,255,255,.72);
+        border: 1px solid rgba(183,103,115,.16);
+        border-radius: 24px;
+      }
+
+      .category-empty h3 {
+        margin-bottom: 8px;
+        font-size: 1.5rem;
+      }
+
+      .category-empty p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .category-close {
+        position: absolute;
+        top: 16px;
+        right: 18px;
+        z-index: 30;
+        width: 46px;
+        height: 46px;
+        display: grid;
+        place-items: center;
+        padding: 0;
+        border: 2px solid rgba(255,255,255,.9);
+        border-radius: 50%;
+        background: var(--rose-dark);
+        color: white;
+        font-family: Arial, sans-serif;
+        font-size: 1.75rem;
+        font-weight: 400;
+        line-height: 1;
+        cursor: pointer;
+        box-shadow: 0 8px 22px rgba(48, 40, 32, .22);
+        transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      }
+
+      .category-close:hover {
+        transform: scale(1.08);
+        background: #9f5561;
+        box-shadow: 0 10px 28px rgba(48,40,32,.28);
+      }
+
+.products {display: grid;grid-template-columns: repeat(4, minmax(0, 1fr));gap: 18px;}
+
+.products .card { min-width: 0;overflow: hidden;}
+
+.product-thumb {width: 100%;height: 210px;border-radius: 18px;overflow: hidden;margin-bottom: 18px;background: #f6eee8;}
+
+.product-thumb img { width: 100%;height: 100%;object-fit: cover;display: block;}
+
+
+      .meta { font-size: .82rem; font-weight: 800; color: var(--rose-dark); text-transform: uppercase; }
+      .price { font-weight: 800; margin-top: 10px; }
+
+      .how {
+        background: #f4ece4;
+      }
+      .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      .step-no {
+        width: 42px; height: 42px; border-radius: 50%; background: var(--rose-dark); color: white;
+        display: grid; place-items: center; font-weight: 800; margin-bottom: 16px;
+      }
+
+      .cta {
+        background: var(--rose-dark);
+        color: white;
+        border-radius: 32px;
+        padding: 42px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+      }
+      .cta h2 { margin: 0 0 8px; font-size: clamp(2rem, 4vw, 3.3rem); }
+      .cta p { margin: 0; opacity: .88; }
+      .cta .btn { background: white; color: var(--rose-dark); white-space: nowrap; }
+
+      footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; }
+
+      @media (max-width: 900px) {
+        nav { display: none; }
+        .hero-grid { grid-template-columns: 1fr; }
+        .hero-card { min-height: 400px; }
+        .categories, .steps { grid-template-columns: repeat(2, 1fr); }
+        .products { grid-template-columns: repeat(2, 1fr); }
+        .category-products { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      }
+
+      @media (max-width: 600px) {
+        .hero { padding-top: 48px; }
+        .categories, .steps, .products { grid-template-columns: 1fr; }
+        .cta { flex-direction: column; align-items: flex-start; padding: 28px; }
+        .nav .btn { display: none; }
+        .category-dialog {
+          width: calc(100% - 16px);
+          height: 94vh;
+          max-height: 94vh;
+          border-radius: 22px;
+        }
+
+        .category-dialog-inner {
+          padding: 58px 16px 22px;
+        }
+
+        .category-dialog-head {
+          top: -58px;
+          margin: -58px -16px 22px;
+          padding: 58px 64px 18px 16px;
+        }
+
+        .category-product-row {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .category-product-row-image {
+          min-height: 280px;
+          height: 280px;
+        }
+
+        .category-product-row-image img {
+          min-height: 280px;
+          height: 280px;
+        }
+
+        .category-product-row-content {
+          padding: 26px 22px 24px;
+        }
+
+        .category-product-row-content h4 {
+          font-size: 2rem;
+        }
+
+        .category-product-actions {
+          flex-direction: column;
+        }
+
+        .category-product-actions .btn {
+          width: 100%;
+        }
+
+.category-dialog {
+          width: calc(100% - 20px);
+          max-height: 94vh;
+          border-radius: 22px;
+        }
+
+        .category-modal-grid {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .category-modal-image-wrap {
+          min-height: 280px;
+          height: 42vh;
+        }
+
+        .category-modal-content {
+          padding: 28px 22px 24px;
+        }
+
+        .category-modal-actions {
+          flex-direction: column;
+        }
+
+        .category-modal-actions .btn {
+          width: 100%;
+        }
+
+
+        .category-dialog-inner {
+          padding: 58px 20px 24px;
+        }
+
+        .category-products {
+          grid-template-columns: 1fr;
+        }
+
+        .category-product img {
+          height: 230px;
+        }
+      }
+    </style>
+
+    <style is:global>
+      /* Elementi creati dinamicamente via innerHTML nella dialog categorie */
+      .category-products-list {
+        display: grid;
+        gap: 24px;
+      }
+
+      .category-product-row {
+        display: grid;
+        grid-template-columns: 1.08fr .92fr;
+        width: 100%;
+        min-height: 420px;
+        overflow: hidden;
+        background: #ffffff;
+        border: 1px solid #eadfd5;
+        border-radius: 28px;
+        box-shadow: 0 14px 40px rgba(72, 48, 34, .10);
+      }
+
+      .category-product-row-image {
+        width: 100%;
+        min-width: 0;
+        height: 420px;
+        overflow: hidden;
+        background: #f6eee8;
+      }
+
+      .category-product-row-image img {
+        width: 100%;
+        height: 420px;
+        display: block;
+        object-fit: cover;
+        object-position: center center;
+      }
+
+      .category-product-row-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 38px 34px;
+        text-align: left;
+      }
+
+      .product-category-label {
+        display: inline-flex;
+        align-self: flex-start;
+        color: #b76773;
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .07em;
+      }
+
+      .category-product-row-content h4 {
+        margin: 12px 0 14px;
+        font-family: Georgia, serif;
+        font-size: clamp(2rem, 3.5vw, 3.1rem);
+        line-height: 1.08;
+        color: #302820;
+      }
+
+      .category-product-description {
+        margin: 0;
+        color: #786b60;
+        font-size: 1.02rem;
+        line-height: 1.7;
+      }
+
+      .category-product-price-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 18px;
+      }
+
+      .category-product-price-label {
+        font-size: .76rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: .07em;
+        color: #aa9485;
+      }
+
+      .category-product-price {
+        font-weight: 900;
+        font-size: 1rem;
+        color: #302820;
+      }
+
+      .category-product-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-top: 24px;
+      }
+
+      .category-product-actions .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 18px;
+        border-radius: 999px;
+        font-size: .92rem;
+        font-weight: 700;
+        text-decoration: none;
+        cursor: pointer;
+        transition: transform .2s ease;
+      }
+
+      .category-product-actions .btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .category-product-actions .btn-primary {
+        background: #b76773;
+        color: #ffffff;
+        border: 1px solid #b76773;
+      }
+
+      .category-product-actions .btn-secondary {
+        background: #ffffff;
+        color: #302820;
+        border: 1px solid #eadfd5;
+      }
+
+      .category-empty {
+        padding: 42px 28px;
+        text-align: center;
+        background: rgba(255,255,255,.78);
+        border: 1px solid rgba(183,103,115,.16);
+        border-radius: 24px;
+      }
+
+      .category-empty h3 {
+        margin: 0 0 8px;
+        font-family: Georgia, serif;
+        font-size: 1.5rem;
+        color: #302820;
+      }
+
+      .category-empty p {
+        margin: 0;
+        color: #786b60;
+      }
+
+      @media (max-width: 700px) {
+        .category-product-row {
+          grid-template-columns: 1fr;
+          min-height: auto;
+        }
+
+        .category-product-row-image,
+        .category-product-row-image img {
+          height: 280px;
+        }
+
+        .category-product-row-content {
+          padding: 26px 22px 24px;
+        }
+
+        .category-product-row-content h4 {
+          font-size: 2rem;
+        }
+
+        .category-product-actions {
+          flex-direction: column;
+        }
+
+        .category-product-actions .btn {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="/">Le Dolci Meraviglie<span> di Lucy Garro</span></a>
+        <nav aria-label="Navigazione principale">
+          <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/sweet-table">Sweet Table</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
+          <a href="/certificazioni">Certificazioni</a>
+          <a href="/#contatti">Contatti</a>
+        </nav>
+        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener">Vai su Etsy per Acquistare Online</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">Biscotti artigianali personalizzati per ogni evento</span>
+            <h1>Grandi emozioni <em>- momenti da ricordare</em></h1>
+            <p class="lead">Biscotti decorati per compleanni, battesimi, baby shower, comunioni, matrimoni e lauree. Scegli il tema, personalizza i dettagli e completa l'ordine in sicurezza su Etsy.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="#biscotti">Scopri i biscotti</a>
+              <a class="btn btn-secondary" href="https://www.etsy.com/" target="_blank" rel="noopener">Acquista su Etsy</a>
+            </div>
+          </div>
+
+          <div class="hero-card" data-hero-gallery tabindex="0" role="button" aria-label="Apri anteprima ingrandita dei biscotti decorati">
+            <div class="cookie-board">
+                <div class="cookie-grid">
+                  <div class="cookie">
+                    <img
+                      src="/images/biscotti-decorati-a-tema-rose-e-cuori.png"
+                      alt="Biscotti decorati personalizzati per Eventi a tema rose e cuori"
+                    />
+                  </div>
+
+                  <div class="cookie">
+                    <img
+                      src="/images/biscotti-decorati-per-cresima-e-comunione.png"
+                      alt="Biscotti decorati artigianali per Cresima e Comunione"
+                    />
+                  </div>
+
+                  <div class="cookie">
+                    <img
+                      src="/images/biscotti-decorati-per-gender-reveal.png"
+                      alt="Biscotti decorati personalizzati per Gender Reveal"
+                    />
+                  </div>
+
+                  <div class="cookie">
+                    <img
+                      src="/images/biscotti-decorati-per-compleanno-a-tema-arcobaleno.png"
+                      alt="Biscotti decorati per Compleanno a tema arcobaleno"
+                    />
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="categorie">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Per ogni occasione</span>
+            <h2>Trova il tema perfetto</h2>
+            <p>Ogni categoria avrà una pagina SEO dedicata, pensata per intercettare ricerche Google specifiche.</p>
+          </div>
+          <div class="categories">
+            {categorie.map((categoria) => (
+              <article
+                class="card category-card"
+                data-category-card
+                data-category={categoria.nome}
+                tabindex="0"
+                role="button"
+                aria-label={`Mostra i biscotti della categoria ${categoria.nome}`}
+              >
+                <div class="category-icon">{categoria.emoji}</div>
+                <h3>{categoria.nome}</h3>
+                <p>{categoria.testo}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section id="biscotti">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">In evidenza</span>
+            <h2>I biscotti più richiesti</h2>
+            <p>Ecco alcuni dei biscotti per Gender Reveal & Babby Shower che puoi ordinare su Etsy</p>
+          </div>
+          <div class="products">
+            {prodotti.map((prodotto) => (
+              <article class="card">
+                <div class="product-thumb">
+                  <img
+                    src={prodotto.immagine}
+                    alt={`${prodotto.nome} - biscotti decorati ${prodotto.categoria}`}
+                    loading="lazy"
+                  />
+                </div>
+                <div class="meta">{prodotto.categoria}</div>
+                <h3>{prodotto.nome}</h3>
+                <div class="price">{prodotto.prezzo}</div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="how" id="come-funziona">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Semplice e veloce</span>
+            <h2>Come funziona</h2>
+          </div>
+          <div class="steps">
+            <article class="card"><div class="step-no">1</div><h3>Scegli il tema</h3><p>Esplora le categorie e trova il modello più adatto all'evento.</p></article>
+            <article class="card"><div class="step-no">2</div><h3>Personalizza</h3><p>Nome, data, colori e dettagli possono essere adattati alla tua festa.</p></article>
+            <article class="card"><div class="step-no">3</div><h3>Ordina su Etsy</h3><p>Il pagamento e la gestione dell'ordine avvengono sulla piattaforma Etsy.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="contatti">
+        <div class="wrap">
+          <div class="cta">
+            <div>
+              <h2>Hai un'idea particolare?</h2>
+              <p>Scrivici per un set completamente personalizzato.</p>
+            </div>
+            <a
+              class="btn"
+              href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20sui%20biscotti%20decorati%20personalizzati."
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Contatta Lucia su WhatsApp
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <dialog id="category-dialog" class="category-dialog" aria-labelledby="category-dialog-title">
+      <button class="category-close" type="button" aria-label="Chiudi finestra">×</button>
+
+      <div class="category-dialog-inner">
+        <div class="category-dialog-head">
+          <span class="eyebrow">Biscotti disponibili</span>
+          <h2 id="category-dialog-title"></h2>
+          <p id="category-dialog-description">
+            Scorri i prodotti disponibili per questa categoria.
+          </p>
+        </div>
+
+        <div id="category-products-list" class="category-products-list"></div>
+      </div>
+    </dialog>
+
+    <script id="category-products-data" type="application/json" set:html={JSON.stringify(biscottiCategorie)}></script>
+
+
+    <dialog id="hero-gallery-dialog" class="hero-gallery-dialog" aria-labelledby="hero-gallery-title">
+      <button class="hero-gallery-close" type="button" aria-label="Chiudi anteprima">×</button>
+
+      <div class="hero-gallery-modal">
+        <div class="hero-gallery-head">
+          <span class="eyebrow">Alcune delle nostre creazioni</span>
+          <h2 id="hero-gallery-title">Biscotti Decorati in Evidenza</h2>
+          <p>Scopri più da vicino le nostre creazioni, consultabili nelle nostre pagine dedicate.</p>
+        </div>
+
+        <div class="hero-featured-list">
+
+          <article class="hero-featured-product">
+            <div class="hero-featured-image">
+              <img
+                src="/images/biscotti-decorati-a-tema-rose-e-cuori.png"
+                alt="Biscotti decorati a tema rose e cuori"
+              />
+            </div>
+            <div class="hero-featured-content">
+              <span class="hero-featured-category">Matrimoni ed eventi</span>
+              <h3>Biscotti a tema Rose e Cuori</h3>
+              <p>
+                Biscotti decorati con rose e cuori, ideali per ricorrenze romantiche,
+                matrimoni e occasioni speciali. Ogni dettaglio può essere coordinato
+                con colori e stile dell'evento.
+              </p>
+              <span class="hero-featured-note">Creazione artigianale personalizzabile</span>
+            </div>
+          </article>
+
+          <article class="hero-featured-product">
+            <div class="hero-featured-image">
+              <img
+                src="/images/biscotti-decorati-per-cresima-e-comunione.png"
+                alt="Biscotti decorati per Cresima e Comunione"
+              />
+            </div>
+            <div class="hero-featured-content">
+              <span class="hero-featured-category">Comunioni e Cresime</span>
+              <h3>Biscotti per Cresima e Comunione</h3>
+              <p>
+                Creazioni artigianali coordinate per Cresima e Comunione,
+                caratterizzate da dettagli raffinati, tonalità delicate e decorazioni
+                personalizzabili per rendere unica la cerimonia.
+              </p>
+              <span class="hero-featured-note">Dettagli e colori coordinabili</span>
+            </div>
+          </article>
+
+          <article class="hero-featured-product">
+            <div class="hero-featured-image">
+              <img
+                src="/images/biscotti-decorati-per-gender-reveal.png"
+                alt="Biscotti decorati personalizzati per Gender Reveal"
+              />
+            </div>
+            <div class="hero-featured-content">
+              <span class="hero-featured-category">Gender Reveal e Baby Shower</span>
+              <h3>Biscotti decorati Gender Reveal</h3>
+              <p>
+                Biscotti decorati nei toni rosa e azzurro pensati per Gender Reveal,
+                nascita e Baby Shower, con forme e dettagli coordinati per annunciare
+                in modo dolce e originale l'arrivo del bebè.
+              </p>
+              <span class="hero-featured-note">Tema rosa e azzurro personalizzabile</span>
+            </div>
+          </article>
+
+          <article class="hero-featured-product">
+            <div class="hero-featured-image">
+              <img
+                src="/images/biscotti-decorati-per-compleanno-a-tema-arcobaleno.png"
+                alt="Biscotti decorati per compleanno a tema arcobaleno"
+              />
+            </div>
+            <div class="hero-featured-content">
+              <span class="hero-featured-category">Compleanni</span>
+              <h3>Biscotti a tema Arcobaleno</h3>
+              <p>
+                Biscotti decorati con arcobaleni e tonalità pastello, ideali per
+                compleanni allegri e colorati. Il set può essere coordinato al tema
+                della festa e personalizzato con dettagli dedicati al festeggiato.
+              </p>
+              <span class="hero-featured-note">Perfetti per feste e sweet table</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </dialog>
+
+    <footer>
+      <div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Biscotti decorati artigianali · Privacy · Cookie</div>
+    </footer>
+
+    <script>
+      const categoryDialog = document.querySelector('#category-dialog');
+      const categoryCards = document.querySelectorAll('[data-category-card]');
+      const categoryTitle = document.querySelector('#category-dialog-title');
+      const categoryDescription = document.querySelector('#category-dialog-description');
+      const categoryProductsList = document.querySelector('#category-products-list');
+      const categoryClose = document.querySelector('.category-close');
+      const dataElement = document.querySelector('#category-products-data');
+
+      const categoryProductsData = dataElement
+        ? JSON.parse(dataElement.textContent ?? '[]')
+        : [];
+
+      function escapeHtml(value) {
+        return String(value)
+          .replaceAll('&', '&amp;')
+          .replaceAll('<', '&lt;')
+          .replaceAll('>', '&gt;')
+          .replaceAll('"', '&quot;')
+          .replaceAll("'", '&#039;');
+      }
+
+      function openCategoryDialog(category) {
+        const filtered = categoryProductsData.filter(
+          (product) => product.categoria === category
+        );
+
+        categoryTitle.textContent = `Biscotti per ${category}`;
+        categoryDescription.textContent =
+          `Scorri tutti i biscotti disponibili per ${category.toLowerCase()}.`;
+
+        if (filtered.length > 0) {
+          categoryProductsList.innerHTML = filtered.map((product) => {
+const whatsappUrl =
+              `https://wa.me/393519425808?text=${encodeURIComponent(`Ciao Lucia, vorrei avere informazioni su: ${product.titolo}`)}`;
+
+            return `
+              <article class="category-product-row">
+                <div class="category-product-row-image">
+                  <img
+                    src="${escapeHtml(product.immagine)}"
+                    alt="${escapeHtml(product.titolo)}"
+                    loading="lazy"
+                  />
+                </div>
+
+                <div class="category-product-row-content">
+                  <span class="product-category-label">
+                    ${escapeHtml(category)}
+                  </span>
+
+                  <h4>${escapeHtml(product.titolo)}</h4>
+
+                  <p class="category-product-description">
+                    ${escapeHtml(product.descrizione)}
+                  </p>
+
+                  <div class="category-product-price-wrap">
+                    <span class="category-product-price-label">Prezzo</span>
+                    <span class="category-product-price">
+                      ${escapeHtml(product.prezzo ?? 'Prezzo su richiesta')}
+                    </span>
+                  </div>
+
+                  <div class="category-product-actions">
+                    <a
+                      class="btn btn-primary"
+                      href="https://www.etsy.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Acquista su Etsy
+                    </a>
+
+                    <a
+                      class="btn btn-secondary"
+                      href="${whatsappUrl}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Chiedi informazioni
+                    </a>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join('');
+        } else {
+          categoryProductsList.innerHTML = `
+            <div class="category-empty">
+              <h3>Nuovi modelli in arrivo</h3>
+              <p>
+                Stiamo preparando nuove proposte per questa categoria.
+              </p>
+            </div>
+          `;
+        }
+
+        categoryDialog.showModal();
+        categoryDialog.querySelector('.category-dialog-inner')?.scrollTo(0, 0);
+      }
+
+      categoryCards.forEach((card) => {
+        card.style.cursor = 'pointer';
+
+        card.addEventListener('mouseenter', () => {
+          card.style.cursor = 'pointer';
+        });
+
+        card.addEventListener('click', () => {
+          openCategoryDialog(card.dataset.category ?? '');
+        });
+
+        card.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openCategoryDialog(card.dataset.category ?? '');
+          }
+        });
+      });
+
+      categoryClose?.addEventListener('click', () => {
+        categoryDialog.close();
+      });
+
+      categoryDialog?.addEventListener('click', (event) => {
+        if (event.target === categoryDialog) {
+          categoryDialog.close();
+        }
+      });
+    </script>
+
+
+    <script>
+      const heroGalleryCard = document.querySelector('[data-hero-gallery]');
+      const heroGalleryDialog = document.querySelector('#hero-gallery-dialog');
+      const heroGalleryClose = document.querySelector('.hero-gallery-close');
+
+      function openHeroGallery() {
+        heroGalleryDialog?.showModal();
+      }
+
+      heroGalleryCard?.addEventListener('click', openHeroGallery);
+
+      heroGalleryCard?.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openHeroGallery();
+        }
+      });
+
+      heroGalleryClose?.addEventListener('click', () => {
+        heroGalleryDialog?.close();
+      });
+
+      heroGalleryDialog?.addEventListener('click', (event) => {
+        if (event.target === heroGalleryDialog) {
+          heroGalleryDialog.close();
+        }
+      });
+    </script>
+
+  </body>
+</html>

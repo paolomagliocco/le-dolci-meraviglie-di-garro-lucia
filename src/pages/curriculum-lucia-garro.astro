@@ -1,0 +1,848 @@
+---
+const seoTitle = 'Curriculum Lucia Garro | Cake Designer e Pasticcera a Siracusa';
+const seoDescription = 'Curriculum professionale di Lucia Garro, cake designer e pasticcera a Siracusa: formazione internazionale, PME Professional Diploma, Squires Kitchen, Cake International Londra e specializzazioni artistiche.';
+
+const competenze = [
+  'Cake design e decorazione artistica',
+  'Sugarpaste e modellazione tridimensionale',
+  'Royal icing e piping',
+  'Wedding cake',
+  'Torte scenografiche monumentali',
+  'Fiori realistici in pasta di zucchero',
+  'Effetti materici e texture decorative',
+  'Biscotti decorati personalizzati',
+  'Sweet table coordinati',
+  'Progettazione estetica per eventi'
+];
+
+const formazione = [
+  {
+    anno: '2012',
+    titolo: 'PME Professional Diploma – Sugarpaste Module',
+    luogo: 'Knightsbridge PME School of Cake Decorating & Confectionery Arts · Londra',
+    testo: 'Percorso professionale dedicato alla decorazione in pasta di zucchero e alle tecniche di cake design.'
+  },
+  {
+    anno: '2016',
+    titolo: 'Squires Kitchen International School',
+    luogo: 'Farnham, Surrey · Regno Unito',
+    testo: 'Formazione specialistica nel modulo Royal Icing Wedding Cake Papillon, con approfondimento delle tecniche di royal icing e wedding cake.'
+  },
+  {
+    anno: '2017',
+    titolo: 'Cake International – Certificate of Merit',
+    luogo: 'Alexandra Palace · Londra',
+    testo: 'Partecipazione alla manifestazione internazionale Cake International nella categoria Class H: Decorative Exhibit, con conseguimento del Certificate of Merit.'
+  },
+  {
+    anno: '2018',
+    titolo: 'Apertura della pasticceria Berry Cakes',
+    luogo: 'Siracusa · Sicilia',
+    testo: 'Apertura della pasticceria Berry Cakes a Siracusa, con Lucia Garro nel ruolo di titolare e cake designer, dedicata alla pasticceria artistica e alla realizzazione di creazioni personalizzate.'
+  },
+  {
+    anno: '2026',
+    titolo: 'Collaborazione con Pasticceria delle Meraviglie',
+    luogo: 'Siracusa · Sicilia',
+    testo: 'Collaborazione professionale con Pasticceria delle Meraviglie a Siracusa come cake designer, con attività di progettazione creativa e consulenze personalizzate per torte, biscotti decorati ed eventi.'
+  }
+];
+
+const milestones = [
+  ['Cake International', 'Partecipazione alla competizione internazionale di Londra e Certificate of Merit nella categoria Decorative Exhibit.'],
+  ['PME Professional Diploma', 'Formazione professionale internazionale nel cake design e nella lavorazione della sugarpaste.'],
+  ['Squires Kitchen', 'Specializzazione nelle tecniche di royal icing e wedding cake presso una scuola internazionale di cake decorating.'],
+  ['Sky TG24', 'Il lavoro di Lucia Garro compare in un articolo dedicato allo show londinese delle torte artistiche.']
+];
+---
+
+<html lang="it">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{seoTitle}</title>
+    <meta name="description" content={seoDescription} />
+    <meta name="robots" content="index,follow" />
+
+    <style>
+      :root {
+        --cream: #fffaf5;
+        --paper: #ffffff;
+        --ink: #302820;
+        --muted: #786b60;
+        --rose: #d6949e;
+        --rose-dark: #b76773;
+        --rose-soft: #f5e3e5;
+        --beige: #efe4d7;
+        --gold: #aa8954;
+        --line: #eadfd5;
+        --shadow: 0 16px 46px rgba(72, 48, 34, .09);
+      }
+
+      * { box-sizing: border-box; }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: var(--ink);
+        background: var(--cream);
+        line-height: 1.65;
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .wrap {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: rgba(255,250,245,.95);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .brand {
+        font-family: Georgia, serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+      }
+
+      .brand span { color: var(--rose-dark); }
+
+      nav {
+        display: flex;
+        gap: 22px;
+        font-size: .95rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 13px 20px;
+        border-radius: 999px;
+        font-weight: 800;
+        transition: .2s ease;
+      }
+
+      .btn:hover { transform: translateY(-2px); }
+
+      .btn-primary {
+        background: var(--rose-dark);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+
+      .hero {
+        padding: 84px 0 58px;
+      }
+
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr .9fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .eyebrow {
+        display: inline-block;
+        padding: 7px 12px;
+        border-radius: 999px;
+        background: var(--beige);
+        font-size: .8rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: .055em;
+      }
+
+      h1, h2, h3 {
+        font-family: Georgia, serif;
+        line-height: 1.08;
+        margin-top: 0;
+      }
+
+      h1 {
+        max-width: 820px;
+        margin: 18px 0 22px;
+        font-size: clamp(3rem, 6vw, 5.9rem);
+      }
+
+      h1 em {
+        color: var(--rose-dark);
+        font-style: normal;
+      }
+
+      .hero .lead {
+        max-width: 760px;
+        color: var(--muted);
+        font-size: 1.12rem;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 28px;
+      }
+
+      .profile-card {
+        position: relative;
+        overflow: hidden;
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-radius: 34px;
+        background:
+          radial-gradient(circle at 82% 12%, rgba(214,148,158,.28), transparent 28%),
+          linear-gradient(145deg, #fff, #f7eee6);
+        box-shadow: var(--shadow);
+      }
+
+      .profile-photo {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 4 / 5;
+        margin: 0 auto 24px;
+        padding: 6px;
+        overflow: hidden;
+        border-radius: 22px;
+        background: #fff;
+        border: 1px solid var(--line);
+        box-shadow: 0 12px 30px rgba(72, 48, 34, .12);
+      }
+
+      .profile-photo img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        object-fit: cover;
+        object-position: center 20%;
+        border-radius: 16px;
+      }
+
+      .profile-card::after {
+        content: "LG";
+        position: absolute;
+        right: -12px;
+        bottom: -58px;
+        font-family: Georgia, serif;
+        font-size: 12rem;
+        font-weight: 700;
+        color: rgba(183,103,115,.08);
+        line-height: 1;
+      }
+
+      .profile-name {
+        font-family: Georgia, serif;
+        font-size: 2.5rem;
+        line-height: 1;
+        margin: 12px 0 8px;
+      }
+
+      .profile-role {
+        color: var(--rose-dark);
+        font-weight: 800;
+        margin-bottom: 24px;
+      }
+
+      .profile-facts {
+        display: grid;
+        gap: 12px;
+      }
+
+      .profile-fact {
+        padding: 15px 16px;
+        border-radius: 18px;
+        background: rgba(255,255,255,.78);
+        border: 1px solid rgba(234,223,213,.9);
+      }
+
+      .profile-fact strong {
+        display: block;
+        margin-bottom: 2px;
+        font-size: .88rem;
+        text-transform: uppercase;
+        letter-spacing: .04em;
+      }
+
+      .profile-fact span {
+        color: var(--muted);
+        font-size: .95rem;
+      }
+
+      section {
+        padding: 76px 0;
+      }
+
+      .section-head {
+        max-width: 800px;
+        margin-bottom: 34px;
+      }
+
+      .section-head h2 {
+        margin: 12px 0;
+        font-size: clamp(2.2rem, 4vw, 3.8rem);
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .summary {
+        background: #f4ece4;
+      }
+
+      .summary-grid {
+        display: grid;
+        grid-template-columns: .85fr 1.15fr;
+        gap: 50px;
+        align-items: start;
+      }
+
+      .summary-title {
+        position: sticky;
+        top: 110px;
+      }
+
+      .summary-title h2 {
+        font-size: clamp(2.2rem, 4vw, 3.6rem);
+      }
+
+      .summary-copy p {
+        margin-top: 0;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+
+      .milestone-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0,1fr));
+        gap: 16px;
+        margin-top: 28px;
+      }
+
+      .milestone {
+        padding: 22px;
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .milestone strong {
+        display: block;
+        margin-bottom: 7px;
+        font-family: Georgia, serif;
+        font-size: 1.18rem;
+      }
+
+      .milestone p {
+        margin: 0;
+        font-size: .94rem;
+      }
+
+      .timeline {
+        position: relative;
+        display: grid;
+        gap: 22px;
+      }
+
+      .timeline::before {
+        content: "";
+        position: absolute;
+        left: 58px;
+        top: 12px;
+        bottom: 12px;
+        width: 1px;
+        background: var(--line);
+      }
+
+      .timeline-item {
+        position: relative;
+        display: grid;
+        grid-template-columns: 116px 1fr;
+        gap: 28px;
+        align-items: start;
+      }
+
+      .timeline-year {
+        position: relative;
+        z-index: 2;
+        width: 86px;
+        padding: 9px 12px;
+        border-radius: 999px;
+        text-align: center;
+        background: var(--rose-dark);
+        color: #fff;
+        font-weight: 900;
+      }
+
+      .timeline-card {
+        padding: 26px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .timeline-card h3 {
+        margin-bottom: 8px;
+        font-size: 1.55rem;
+      }
+
+      .timeline-place {
+        color: var(--rose-dark);
+        font-weight: 800;
+        font-size: .94rem;
+        margin-bottom: 10px;
+      }
+
+      .timeline-card p {
+        margin: 0;
+        color: var(--muted);
+      }
+
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .skill {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        padding: 17px 18px;
+        border-radius: 18px;
+        background: #fff;
+        border: 1px solid var(--line);
+      }
+
+      .skill::before {
+        content: "✦";
+        color: var(--rose-dark);
+        font-size: 1.1rem;
+      }
+
+      .press-section {
+        background: #f4ece4;
+      }
+
+      .press-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+        align-items: center;
+      }
+
+      .press-card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .press-card img {
+        width: 100%;
+        max-height: 600px;
+        display: block;
+        object-fit: contain;
+        border-radius: 20px;
+        background: #fff;
+      }
+
+      .press-copy h2 {
+        font-size: clamp(2.2rem, 4vw, 3.6rem);
+        margin: 14px 0 18px;
+      }
+
+      .press-copy p {
+        color: var(--muted);
+      }
+
+      .cert-links {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .cert-link {
+        min-height: 170px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: var(--shadow);
+      }
+
+      .cert-link span {
+        color: var(--rose-dark);
+        font-size: .78rem;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .cert-link h3 {
+        margin: 8px 0 0;
+        font-size: 1.45rem;
+      }
+
+      .cta {
+        padding: 42px;
+        border-radius: 32px;
+        background: var(--rose-dark);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      .cta h2 {
+        margin: 0 0 8px;
+        font-size: clamp(2rem, 4vw, 3.3rem);
+      }
+
+      .cta p {
+        margin: 0;
+        opacity: .9;
+      }
+
+      .cta .btn {
+        background: #fff;
+        color: var(--rose-dark);
+        white-space: nowrap;
+      }
+
+      footer {
+        padding: 42px 0 56px;
+        color: var(--muted);
+        font-size: .9rem;
+      }
+
+      .whatsapp-floating {
+        position: fixed;
+        right: 24px;
+        bottom: 24px;
+        z-index: 1000;
+        padding: 14px 20px;
+        border-radius: 999px;
+        background: #25D366;
+        color: #fff;
+        font-weight: 900;
+        box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      }
+
+      @media (max-width: 900px) {
+        nav { display: none; }
+        .hero-grid,
+        .summary-grid,
+        .press-grid {
+          grid-template-columns: 1fr;
+        }
+        .summary-title { position: static; }
+        .cert-links { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 650px) {
+        .nav .btn { display: none; }
+        .hero { padding-top: 54px; }
+        .profile-card { padding: 26px; }
+        .milestone-grid,
+        .skills-grid {
+          grid-template-columns: 1fr;
+        }
+        .timeline::before { left: 42px; }
+        .timeline-item {
+          grid-template-columns: 88px 1fr;
+          gap: 16px;
+        }
+        .timeline-year {
+          width: 72px;
+          font-size: .85rem;
+        }
+        .cta {
+          flex-direction: column;
+          align-items: flex-start;
+          padding: 28px;
+        }
+        .whatsapp-floating {
+          right: 16px;
+          bottom: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="/">Le Dolci Meraviglie<span> di Lucy Garro</span></a>
+
+        <nav aria-label="Navigazione principale">
+          <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/sweet-table">Sweet Table</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
+          <a href="/certificazioni">Certificazioni</a>
+          <a href="/#contatti">Contatti</a>
+        </nav>
+
+        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">
+          Acquista su Etsy
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="wrap hero-grid">
+          <div>
+            <span class="eyebrow">Curriculum professionale</span>
+            <h1>Lucia Garro <em>Cake Designer</em></h1>
+            <p class="lead">
+              Cake designer e pasticcera siciliana attiva a Siracusa, specializzata nella decorazione artistica,
+              nelle torte scenografiche, nella sugarpaste, nelle wedding cake e nei biscotti decorati personalizzati.
+              Il suo percorso professionale comprende formazione specialistica internazionale e partecipazioni
+              a eventi dedicati al cake design nel Regno Unito.
+            </p>
+
+            <div class="hero-actions">
+              <a class="btn btn-primary" href="/certificazioni">Vedi certificazioni e riconoscimenti</a>
+              <a class="btn btn-secondary" href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni." target="_blank" rel="noopener noreferrer">
+                Contatta Lucia
+              </a>
+            </div>
+          </div>
+
+          <aside class="profile-card">
+            <div class="profile-photo">
+              <img
+                src="/images/foto curriculum lucia garro.jpg"
+                alt="Lucia Garro, cake designer e pasticcera a Siracusa"
+                width="320"
+                height="320"
+                loading="eager"
+              />
+            </div>
+            <span class="eyebrow">Profilo</span>
+            <div class="profile-name">Lucia Garro</div>
+            <div class="profile-role">Cake Designer · Pasticcera · Decoratrice artistica</div>
+
+            <div class="profile-facts">
+              <div class="profile-fact">
+                <strong>Base professionale</strong>
+                <span>Siracusa · Sicilia</span>
+              </div>
+              <div class="profile-fact">
+                <strong>Specializzazioni</strong>
+                <span>Cake design, sugarpaste, royal icing, wedding cake, biscotti decorati</span>
+              </div>
+              <div class="profile-fact">
+                <strong>Formazione</strong>
+                <span>PME Professional Diploma · Squires Kitchen International School</span>
+              </div>
+              <div class="profile-fact">
+                <strong>Riconoscimento</strong>
+                <span>Cake International 2017 · Certificate of Merit</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="summary">
+        <div class="wrap summary-grid">
+          <div class="summary-title">
+            <span class="eyebrow">Profilo professionale</span>
+            <h2>Un percorso tra tecnica, creatività e formazione internazionale</h2>
+          </div>
+
+          <div class="summary-copy">
+            <p>
+              Il lavoro di Lucia Garro si concentra sulla trasformazione della pasticceria decorativa
+              in un'esperienza visiva coordinata all'evento. La progettazione parte dal tema, dai colori,
+              dall'atmosfera e dallo stile scelto dal cliente, per arrivare alla realizzazione di torte,
+              biscotti e allestimenti capaci di dialogare tra loro.
+            </p>
+
+            <p>
+              La formazione professionale maturata nel Regno Unito ha contribuito allo sviluppo di tecniche
+              specifiche nella lavorazione della sugarpaste e del royal icing, oltre che nella progettazione
+              di wedding cake e decorazioni tridimensionali.
+            </p>
+
+            <div class="milestone-grid">
+              {milestones.map(([titolo, testo]) => (
+                <article class="milestone">
+                  <strong>{titolo}</strong>
+                  <p>{testo}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Formazione e riconoscimenti</span>
+            <h2>Esperienze internazionali</h2>
+            <p>
+              Le tappe principali del percorso formativo e professionale documentato dalle certificazioni presenti sul sito.
+            </p>
+          </div>
+
+          <div class="timeline">
+            {formazione.map((item) => (
+              <article class="timeline-item">
+                <div class="timeline-year">{item.anno}</div>
+
+                <div class="timeline-card">
+                  <h3>{item.titolo}</h3>
+                  <div class="timeline-place">{item.luogo}</div>
+                  <p>{item.testo}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="summary">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Competenze</span>
+            <h2>Specializzazioni artistiche</h2>
+            <p>
+              Competenze sviluppate nel corso dell'attività professionale e della formazione nel cake design.
+            </p>
+          </div>
+
+          <div class="skills-grid">
+            {competenze.map((competenza) => (
+              <div class="skill">{competenza}</div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="press-section">
+        <div class="wrap press-grid">
+          <div class="press-card">
+            <img
+              src="/images/lucia garro articolo su Sky tg24.jpg"
+              alt="Articolo Sky TG24 dedicato a Cake International con Lucia Garro"
+              loading="lazy"
+            />
+          </div>
+
+          <div class="press-copy">
+            <span class="eyebrow">Media e visibilità</span>
+            <h2>Il lavoro di Lucia Garro nell'articolo di Sky TG24</h2>
+
+            <p>
+              Nel 2017 Sky TG24 ha pubblicato un articolo dedicato allo show londinese delle torte artistiche
+              e a Cake International. Tra le immagini dedicate all'evento compare anche Lucia Garro con una
+              delle sue creazioni.
+            </p>
+
+            <p>
+              Il collegamento alla fonte permette di consultare direttamente l'articolo originale pubblicato
+              dalla testata.
+            </p>
+
+            <a
+              class="btn btn-primary"
+              href="https://tg24.sky.it/spettacolo/2017/04/24/londra-cake-decorating-baking-show-torte-artistiche"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Leggi l'articolo su Sky TG24 →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Documenti</span>
+            <h2>Certificazioni principali</h2>
+          </div>
+
+          <div class="cert-links">
+            <a class="cert-link" href="/certificazioni">
+              <span>Riconoscimento internazionale</span>
+              <h3>Cake International · Certificate of Merit</h3>
+            </a>
+
+            <a class="cert-link" href="/certificazioni">
+              <span>Diploma professionale</span>
+              <h3>PME Professional Diploma</h3>
+            </a>
+
+            <a class="cert-link" href="/certificazioni">
+              <span>Formazione internazionale</span>
+              <h3>Squires Kitchen International School</h3>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="cta">
+            <div>
+              <h2>Scopri le creazioni di Lucia Garro</h2>
+              <p>Biscotti decorati personalizzati, sweet table e lavorazioni artistiche per eventi.</p>
+            </div>
+
+            <a class="btn" href="/biscotti-decorati">Scopri i biscotti decorati</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        © 2026 Le Dolci Meraviglie di Lucy Garro · Siracusa · Cake Design e Pasticceria Artistica
+      </div>
+    </footer>
+
+    <a
+      class="whatsapp-floating"
+      href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni."
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contatta Lucia Garro su WhatsApp"
+    >
+      WhatsApp
+    </a>
+  </body>
+</html>
