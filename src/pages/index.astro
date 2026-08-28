@@ -93,6 +93,65 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
       .brand span { color: var(--rose-dark); }
       nav { display: flex; gap: 22px; font-size: .95rem; }
 
+      .mobile-menu-toggle {
+        display: none;
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: #fff;
+        color: var(--ink);
+        cursor: pointer;
+        box-shadow: 0 8px 22px rgba(72,48,34,.08);
+      }
+
+      .mobile-menu-toggle span,
+      .mobile-menu-toggle span::before,
+      .mobile-menu-toggle span::after {
+        display: block;
+        width: 22px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+        transition: transform .2s ease, opacity .2s ease;
+      }
+
+      .mobile-menu-toggle span {
+        position: relative;
+      }
+
+      .mobile-menu-toggle span::before,
+      .mobile-menu-toggle span::after {
+        content: "";
+        position: absolute;
+        left: 0;
+      }
+
+      .mobile-menu-toggle span::before { top: -7px; }
+      .mobile-menu-toggle span::after { top: 7px; }
+
+      .mobile-menu-toggle[aria-expanded="true"] span {
+        background: transparent;
+      }
+
+      .mobile-menu-toggle[aria-expanded="true"] span::before {
+        top: 0;
+        transform: rotate(45deg);
+      }
+
+      .mobile-menu-toggle[aria-expanded="true"] span::after {
+        top: 0;
+        transform: rotate(-45deg);
+      }
+
+      .mobile-nav-panel {
+        display: none;
+      }
+
       .btn {
         display: inline-flex;
         align-items: center;
@@ -229,7 +288,76 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
       footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; }
 
       @media (max-width: 900px) {
-        nav { display: none; }
+        .nav {
+          min-height: 76px;
+          gap: 14px;
+        }
+
+        .nav > nav,
+        .nav > .btn-primary {
+          display: none;
+        }
+
+        .brand {
+          min-width: 0;
+          font-size: clamp(1rem, 4vw, 1.25rem);
+          line-height: 1.2;
+        }
+
+        .mobile-menu-toggle {
+          display: inline-flex;
+          margin-left: auto;
+        }
+
+        .mobile-nav-panel {
+          display: block;
+          position: absolute;
+          top: calc(100% + 8px);
+          left: 16px;
+          right: 16px;
+          padding: 12px;
+          border: 1px solid var(--line);
+          border-radius: 22px;
+          background: rgba(255,250,245,.99);
+          box-shadow: 0 22px 54px rgba(72,48,34,.18);
+          transform: translateY(-8px);
+          opacity: 0;
+          visibility: hidden;
+          pointer-events: none;
+          transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+        }
+
+        .mobile-nav-panel.is-open {
+          transform: translateY(0);
+          opacity: 1;
+          visibility: visible;
+          pointer-events: auto;
+        }
+
+        .mobile-nav-panel nav {
+          display: grid;
+          gap: 4px;
+        }
+
+        .mobile-nav-panel nav a {
+          display: block;
+          padding: 13px 14px;
+          border-radius: 14px;
+          font-size: 1rem;
+          font-weight: 700;
+        }
+
+        .mobile-nav-panel nav a:hover,
+        .mobile-nav-panel nav a:focus-visible {
+          background: var(--beige);
+          outline: none;
+        }
+
+        .mobile-nav-panel .mobile-etsy {
+          width: 100%;
+          margin-top: 10px;
+        }
+
         .hero-grid { grid-template-columns: 1fr; }
         .hero-card { min-height: 400px; }
         .categories, .steps { grid-template-columns: repeat(2, 1fr); }
@@ -237,10 +365,10 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
       }
 
       @media (max-width: 600px) {
+        .wrap { width: min(100% - 28px, 1160px); }
         .hero { padding-top: 48px; }
         .categories, .steps, .products { grid-template-columns: 1fr; }
         .cta { flex-direction: column; align-items: flex-start; padding: 28px; }
-        .nav .btn { display: none; }
       }
     </style>
   </head>
@@ -248,13 +376,40 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
     <header>
       <div class="wrap nav">
         <a class="brand" href="/">Le Dolci Meraviglie<span> di Lucy Garro</span></a>
+
         <nav aria-label="Navigazione principale">
-          <a href="#biscotti">Biscotti Decorati</a>
-          <a href="#biscotti">Sweet Table</a>
+          <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/sweet-table">Sweet Table</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
           <a href="/certificazioni">Certificazioni</a>
-          <a href="#contatti">Contatti</a>
+          <a href="/#contatti">Contatti</a>
         </nav>
+
         <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener">Vai su Etsy per Acquistare Online</a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Apri menu di navigazione"
+          aria-expanded="false"
+          aria-controls="mobile-nav-panel"
+          data-mobile-menu-toggle
+        >
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
+          <nav aria-label="Navigazione mobile">
+            <a href="/biscotti-decorati">Biscotti</a>
+            <a href="/sweet-table">Sweet Table</a>
+            <a href="/curriculum-lucia-garro">Curriculum</a>
+            <a href="/certificazioni">Certificazioni</a>
+            <a href="/#contatti">Contatti</a>
+          </nav>
+          <a class="btn btn-primary mobile-etsy" href="https://www.etsy.com/" target="_blank" rel="noopener">
+            Vai su Etsy per Acquistare Online
+          </a>
+        </div>
       </div>
     </header>
 
@@ -382,5 +537,49 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
     <footer>
       <div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Biscotti decorati artigianali · Privacy · Cookie</div>
     </footer>
+
+    <script>
+      const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+      const mobileNav = document.querySelector('[data-mobile-nav]');
+
+      const closeMobileMenu = () => {
+        if (!(mobileMenuToggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.setAttribute('aria-label', 'Apri menu di navigazione');
+        mobileNav.classList.remove('is-open');
+      };
+
+      const openMobileMenu = () => {
+        if (!(mobileMenuToggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        mobileMenuToggle.setAttribute('aria-label', 'Chiudi menu di navigazione');
+        mobileNav.classList.add('is-open');
+      };
+
+      if (mobileMenuToggle instanceof HTMLButtonElement && mobileNav instanceof HTMLElement) {
+        mobileMenuToggle.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeMobileMenu() : openMobileMenu();
+        });
+
+        mobileNav.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (event.target instanceof HTMLAnchorElement) {
+            closeMobileMenu();
+          }
+        });
+
+        document.addEventListener('click', closeMobileMenu);
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeMobileMenu();
+        });
+
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 900) closeMobileMenu();
+        });
+      }
+    </script>
   </body>
 </html>
