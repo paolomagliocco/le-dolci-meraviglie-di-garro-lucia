@@ -1,40 +1,61 @@
 ---
-const seoTitle = 'Sweet Table personalizzati | Le Dolci Meraviglie di Lucy Garro';
-const seoDescription = 'Sweet table personalizzati di Lucia Garro per compleanni, battesimi, baby shower, gender reveal, comunioni, cresime e nascita.';
+const seoTitle = 'Sweet Table Personalizzati per Eventi | Lucia Garro';
+const seoDescription = 'Scopri sweet table personalizzati con biscotti decorati per compleanni, battesimi, baby shower, gender reveal, comunioni, cresime, matrimoni, nascite ed eventi.';
+const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/sweet-table';
+const etsyUrl = 'https://toppercrafts.etsy.com';
+const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/sweet%20table%20con%20biscotti%20decorati%20a%20tema%20rose%20e%20cuori.png';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Sweet Table personalizzati per eventi',
+  url: canonicalUrl,
+  description: seoDescription,
+  image: ogImage,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Le Dolci Meraviglie di Lucy Garro',
+    url: 'https://www.ledolcimeravigliedigarrolucia.com/'
+  },
+  about: {
+    '@type': 'Thing',
+    name: 'Sweet table personalizzati'
+  }
+};
 
 const prodotti = [
-  { titolo:'Sweet Table a tema Fiorito', categoria:'Compleanno', descrizione:'Allestimento coordinato con biscotti decorati e dettagli floreali, ideale per compleanni ed eventi dallo stile delicato.', immagine:'/images/sweet table con biscotti a tema fiorito.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Rose e Cuori', categoria:'Matrimonio / Evento', descrizione:'Sweet table romantico con biscotti decorati a tema rose e cuori, ideale per matrimoni, anniversari e occasioni speciali.', immagine:'/images/sweet table con biscotti decorati a tema rose e cuori.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Stelle Marine', categoria:'Compleanno', descrizione:'Allestimento a tema mare con stelle marine e biscotti decorati coordinati, perfetto per feste estive e compleanni.', immagine:'/images/sweet table con biscotti decorati a tema stelle marine.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table a tema Sirenetta', categoria:'Compleanno', descrizione:'Sweet table a tema sirenetta con biscotti decorati e dettagli ispirati al mondo marino.', immagine:'/images/sweet-table-biscotti-a-tema-sirenetta.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table a tema Unicorno', categoria:'Compleanno', descrizione:'Allestimento coordinato a tema unicorno con biscotti decorati e dettagli personalizzati.', immagine:'/images/sweet-table-biscotti-a-tema-unicorno.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Baby Shower con orsetti azzurri', categoria:'Baby Shower', descrizione:'Sweet table nei toni dell’azzurro con orsetti e biscotti decorati, ideale per baby shower e nascita.', immagine:'/images/sweet-table-biscotti-baby-shower-orsetti-azzurri.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Comunione e Cresima', categoria:'Comunione e Cresima', descrizione:'Allestimento elegante con biscotti decorati coordinati per Comunione e Cresima.', immagine:'/images/sweet-table-biscotti-comunione-cresima.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table I Tesori del Mare', categoria:'Compleanno', descrizione:'Allestimento ispirato ai tesori del mare con biscotti decorati e dettagli marini coordinati.', immagine:'/images/sweet-table-biscotti-decorati-a- tema-i-tesori-del-mare.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table a tema Angeli', categoria:'Battesimo', descrizione:'Sweet table delicato a tema angeli, ideale per battesimi e cerimonie.', immagine:'/images/sweet-table-biscotti-decorati-a-tema-angeli.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Siciliano con maioliche e limoni', categoria:'Matrimonio / Evento', descrizione:'Allestimento ispirato alla Sicilia con maioliche, limoni e biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-a-tema-siciliano-con-maioliche-e-limoni.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Gender Reveal con orsetti Boy or Girl', categoria:'Gender Reveal', descrizione:'Allestimento rosa e azzurro con orsetti per Gender Reveal e Baby Shower.', immagine:'/images/sweet-table-biscotti-decorati-Gender-Reveal-con-orsetti-boy-or-girl.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table 18° compleanno floreale', categoria:'Compleanno', descrizione:'Sweet table elegante e floreale per festeggiare il diciottesimo compleanno con uno stile raffinato.', immagine:'/images/sweet-table-biscotti-decorati-per-18-esimo-compleanno-a-tema-floreale.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Animali della Fattoria', categoria:'Compleanno', descrizione:'Allestimento con animali della fattoria e biscotti decorati coordinati per feste dei più piccoli.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-animali-della-fattoria.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Animali della Giungla', categoria:'Compleanno', descrizione:'Sweet table a tema giungla e safari con biscotti decorati personalizzati.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-animali-della-giungla.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Animali Marini', categoria:'Compleanno', descrizione:'Allestimento a tema oceano con animali marini e biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-animali-marini.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Arcobaleno', categoria:'Compleanno', descrizione:'Sweet table colorato a tema arcobaleno con biscotti decorati e dettagli pastello.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-arcobaleno.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Unicorno', categoria:'Compleanno', descrizione:'Allestimento a tema unicorno con biscotti decorati e dettagli coordinati.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-unicorno.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Unicorno Rosa', categoria:'Compleanno', descrizione:'Sweet table a tema unicorno rosa per una festa fiabesca e delicata.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-unicorno-rosa.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Cuore e Rose', categoria:'Matrimonio / Evento', descrizione:'Allestimento romantico con cuore, rose e biscotti decorati per eventi e ricorrenze.', immagine:'/images/sweet-table-biscotti-decorati-per-eventi-con-cuore-e-rose.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Matrimonio a tema Nuziale', categoria:'Matrimonio', descrizione:'Sweet table nuziale coordinato con biscotti decorati e dettagli personalizzati.', immagine:'/images/sweet-table-biscotti-decorati-per-matrimonio-a-tema-nuziale.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table nascita bambino con orsetti', categoria:'Nascita', descrizione:'Allestimento con orsetti per la nascita di un bambino, con biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-per-nascita-bambino-con-orsetti.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Cuore e Rose Rosa', categoria:'Matrimonio / Evento', descrizione:'Allestimento personalizzato con rose rosa e cuori per eventi romantici.', immagine:'/images/sweet-table-biscotti-decorati-personalizzati-a-tema-cuore-e-rose-rosa.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Cresima con fiori', categoria:'Comunione e Cresima', descrizione:'Sweet table floreale per Cresima con biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-personalizzati-per-Cresima-con-fiori.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table primo compleanno Caramelle', categoria:'Compleanno', descrizione:'Allestimento colorato a tema caramelle per festeggiare il primo compleanno.', immagine:'/images/sweet-table-biscotti-decorati-primo-compeanno-a-tema-caramelle.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table primo compleanno Foglie d’Autunno', categoria:'Compleanno', descrizione:'Sweet table dai toni autunnali con biscotti decorati per il primo compleanno.', immagine:'/images/sweet-table-biscotti-decorati-primo-compleanno-a-tema-foglie-di-autunno.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table primo compleanno rosa con fiocchi', categoria:'Compleanno', descrizione:'Allestimento rosa con fiocchi e biscotti decorati per il primo compleanno.', immagine:'/images/sweet-table-biscotti-decorati-primo-compleanno-rosa-con-fiocchi.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Gender Reveal New Born', categoria:'Gender Reveal', descrizione:'Allestimento rosa e azzurro per Gender Reveal e nascita con biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-gender-reveal-new-born.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Gender Reveal con orsetti', categoria:'Gender Reveal', descrizione:'Sweet table personalizzato con orsetti, dettagli rosa e azzurri e biscotti decorati.', immagine:'/images/sweet-table-biscotti-gender-reveal-orsetti.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table New Born Girl', categoria:'Nascita', descrizione:'Sweet table per la nascita di una bambina con palette rosa e biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-new-born-girl.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table Battesimo con orsetti azzurri', categoria:'Battesimo', descrizione:'Allestimento per battesimo con orsetti azzurri, biscotti decorati e dettagli personalizzati.', immagine:'/images/sweet-table-biscotti-orsetti-azzurri-battesimo.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table a tema Piccolo Principe', categoria:'Compleanno', descrizione:'Sweet table ispirato al Piccolo Principe con biscotti decorati e allestimento coordinato.', immagine:'/images/sweet-table-biscotti-piccolo-principe.png', etsy:'https://www.etsy.com/' },
-  { titolo:'Sweet Table primo complimese con orsetti', categoria:'Baby Shower / Complimese', descrizione:'Allestimento con orsetti per festeggiare il primo complimese con biscotti decorati coordinati.', immagine:'/images/sweet-table-con-biscotti-e-orsetti-primo-complimese.png', etsy:'https://www.etsy.com/' },
+  { titolo:'Sweet Table a tema Fiorito', categoria:'Compleanno', descrizione:'Allestimento coordinato con biscotti decorati e dettagli floreali, ideale per compleanni ed eventi dallo stile delicato.', immagine:'/images/sweet table con biscotti a tema fiorito.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Rose e Cuori', categoria:'Matrimonio / Evento', descrizione:'Sweet table romantico con biscotti decorati a tema rose e cuori, ideale per matrimoni, anniversari e occasioni speciali.', immagine:'/images/sweet table con biscotti decorati a tema rose e cuori.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Stelle Marine', categoria:'Compleanno', descrizione:'Allestimento a tema mare con stelle marine e biscotti decorati coordinati, perfetto per feste estive e compleanni.', immagine:'/images/sweet table con biscotti decorati a tema stelle marine.png', etsy:etsyUrl },
+  { titolo:'Sweet Table a tema Sirenetta', categoria:'Compleanno', descrizione:'Sweet table a tema sirenetta con biscotti decorati e dettagli ispirati al mondo marino.', immagine:'/images/sweet-table-biscotti-a-tema-sirenetta.png', etsy:etsyUrl },
+  { titolo:'Sweet Table a tema Unicorno', categoria:'Compleanno', descrizione:'Allestimento coordinato a tema unicorno con biscotti decorati e dettagli personalizzati.', immagine:'/images/sweet-table-biscotti-a-tema-unicorno.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Baby Shower con orsetti azzurri', categoria:'Baby Shower', descrizione:'Sweet table nei toni dell’azzurro con orsetti e biscotti decorati, ideale per baby shower e nascita.', immagine:'/images/sweet-table-biscotti-baby-shower-orsetti-azzurri.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Comunione e Cresima', categoria:'Comunione e Cresima', descrizione:'Allestimento elegante con biscotti decorati coordinati per Comunione e Cresima.', immagine:'/images/sweet-table-biscotti-comunione-cresima.png', etsy:etsyUrl },
+  { titolo:'Sweet Table I Tesori del Mare', categoria:'Compleanno', descrizione:'Allestimento ispirato ai tesori del mare con biscotti decorati e dettagli marini coordinati.', immagine:'/images/sweet-table-biscotti-decorati-a- tema-i-tesori-del-mare.png', etsy:etsyUrl },
+  { titolo:'Sweet Table a tema Angeli', categoria:'Battesimo', descrizione:'Sweet table delicato a tema angeli, ideale per battesimi e cerimonie.', immagine:'/images/sweet-table-biscotti-decorati-a-tema-angeli.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Siciliano con maioliche e limoni', categoria:'Matrimonio / Evento', descrizione:'Allestimento ispirato alla Sicilia con maioliche, limoni e biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-a-tema-siciliano-con-maioliche-e-limoni.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Gender Reveal con orsetti Boy or Girl', categoria:'Gender Reveal', descrizione:'Allestimento rosa e azzurro con orsetti per Gender Reveal e Baby Shower.', immagine:'/images/sweet-table-biscotti-decorati-Gender-Reveal-con-orsetti-boy-or-girl.png', etsy:etsyUrl },
+  { titolo:'Sweet Table 18° compleanno floreale', categoria:'Compleanno', descrizione:'Sweet table elegante e floreale per festeggiare il diciottesimo compleanno con uno stile raffinato.', immagine:'/images/sweet-table-biscotti-decorati-per-18-esimo-compleanno-a-tema-floreale.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Animali della Fattoria', categoria:'Compleanno', descrizione:'Allestimento con animali della fattoria e biscotti decorati coordinati per feste dei più piccoli.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-animali-della-fattoria.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Animali della Giungla', categoria:'Compleanno', descrizione:'Sweet table a tema giungla e safari con biscotti decorati personalizzati.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-animali-della-giungla.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Animali Marini', categoria:'Compleanno', descrizione:'Allestimento a tema oceano con animali marini e biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-animali-marini.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Arcobaleno', categoria:'Compleanno', descrizione:'Sweet table colorato a tema arcobaleno con biscotti decorati e dettagli pastello.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-arcobaleno.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Unicorno', categoria:'Compleanno', descrizione:'Allestimento a tema unicorno con biscotti decorati e dettagli coordinati.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-unicorno.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Unicorno Rosa', categoria:'Compleanno', descrizione:'Sweet table a tema unicorno rosa per una festa fiabesca e delicata.', immagine:'/images/sweet-table-biscotti-decorati-per-compleanno-a-tema-unicorno-rosa.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Cuore e Rose', categoria:'Matrimonio / Evento', descrizione:'Allestimento romantico con cuore, rose e biscotti decorati per eventi e ricorrenze.', immagine:'/images/sweet-table-biscotti-decorati-per-eventi-con-cuore-e-rose.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Matrimonio a tema Nuziale', categoria:'Matrimonio', descrizione:'Sweet table nuziale coordinato con biscotti decorati e dettagli personalizzati.', immagine:'/images/sweet-table-biscotti-decorati-per-matrimonio-a-tema-nuziale.png', etsy:etsyUrl },
+  { titolo:'Sweet Table nascita bambino con orsetti', categoria:'Nascita', descrizione:'Allestimento con orsetti per la nascita di un bambino, con biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-per-nascita-bambino-con-orsetti.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Cuore e Rose Rosa', categoria:'Matrimonio / Evento', descrizione:'Allestimento personalizzato con rose rosa e cuori per eventi romantici.', immagine:'/images/sweet-table-biscotti-decorati-personalizzati-a-tema-cuore-e-rose-rosa.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Cresima con fiori', categoria:'Comunione e Cresima', descrizione:'Sweet table floreale per Cresima con biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-decorati-personalizzati-per-Cresima-con-fiori.png', etsy:etsyUrl },
+  { titolo:'Sweet Table primo compleanno Caramelle', categoria:'Compleanno', descrizione:'Allestimento colorato a tema caramelle per festeggiare il primo compleanno.', immagine:'/images/sweet-table-biscotti-decorati-primo-compeanno-a-tema-caramelle.png', etsy:etsyUrl },
+  { titolo:'Sweet Table primo compleanno Foglie d’Autunno', categoria:'Compleanno', descrizione:'Sweet table dai toni autunnali con biscotti decorati per il primo compleanno.', immagine:'/images/sweet-table-biscotti-decorati-primo-compleanno-a-tema-foglie-di-autunno.png', etsy:etsyUrl },
+  { titolo:'Sweet Table primo compleanno rosa con fiocchi', categoria:'Compleanno', descrizione:'Allestimento rosa con fiocchi e biscotti decorati per il primo compleanno.', immagine:'/images/sweet-table-biscotti-decorati-primo-compleanno-rosa-con-fiocchi.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Gender Reveal New Born', categoria:'Gender Reveal', descrizione:'Allestimento rosa e azzurro per Gender Reveal e nascita con biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-gender-reveal-new-born.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Gender Reveal con orsetti', categoria:'Gender Reveal', descrizione:'Sweet table personalizzato con orsetti, dettagli rosa e azzurri e biscotti decorati.', immagine:'/images/sweet-table-biscotti-gender-reveal-orsetti.png', etsy:etsyUrl },
+  { titolo:'Sweet Table New Born Girl', categoria:'Nascita', descrizione:'Sweet table per la nascita di una bambina con palette rosa e biscotti decorati coordinati.', immagine:'/images/sweet-table-biscotti-new-born-girl.png', etsy:etsyUrl },
+  { titolo:'Sweet Table Battesimo con orsetti azzurri', categoria:'Battesimo', descrizione:'Allestimento per battesimo con orsetti azzurri, biscotti decorati e dettagli personalizzati.', immagine:'/images/sweet-table-biscotti-orsetti-azzurri-battesimo.png', etsy:etsyUrl },
+  { titolo:'Sweet Table a tema Piccolo Principe', categoria:'Compleanno', descrizione:'Sweet table ispirato al Piccolo Principe con biscotti decorati e allestimento coordinato.', immagine:'/images/sweet-table-biscotti-piccolo-principe.png', etsy:etsyUrl },
+  { titolo:'Sweet Table primo complimese con orsetti', categoria:'Baby Shower / Complimese', descrizione:'Allestimento con orsetti per festeggiare il primo complimese con biscotti decorati coordinati.', immagine:'/images/sweet-table-con-biscotti-e-orsetti-primo-complimese.png', etsy:etsyUrl },
 ];
 ---
 
@@ -44,7 +65,24 @@ const prodotti = [
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
-<meta name="robots" content="index,follow" />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href={canonicalUrl} />
+
+<meta property="og:locale" content="it_IT" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+<meta property="og:title" content={seoTitle} />
+<meta property="og:description" content={seoDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content="Sweet table personalizzato con biscotti decorati per eventi" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={seoTitle} />
+<meta name="twitter:description" content={seoDescription} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 <style>
 :root{--cream:#fffaf5;--paper:#fff;--ink:#302820;--muted:#786b60;--rose-dark:#b76773;--beige:#efe4d7;--line:#eadfd5;--shadow:0 14px 40px rgba(72,48,34,.08)}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
@@ -95,7 +133,7 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:.9rem}.whatsapp-floating
   <a href="/certificazioni">Certificazioni</a>
   <a href="/#contatti">Contatti</a>
 </nav>
-<a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">Vai su Etsy per Acquistare Online</a>
+<a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener noreferrer">Vai su Etsy per Acquistare Online</a>
 
 <button class="mobile-menu-toggle" type="button" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobile-nav-panel" data-mobile-menu-toggle>
   <span aria-hidden="true"></span>
@@ -109,15 +147,15 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:.9rem}.whatsapp-floating
     <a href="/certificazioni">Certificazioni</a>
     <a href="/#contatti">Contatti</a>
   </nav>
-  <a class="btn btn-primary mobile-etsy" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">Vai su Etsy per Acquistare Online</a>
+  <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener noreferrer">Vai su Etsy per Acquistare Online</a>
 </div>
 </div></header>
 
 <main>
 <section class="hero"><div class="wrap">
 <span class="eyebrow">Allestimenti personalizzati</span>
-<h1>Sweet Table <em>per ogni occasione</em></h1>
-<p class="lead">Scopri gli sweet table realizzati da Lucia Garro: allestimenti coordinati con biscotti decorati, colori, temi e dettagli personalizzati per compleanni, battesimi, baby shower, nascita, Gender Reveal, Comunione e Cresima.</p>
+<h1>Sweet Table <em>personalizzati per ogni occasione</em></h1>
+<p class="lead">Scopri gli sweet table realizzati da Lucia Garro: allestimenti coordinati con biscotti decorati, colori, temi e dettagli personalizzati per compleanni, battesimi, baby shower, nascite, Gender Reveal, Comunione, Cresima, matrimoni e occasioni speciali.</p>
 </div></section>
 
 <section class="catalogo"><div class="wrap">
@@ -154,7 +192,7 @@ footer{padding:40px 0 56px;color:var(--muted);font-size:.9rem}.whatsapp-floating
 <div class="modal-content">
 <span id="modal-category" class="category"></span><h2 id="modal-title"></h2><p id="modal-description"></p>
 <div class="modal-actions">
-<a id="modal-etsy" class="btn etsy-btn" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">Acquista su Etsy</a>
+<a id="modal-etsy" class="btn etsy-btn" href={etsyUrl} target="_blank" rel="noopener noreferrer">Acquista su Etsy</a>
 <a id="modal-whatsapp" class="btn whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer">Chiedi informazioni</a>
 </div>
 </div>
@@ -210,7 +248,7 @@ function openProductModal(card){
  const category=card.dataset.category??'';
  const description=card.dataset.description??'';
  const image=card.dataset.image??'';
- const etsy=card.dataset.etsy??'https://www.etsy.com/';
+ const etsy=card.dataset.etsy??etsyUrl;
  modalImage.src=image; modalImage.alt=`${title} - immagine ingrandita`;
  modalTitle.textContent=title; modalCategory.textContent=category; modalDescription.textContent=description; modalEtsy.href=etsy;
  const whatsappMessage=encodeURIComponent(`Ciao Lucia, vorrei avere informazioni su: ${title}`);

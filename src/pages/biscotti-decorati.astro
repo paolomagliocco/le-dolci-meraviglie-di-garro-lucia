@@ -1,6 +1,27 @@
 ---
-const seoTitle = 'Biscotti decorati personalizzati | Le Dolci Meraviglie di Lucy Garro';
-const seoDescription = 'Scopri i biscotti decorati artigianali di Lucia Garro per battesimi, baby shower, comunioni, cresime, compleanni e occasioni speciali. Acquista online su Etsy.';
+const seoTitle = 'Biscotti Decorati Personalizzati per Eventi | Lucy Garro';
+const seoDescription = 'Scopri biscotti decorati e personalizzati artigianalmente per compleanni, battesimi, nascite, baby shower, comunioni, cresime, matrimoni ed eventi. Ordina online su Etsy.';
+const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/biscotti-decorati';
+const etsyUrl = 'https://toppercrafts.etsy.com';
+const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/biscotti-decorati-a-tema-rose-e-cuori.png';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Biscotti decorati personalizzati',
+  url: canonicalUrl,
+  description: seoDescription,
+  image: ogImage,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Le Dolci Meraviglie di Lucy Garro',
+    url: 'https://www.ledolcimeravigliedigarrolucia.com/'
+  },
+  about: {
+    '@type': 'Thing',
+    name: 'Biscotti decorati personalizzati'
+  }
+};
 
 const prodotti = [
   {
@@ -8,238 +29,238 @@ const prodotti = [
     categoria: 'Baby shower',
     descrizione: 'Biscotti decorati con teneri orsetti per festeggiare il primo complimese e i primi momenti speciali del bambino.',
     immagine: '/images/biscotti-con-orsetti-per-primo-complimese.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Piccolo Principe',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati ispirati al Piccolo Principe, ideali per compleanni e feste a tema.',
     immagine: '/images/biscotti-decorati--per-compleanno-a-tema-piccolo-principe.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema I Tesori del Mare',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati ispirati ai tesori del mare, perfetti per feste e compleanni dal tema marino.',
     immagine: '/images/biscotti-decorati-a-tema-i-tesori-del-mare.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Rose e Cuori',
     categoria: 'Matrimonio / Evento',
     descrizione: 'Biscotti decorati con rose e cuori, ideali per ricorrenze romantiche, matrimoni e occasioni speciali.',
     immagine: '/images/biscotti-decorati-a-tema-rose-e-cuori.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti siciliani con maioliche e limoni',
     categoria: 'Matrimonio / Evento',
     descrizione: 'Biscotti decorati ispirati alla Sicilia, con maioliche e limoni, perfetti per eventi e cerimonie a tema siciliano.',
     immagine: '/images/biscotti-decorati-a-tema-siciliano-con-maioliche-e-limoni.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Sirenetta',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati a tema sirenetta, ideali per compleanni e feste dedicate al mondo del mare.',
     immagine: '/images/biscotti-decorati-a-tema-sirenetta.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Stelle Marine',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con stelle marine e dettagli marini, perfetti per compleanni ed eventi estivi.',
     immagine: '/images/biscotti-decorati-a-tema-stelle-marine.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Unicorno',
     categoria: 'Compleanno',
     descrizione: 'Biscotti artigianali decorati a tema unicorno, ideali per compleanni e sweet table personalizzati.',
     immagine: '/images/biscotti-decorati-a-tema-unicorno_sweet_table.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti con orsetti per Battesimo',
     categoria: 'Battesimo',
     descrizione: 'Delicati biscotti decorati con orsetti, perfetti per battesimi, bomboniere e tavoli dei dolci coordinati.',
     immagine: '/images/biscotti-decorati-conorsetti-per-battesimo.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti Gender Reveal con orsetti Boy or Girl',
     categoria: 'Baby shower',
     descrizione: 'Biscotti decorati con orsetti rosa e azzurri per Gender Reveal e Baby Shower.',
     immagine: '/images/biscotti-decorati-Gender-Reveal-con-orsetti–Boy-or-Girl.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti Gender Reveal e Baby Shower',
     categoria: 'Baby shower',
     descrizione: 'Biscotti personalizzati per annunciare l\'arrivo di un bebè o rendere speciale un Gender Reveal.',
     immagine: '/images/biscotti-decorati-gender-reveal-nascita-baby-shower.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per 18° compleanno a tema floreale',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati a tema floreale per festeggiare il diciottesimo compleanno con uno stile elegante e raffinato.',
     immagine: '/images/biscotti-decorati-per-18-esimo-compleanno-a-tema-floreale.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per Battesimo a tema Angeli',
     categoria: 'Battesimo',
     descrizione: 'Biscotti delicati a tema angeli, pensati per battesimi e cerimonie dal carattere dolce ed elegante.',
     immagine: '/images/biscotti-decorati-per-battesimo-a-tema-angeli.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Animali della Fattoria',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con gli animali della fattoria, ideali per feste di compleanno dei più piccoli.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-della-fattoria.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Animali della Giungla',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con animali della giungla per compleanni e feste a tema safari.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-della-giungla.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Animali Marini',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con simpatici animali marini, perfetti per compleanni a tema oceano.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-animali-marini.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Arcobaleno',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con arcobaleni e colori pastello per compleanni allegri e colorati.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-arcobaleno.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti a tema Fiorito',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con motivi floreali, ideali per compleanni ed eventi primaverili.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-fiorito.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per compleanno a tema Unicorno',
     categoria: 'Compleanno',
     descrizione: 'Biscotti personalizzati a tema unicorno per compleanni e feste coordinate.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-unicorno.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti Unicorno Rosa',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati a tema unicorno rosa, perfetti per compleanni romantici e fiabeschi.',
     immagine: '/images/biscotti-decorati-per-compleanno-a-tema-unicorno-rosa.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per Comunione e Cresima',
     categoria: 'Comunione / Cresima',
     descrizione: 'Biscotti eleganti e personalizzabili per Comunione e Cresima, ideali come ricordo della cerimonia.',
     immagine: '/images/biscotti-decorati-per-comunione-e-cresima.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per Cresima e Comunione',
     categoria: 'Comunione / Cresima',
     descrizione: 'Creazioni artigianali coordinate per Cresima e Comunione, con dettagli raffinati e personalizzabili.',
     immagine: '/images/biscotti-decorati-per-cresima-e-comunione.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per eventi con Cuore e Rose',
     categoria: 'Matrimonio / Evento',
     descrizione: 'Biscotti decorati con cuore e rose per matrimoni, anniversari e occasioni romantiche.',
     immagine: '/images/biscotti-decorati-per-eventi-con-cuore-e-rose.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti decorati Gender Reveal',
     categoria: 'Baby shower',
     descrizione: 'Biscotti decorati rosa e azzurri per Gender Reveal, nascita e Baby Shower.',
     immagine: '/images/biscotti-decorati-per-gender-reveal.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti Gender Reveal personalizzati',
     categoria: 'Baby shower',
     descrizione: 'Una proposta coordinata per Gender Reveal e Baby Shower, personalizzabile nei colori e nei dettagli.',
     immagine: '/images/biscotti-decorati-per-gender-reveal-2.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per Matrimonio a tema Nuziale',
     categoria: 'Matrimonio / Evento',
     descrizione: 'Biscotti decorati per matrimonio, coordinabili con colori e stile delle nozze.',
     immagine: '/images/biscotti-decorati-per-matrimonio-a-tema-nuziale.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per nascita bambino con orsetti',
     categoria: 'Baby shower',
     descrizione: 'Biscotti decorati con orsetti per celebrare la nascita di un bambino, personalizzabili nei dettagli.',
     immagine: '/images/biscotti-decorati-per-nascita-bambino-con-orsetti.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti personalizzati Cuore e Rose Rosa',
     categoria: 'Matrimonio / Evento',
     descrizione: 'Biscotti decorati con cuori e rose rosa per eventi romantici, matrimoni e anniversari.',
     immagine: '/images/biscotti-decorati-personalizzati-a-tema-cuore-e-rose-rosa.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti per Cresima con fiori',
     categoria: 'Comunione / Cresima',
     descrizione: 'Biscotti personalizzati per Cresima con decorazioni floreali eleganti e delicate.',
     immagine: '/images/biscotti-decorati-personalizzati-per-Cresima-con-fiori.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti primo compleanno a tema Caramelle',
     categoria: 'Compleanno',
     descrizione: 'Biscotti colorati a tema caramelle per festeggiare il primo compleanno.',
     immagine: '/images/biscotti-decorati-primo-compeanno-a-tema-caramelle.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti primo compleanno Foglie d\'Autunno',
     categoria: 'Compleanno',
     descrizione: 'Biscotti decorati con foglie d\'autunno e tonalità calde per un primo compleanno stagionale.',
     immagine: '/images/biscotti-decorati-primo-compleanno-a-tema-foglie-di-autunno.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti primo compleanno rosa con fiocchi',
     categoria: 'Compleanno',
     descrizione: 'Biscotti rosa con fiocchi per un primo compleanno delicato ed elegante.',
     immagine: '/images/biscotti-decorati-primo-compleanno-rosa-con-fiocchi.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti decorati per nascita bambina',
     categoria: 'Baby shower',
     descrizione: 'Biscotti delicati per celebrare la nascita di una bambina, personalizzabili con colori, nome e dettagli.',
     immagine: '/images/biscotti_decorati_nascita_bambina.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
   {
     titolo: 'Biscotti Baby Shower con orsetti azzurri',
     categoria: 'Baby shower',
     descrizione: 'Biscotti a tema orsetti azzurri per Baby Shower, nascita e battesimo.',
     immagine: '/images/biscotti_decorati_per_baby_shower_a_tema_orsetti_azzurri.png',
-    etsy: 'https://www.etsy.com/'
+    etsy: etsyUrl
   },
 ];
 ---
@@ -250,7 +271,24 @@ const prodotti = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Biscotti decorati e personalizzati artigianali per eventi" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={seoDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
     <style>
       :root {
@@ -542,7 +580,7 @@ const prodotti = [
           <a href="/#contatti">Contatti</a>
         </nav>
 
-        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">
+        <a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener noreferrer">
           Vai su Etsy per Acquistare Online
         </a>
 
@@ -560,7 +598,7 @@ const prodotti = [
             <a href="/certificazioni">Certificazioni</a>
             <a href="/#contatti">Contatti</a>
           </nav>
-          <a class="btn btn-primary mobile-etsy" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener noreferrer">
             Vai su Etsy per Acquistare Online
           </a>
         </div>
@@ -571,11 +609,12 @@ const prodotti = [
       <section class="hero">
         <div class="wrap">
           <span class="eyebrow">Catalogo biscotti decorati</span>
-          <h1>Biscotti decorati <em>per ogni occasione</em></h1>
+          <h1>Biscotti decorati <em>personalizzati per ogni occasione</em></h1>
           <p class="lead">
             Scopri le creazioni artigianali di Lucia Garro: biscotti decorati e personalizzati
-            per compleanni, battesimi, nascita, baby shower, Gender Reveal, Comunione, Cresima
-            e occasioni speciali. Scegli il modello che preferisci e completa l’acquisto su Etsy.
+            per compleanni, battesimi, nascite, baby shower, Gender Reveal, Comunione, Cresima,
+            matrimoni e occasioni speciali. Scegli il modello più adatto al tuo evento,
+            personalizza colori e dettagli e completa l’acquisto online su Etsy.
           </p>
         </div>
       </section>
@@ -672,7 +711,7 @@ const prodotti = [
             <a
               id="modal-etsy"
               class="btn etsy-btn"
-              href="https://www.etsy.com/"
+              href={etsyUrl}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -755,7 +794,7 @@ const prodotti = [
         const category = card.dataset.category ?? '';
         const description = card.dataset.description ?? '';
         const image = card.dataset.image ?? '';
-        const etsy = card.dataset.etsy ?? 'https://www.etsy.com/';
+        const etsy = card.dataset.etsy ?? etsyUrl;
 
         modalImage.src = image;
         modalImage.alt = `${title} - immagine ingrandita`;

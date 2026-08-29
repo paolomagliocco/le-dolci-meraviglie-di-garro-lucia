@@ -35,8 +35,30 @@ const prodotti = [
   }
 ];
 
-const seoTitle = 'Biscotti decorati personalizzati | Dolci Meraviglie di Lucy Garro';
-const seoDescription = 'Biscotti decorati artigianali personalizzati per compleanni, battesimi, baby shower, comunioni, matrimoni e lauree. Scopri i modelli e acquista su Etsy.';
+const seoTitle = 'Biscotti Decorati Personalizzati | Le Dolci Meraviglie di Lucy Garro';
+const seoDescription = 'Biscotti decorati e personalizzati artigianalmente per compleanni, battesimi, comunioni, cresime, baby shower, matrimoni, lauree ed eventi. Scopri Le Dolci Meraviglie di Lucy Garro e ordina online su Etsy.';
+const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/';
+const etsyUrl = 'https://toppercrafts.etsy.com';
+const whatsappUrl = 'https://wa.me/393519425808';
+const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/biscotti-decorati-a-tema-rose-e-cuori.png';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'LocalBusiness',
+  name: 'Le Dolci Meraviglie di Lucy Garro',
+  url: canonicalUrl,
+  telephone: '+39 351 942 5808',
+  image: ogImage,
+  description: seoDescription,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: 'Viale Zecchino 72A',
+    addressLocality: 'Siracusa',
+    addressRegion: 'Sicilia',
+    addressCountry: 'IT'
+  },
+  sameAs: [etsyUrl]
+};
 ---
 
 <html lang="it">
@@ -45,8 +67,24 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
-    <meta name="robots" content="index,follow" />
-    <link rel="canonical" href="https://www.esempio-biscotti.it/" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Biscotti decorati personalizzati artigianali di Le Dolci Meraviglie di Lucy Garro" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={seoDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <style>
       :root {
         --cream: #fffaf5;
@@ -385,7 +423,7 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
           <a href="/#contatti">Contatti</a>
         </nav>
 
-        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener">Vai su Etsy per Acquistare Online</a>
+        <a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener">Vai su Etsy per Acquistare Online</a>
 
         <button
           class="mobile-menu-toggle"
@@ -406,7 +444,7 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
             <a href="/certificazioni">Certificazioni</a>
             <a href="/#contatti">Contatti</a>
           </nav>
-          <a class="btn btn-primary mobile-etsy" href="https://www.etsy.com/" target="_blank" rel="noopener">
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener">
             Vai su Etsy per Acquistare Online
           </a>
         </div>
@@ -418,11 +456,11 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
         <div class="wrap hero-grid">
           <div>
             <span class="eyebrow">Biscotti artigianali personalizzati per ogni evento</span>
-            <h1>Grandi emozioni <em>- momenti da ricordare</em></h1>
-            <p class="lead">Biscotti decorati per compleanni, battesimi, baby shower, comunioni, matrimoni e lauree. Scegli il tema, personalizza i dettagli e completa l'ordine in sicurezza su Etsy.</p>
+            <h1>Biscotti decorati personalizzati per rendere unico ogni evento</h1>
+            <p class="lead">Biscotti decorati artigianali e personalizzati per compleanni, battesimi, baby shower, comunioni, cresime, matrimoni, lauree e occasioni speciali. Scegli il tema, personalizza i dettagli e completa l'ordine online su Etsy.</p>
             <div class="actions">
               <a class="btn btn-primary" href="#biscotti">Scopri i biscotti</a>
-              <a class="btn btn-secondary" href="https://www.etsy.com/" target="_blank" rel="noopener">Acquista su Etsy</a>
+              <a class="btn btn-secondary" href={etsyUrl} target="_blank" rel="noopener">Acquista su Etsy</a>
             </div>
           </div>
 
@@ -486,7 +524,7 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
           <div class="section-head">
             <span class="eyebrow">In evidenza</span>
             <h2>I biscotti più richiesti</h2>
-            <p>Ecco alcuni dei biscotti per Gender Reveal & Babby Shower che puoi ordinare su Etsy</p>
+            <p>Ecco alcuni dei biscotti decorati per Gender Reveal e Baby Shower che puoi ordinare online su Etsy.</p>
           </div>
           <div class="products">
             {prodotti.map((prodotto) => (
@@ -526,9 +564,9 @@ const seoDescription = 'Biscotti decorati artigianali personalizzati per complea
           <div class="cta">
             <div>
               <h2>Hai un'idea particolare?</h2>
-              <p>Scrivici per un set completamente personalizzato.</p>
+              <p>Scrivici per creare un set di biscotti completamente personalizzato. Le Dolci Meraviglie di Lucy Garro ha sede a Siracusa e realizza proposte per eventi e occasioni speciali.</p>
             </div>
-            <a class="btn" href="https://wa.me/390000000000" target="_blank" rel="noopener">Contattaci su WhatsApp</a>
+            <a class="btn" href={whatsappUrl} target="_blank" rel="noopener">Contattaci su WhatsApp</a>
           </div>
         </div>
       </section>

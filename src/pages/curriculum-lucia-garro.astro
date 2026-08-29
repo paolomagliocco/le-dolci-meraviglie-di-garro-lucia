@@ -1,6 +1,37 @@
 ---
-const seoTitle = 'Curriculum Lucia Garro | Cake Designer e Pasticcera a Siracusa';
-const seoDescription = 'Curriculum professionale di Lucia Garro, cake designer e pasticcera a Siracusa: formazione internazionale, PME Professional Diploma, Squires Kitchen, Cake International Londra e specializzazioni artistiche.';
+const seoTitle = 'Curriculum Lucia Garro | Cake Designer, Diplomi e Formazione';
+const seoDescription = 'Scopri il curriculum professionale di Lucia Garro: cake designer e pasticcera, formazione internazionale, PME Professional Diploma, Squires Kitchen, Cake International e specializzazioni artistiche.';
+const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/curriculum-lucia-garro';
+const etsyUrl = 'https://toppercrafts.etsy.com';
+const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/foto%20curriculum%20lucia%20garro.jpg';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: 'Curriculum professionale di Lucia Garro',
+  url: canonicalUrl,
+  description: seoDescription,
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Lucia Garro',
+    jobTitle: 'Cake Designer e Pasticcera',
+    url: canonicalUrl,
+    image: ogImage,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Viale Zecchino 72A',
+      addressLocality: 'Siracusa',
+      addressRegion: 'Sicilia',
+      addressCountry: 'IT'
+    },
+    sameAs: [etsyUrl]
+  },
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Le Dolci Meraviglie di Lucy Garro',
+    url: 'https://www.ledolcimeravigliedigarrolucia.com/'
+  }
+};
 
 const competenze = [
   'Cake design e decorazione artistica',
@@ -62,7 +93,24 @@ const milestones = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Lucia Garro, cake designer e pasticcera" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={seoDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
 
     <style>
       :root {
@@ -741,8 +789,8 @@ const milestones = [
           <a href="/#contatti">Contatti</a>
         </nav>
 
-        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">
-          Acquista su Etsy
+        <a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener noreferrer">
+          Scopri il negozio Etsy
         </a>
 
         <button
@@ -765,8 +813,8 @@ const milestones = [
             <a href="/#contatti">Contatti</a>
           </nav>
 
-          <a class="btn btn-primary mobile-etsy" href="https://www.etsy.com/" target="_blank" rel="noopener noreferrer">
-            Acquista su Etsy
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener noreferrer">
+            Scopri il negozio Etsy
           </a>
         </div>
       </div>
@@ -777,7 +825,7 @@ const milestones = [
         <div class="wrap hero-grid">
           <div>
             <span class="eyebrow">Curriculum professionale</span>
-            <h1>Lucia Garro <em>Cake Designer</em></h1>
+            <h1>Curriculum di Lucia Garro <em>Cake Designer e Pasticcera</em></h1>
             <p class="lead">
               Cake designer e pasticcera siciliana attiva a Siracusa, specializzata nella decorazione artistica,
               nelle torte scenografiche, nella sugarpaste, nelle wedding cake e nei biscotti decorati personalizzati.

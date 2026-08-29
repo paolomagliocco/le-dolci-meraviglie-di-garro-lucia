@@ -1,6 +1,33 @@
 ---
-const seoTitle = 'Certificazioni internazionali | Le Dolci Meraviglie di Lucy Garro';
-const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i riconoscimenti internazionali di Lucy Garro nel cake design e nella decorazione artistica di torte.';
+const seoTitle = 'Certificazioni Cake Design di Lucia Garro | Diplomi e Riconoscimenti';
+const seoDescription = 'Scopri certificazioni, diplomi professionali e riconoscimenti internazionali di Lucia Garro nel cake design, sugarpaste, royal icing e decorazione artistica.';
+const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/certificazioni';
+const etsyUrl = 'https://toppercrafts.etsy.com';
+const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/premio-cake-international-lucia-garro.png';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  name: 'Certificazioni e riconoscimenti di Lucia Garro',
+  url: canonicalUrl,
+  description: seoDescription,
+  mainEntity: {
+    '@type': 'Person',
+    name: 'Lucia Garro',
+    jobTitle: 'Cake Designer e Pasticcera',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Viale Zecchino 72A',
+      addressLocality: 'Siracusa',
+      addressRegion: 'Sicilia',
+      addressCountry: 'IT'
+    },
+    sameAs: [
+      etsyUrl,
+      'https://www.youtube.com/@pasticceriaberrycakessirac4193'
+    ]
+  }
+};
 ---
 
 <html lang="it">
@@ -9,7 +36,24 @@ const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i ri
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
-    <meta name="robots" content="index,follow" />
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+    <meta property="og:title" content={seoTitle} />
+    <meta property="og:description" content={seoDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Riconoscimento Cake International e certificazioni professionali di Lucia Garro" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seoTitle} />
+    <meta name="twitter:description" content={seoDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     <style>
       :root {
         --cream: #fffaf5;
@@ -466,7 +510,7 @@ const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i ri
           <a href="/#contatti">Contatti</a>
         </nav>
 
-        <a class="btn btn-primary" href="https://www.etsy.com/" target="_blank" rel="noopener">Vai su Etsy per Acquistare Online</a>
+        <a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener">Vai su Etsy per Acquistare Online</a>
 
         <button
           class="mobile-menu-toggle"
@@ -487,7 +531,7 @@ const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i ri
             <a href="/certificazioni">Certificazioni</a>
             <a href="/#contatti">Contatti</a>
           </nav>
-          <a class="btn btn-primary mobile-etsy" href="https://www.etsy.com/" target="_blank" rel="noopener">
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener">
             Vai su Etsy per Acquistare Online
           </a>
         </div>
@@ -499,8 +543,8 @@ const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i ri
         <div class="wrap about-grid">
           <div class="about-copy">
             <span class="eyebrow">Chi è Lucia Garro</span>
-            <h1>Esperienza e <em>formazione</em></h1>
-            <p>Lucia Garro è una famosa Cake Designer e Pasticcera Siciliana (Siracusa) specializzata nella decorazione artistica, nella modellazione della pasta di zucchero e nella realizzazione di creazioni scenografiche per eventi. Il suo percorso unisce formazione professionale internazionale, precisione tecnica e una forte sensibilità estetica.</p>
+            <h1>Lucia Garro: esperienza, <em>formazione e cake design</em></h1>
+            <p>Lucia Garro è una Cake Designer e Pasticcera siciliana di Siracusa, specializzata nella decorazione artistica, nella modellazione della pasta di zucchero e nella realizzazione di creazioni scenografiche per eventi. Il suo percorso unisce formazione professionale internazionale, precisione tecnica e una forte sensibilità estetica.</p>
             <p>La sua formazione comprende il <strong>PME Professional Diploma – Sugarpaste Module</strong>, conseguito a Londra, e una certificazione presso la <strong>Squires Kitchen International School of Baking and Cake Decorating</strong>, con specializzazione nelle tecniche di royal icing e wedding cake.</p>
             <p>Nel 2017 ha partecipato a <strong>Cake International</strong> presso <strong>Alexandra Palace, Londra</strong>, nella categoria <strong>Class H: Decorative Exhibit</strong>, ottenendo un <strong>Certificate of Merit</strong>. Il riconoscimento attesta il superamento degli standard tecnici previsti dalla giuria della manifestazione per le opere artistiche espositive.</p>
 
@@ -584,11 +628,11 @@ const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i ri
             </article>
             <article class="cert-card">
               <div class="cert-media"><img src="/images/certificato di diploma lucia garro decorazione torte .png" alt="Certificato internazionale di Lucia Garro presso Squires Kitchen" /></div>
-              <div class="cert-body"><span class="cert-tag">Formazione professionale</span><h2>Squires Kitchen International School</h2><p>La certificazione **Royal Icing Wedding Cake Papillon**, conseguita da **Lucia Garro nel 2016 presso la Squires Kitchen International School of Baking and Cake Decorating di Farnham, Surrey (Regno Unito)**, documenta un percorso di formazione specialistica dedicato alla **decorazione professionale delle wedding cake e alle tecniche di royal icing**.
+              <div class="cert-body"><span class="cert-tag">Formazione professionale</span><h2>Squires Kitchen International School</h2><p>La certificazione <strong>Royal Icing Wedding Cake Papillon</strong>, conseguita da <strong>Lucia Garro nel 2016 presso la Squires Kitchen International School of Baking and Cake Decorating di Farnham, Surrey (Regno Unito)</strong>, documenta un percorso di formazione specialistica dedicato alla <strong>decorazione professionale delle wedding cake e alle tecniche di royal icing</strong>.
 
-                                                                                                                                           La formazione presso Squires Kitchen ha contribuito al perfezionamento di competenze tecniche nella **lavorazione della ghiaccia reale, nella decorazione di precisione e nella realizzazione di elementi ornamentali per torte nuziali**, integrando tecnica, progettazione e sensibilità estetica.
+                                                                                                                                           La formazione presso Squires Kitchen ha contribuito al perfezionamento di competenze tecniche nella <strong>lavorazione della ghiaccia reale, nella decorazione di precisione e nella realizzazione di elementi ornamentali per torte nuziali</strong>, integrando tecnica, progettazione e sensibilità estetica.
 
-                                                                                                                                           Questa esperienza internazionale rappresenta una tappa significativa nel percorso professionale di Lucia Garro e nella sua specializzazione nella realizzazione di **torte artistiche e wedding cake curate nei dettagli**</p></div>
+                                                                                                                                           Questa esperienza internazionale rappresenta una tappa significativa nel percorso professionale di Lucia Garro e nella sua specializzazione nella realizzazione di <strong>torte artistiche e wedding cake curate nei dettagli</strong></p></div>
             </article>
             <article class="cert-card">
               <div class="cert-media"><img src="/images/diploma PME di cake designer Lucia Garro.png" alt="Diploma professionale PME di cake design conseguito da Lucia Garro" /></div>
@@ -657,7 +701,7 @@ const seoDescription = 'Scopri le certificazioni, i diplomi professionali e i ri
           </div>
         </section>
       <section>
-        <div class="wrap"><div class="cta"><div><h2>Scopri i biscotti decorati</h2><p>Esplora i modelli disponibili e scegli il tema più adatto al tuo evento.</p></div><a class="btn" href="/#biscotti">Vai ai biscotti</a></div></div>
+        <div class="wrap"><div class="cta"><div><h2>Scopri i biscotti decorati</h2><p>Esplora i modelli disponibili e scegli il tema più adatto al tuo evento.</p></div><a class="btn" href="/biscotti-decorati">Vai ai biscotti</a></div></div>
       </section>
     </main>
     <footer><div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Biscotti decorati artigianali · Privacy · Cookie</div></footer>
