@@ -103,7 +103,7 @@ const biscottiCategorie = [
     titolo: 'Biscotti Gender Reveal con orsetti Boy or Girl',
     categoria: 'Baby shower',
     descrizione: 'Biscotti decorati con orsetti rosa e azzurri per Gender Reveal e Baby Shower.',
-    immagine: '/images/biscotti-decorati-Gender-Reveal-con-orsetti-Boy-or-Girl.png',
+    immagine: '/images/biscotti-decorati-gender-reveal-con-orsetti-boy-or-girl.png',
     prezzo: 'Prezzo su richiesta'
   },
   {
@@ -276,21 +276,22 @@ const biscottiCategorie = [
   },
 ];
 
-const seoTitle = 'Biscotti Decorati Personalizzati | Le Dolci Meraviglie di Lucy Garro';
-const seoDescription = 'Biscotti decorati e personalizzati artigianalmente per compleanni, battesimi, comunioni, cresime, baby shower, matrimoni, lauree ed eventi. Scopri Le Dolci Meraviglie di Lucy Garro e ordina online su Etsy.';
+const seoTitle = 'Biscotti Decorati Personalizzati | Le Dolci Meraviglie';
+const seoDescription = 'Biscotti decorati artigianalmente per compleanni, battesimi, comunioni, baby shower e matrimoni. Le Dolci Meraviglie di Lucy Garro, ordina su Etsy.';
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/';
-const etsyUrl = 'https://toppercrafts.etsy.com';
+const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const whatsappUrl = 'https://wa.me/393519425808';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/biscotti-decorati-a-tema-rose-e-cuori.png';
 
 const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
+  '@type': 'Bakery',
   name: 'Le Dolci Meraviglie di Lucy Garro',
   url: canonicalUrl,
   telephone: '+39 351 942 5808',
   image: ogImage,
   description: seoDescription,
+  priceRange: '€€',
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Viale Zecchino 72A',
@@ -298,7 +299,35 @@ const structuredData = {
     addressRegion: 'Sicilia',
     addressCountry: 'IT'
   },
+  areaServed: [
+    { '@type': 'City', name: 'Siracusa' },
+    { '@type': 'AdministrativeArea', name: 'Sicilia' },
+    { '@type': 'Country', name: 'Italia' }
+  ],
   sameAs: [etsyUrl]
+};
+
+const productListStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'Biscotti decorati in evidenza',
+  itemListElement: prodotti.map((prodotto, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    item: {
+      '@type': 'Product',
+      name: prodotto.nome,
+      category: prodotto.categoria,
+      image: `https://www.ledolcimeravigliedigarrolucia.com${prodotto.immagine}`,
+      offers: {
+        '@type': 'Offer',
+        url: etsyUrl,
+        priceCurrency: 'EUR',
+        price: prodotto.prezzo.match(/[\d,]+/)[0].replace(',', '.'),
+        availability: 'https://schema.org/InStock'
+      }
+    }
+  }))
 };
 ---
 
@@ -310,6 +339,8 @@ const structuredData = {
     <meta name="description" content={seoDescription} />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
     <meta property="og:locale" content="it_IT" />
     <meta property="og:type" content="website" />
@@ -326,6 +357,7 @@ const structuredData = {
     <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(productListStructuredData)}></script>
     <style>
       :root {
         --cream: #fffaf5;
@@ -1298,10 +1330,10 @@ const structuredData = {
           <div>
             <span class="eyebrow">Biscotti artigianali personalizzati per ogni evento</span>
             <h1>Biscotti decorati personalizzati per rendere unico ogni evento</h1>
-            <p class="lead">Biscotti decorati artigianali e personalizzati per compleanni, battesimi, baby shower, comunioni, cresime, matrimoni, lauree e occasioni speciali. Scegli il tema, personalizza i dettagli e completa l'ordine online su Etsy.</p>
+            <p class="lead">Biscotti decorati artigianali e personalizzati per compleanni, battesimi, baby shower, comunioni, cresime, matrimoni, lauree e occasioni speciali. Realizzati a mano a Siracusa e spediti in tutta Italia. Scegli il tema, personalizza i dettagli e completa l'ordine online su Etsy.</p>
             <div class="actions">
               <a class="btn btn-primary" href="#biscotti">Scopri i biscotti</a>
-              <a class="btn btn-secondary" href="https://toppercrafts.etsy.com" target="_blank" rel="noopener">Acquista su Etsy</a>
+              <a class="btn btn-secondary" href="https://sweetwondersoflucy.etsy.com" target="_blank" rel="noopener">Acquista su Etsy</a>
             </div>
           </div>
 
@@ -1483,7 +1515,7 @@ const structuredData = {
     </dialog>
 
     <footer>
-      <div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Biscotti decorati artigianali · Privacy · Cookie</div>
+      <div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Biscotti decorati artigianali a Siracusa, spediti in tutta Italia · Privacy · Cookie</div>
     </footer>
 
     <script>
@@ -1589,7 +1621,7 @@ const whatsappUrl =
                   <div class="category-product-actions">
                     <a
                       class="btn btn-primary"
-                      href="https://toppercrafts.etsy.com"
+                      href="https://sweetwondersoflucy.etsy.com"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
