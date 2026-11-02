@@ -1,0 +1,12 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "le-dolci-meraviglie-di-garro-lucia.vercel.app" }],
+      "destination": "https://www.ledolcimeravigliedigarrolucia.com/:path*",
+      "permanent": true
+    }
+  ]
+}
