@@ -1280,6 +1280,129 @@ const productListStructuredData = {
         .prod-tag{font-size:.68rem;padding:4px 9px;left:8px;top:8px}
         .richiesti-more .btn{flex:1 1 100%}
       }
+
+      /* ===== Sezione formazione con Ceri Griffiths ===== */
+      .maestro{
+        position:relative;overflow:hidden;padding:96px 0;
+        background:
+          radial-gradient(ellipse 60% 70% at 0% 50%,rgba(244,207,210,.45),transparent 70%),
+          radial-gradient(ellipse 50% 60% at 100% 0%,rgba(234,214,186,.45),transparent 70%),
+          #fffaf6;
+      }
+      .maestro::before,.maestro::after{
+        content:"";position:absolute;left:50%;width:min(1160px,calc(100% - 32px));height:1px;transform:translateX(-50%);
+        background:linear-gradient(90deg,transparent,#d8b98a 20%,#d8b98a 80%,transparent)
+      }
+      .maestro::before{top:36px}.maestro::after{bottom:36px}
+      .maestro-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:start}
+      @media (min-width:901px){.maestro-media{position:sticky;top:110px}}
+      .maestro-media{margin:0;position:relative;isolation:isolate}
+      .maestro-frame{position:relative;padding:12px;border-radius:28px;background:#fff;
+        box-shadow:0 30px 70px rgba(120,70,60,.18)}
+      .maestro-frame::before{
+        content:"";position:absolute;inset:-12px;border:1.5px solid #d8b98a;border-radius:36px;z-index:-1;pointer-events:none
+      }
+      .maestro-frame img{display:block;width:100%;height:auto;border-radius:18px}
+      .maestro-media figcaption{margin-top:22px;text-align:center;font-family:Georgia,serif;font-style:italic;color:#7a5a50;font-size:.98rem}
+      .maestro-media figcaption em{color:#a9505e}
+
+      .maestro-copy h2{margin:16px 0 6px;font-size:clamp(2rem,3.6vw,3.1rem);color:#3b1f18;line-height:1.1}
+      .maestro-copy h2 em{font-style:italic;color:#a9505e}
+      .maestro-ribbon{width:180px;height:16px;margin:4px 0 22px;fill:none;stroke:#c9a46b;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+      .maestro-copy p{color:#4a3028;margin:0 0 16px;line-height:1.75}
+      .maestro-lead{font-family:Georgia,serif;font-size:1.2rem;line-height:1.6 !important;color:#3b1f18 !important}
+      .maestro-lead strong{color:#a9505e;font-weight:700}
+
+      .maestro-skills{list-style:none;padding:0;margin:26px 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+      .maestro-skills li{
+        display:flex;flex-direction:column;gap:6px;padding:16px 16px 14px;border-radius:16px;
+        background:rgba(255,255,255,.75);border:1px solid #efdcd3;font-family:Georgia,serif;color:#3b1f18;font-size:.98rem;line-height:1.3
+      }
+      .maestro-skills span{font-family:Georgia,serif;font-style:italic;font-size:1.4rem;color:#c9a46b;line-height:1}
+
+      .maestro-school{
+        display:flex;gap:18px;align-items:flex-start;padding:22px 24px;border-radius:20px;
+        background:linear-gradient(135deg,#fdf1ef,#fbe7e6);border:1px solid #f3d6d6;border-left:4px solid #a9505e
+      }
+      .maestro-crest{width:42px;height:42px;flex:0 0 42px;fill:none;stroke:#a9505e;stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round}
+      .maestro-school h3{margin:0 0 6px;font-size:1.2rem;color:#3b1f18}
+      .maestro-school p{margin:0;font-size:.94rem;line-height:1.65}
+
+      .maestro-link{display:inline-flex;align-items:center;gap:8px;margin-top:24px;font-weight:600;color:#a9505e;
+        border-bottom:1.5px solid rgba(169,80,94,.35);padding-bottom:2px;transition:gap .2s ease,border-color .2s ease}
+      .maestro-link:hover{gap:12px;border-color:#a9505e}
+      .maestro-link .ico{width:18px;height:18px}
+
+      @media (max-width:900px){
+        .maestro{padding:72px 0}
+        .maestro-grid{grid-template-columns:1fr;gap:44px}
+        .maestro-media{max-width:440px;margin:0 auto;width:calc(100% - 28px)}
+      }
+      @media (max-width:600px){
+        .maestro-skills{grid-template-columns:1fr}
+        .maestro-skills li{flex-direction:row;align-items:center;gap:12px}
+        .maestro-school{flex-direction:column;gap:10px;padding:20px}
+        .maestro-lead{font-size:1.08rem}
+      }
+
+      /* carousel foto sezione maestro */
+      .maestro-slides{position:relative;aspect-ratio:1122/1402;border-radius:18px;overflow:hidden;clip-path:inset(0 round 18px);isolation:isolate;background:#f6ece6}
+      .maestro-slides .maestro-slide{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+        opacity:0;transform:scale(1.03);transition:opacity 1.1s ease,transform 6s ease}
+      .maestro-slides .maestro-slide.is-active{opacity:1;transform:scale(1)}
+      .maestro-dots{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:flex;gap:8px;
+        padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.75);backdrop-filter:blur(4px)}
+      .maestro-dots button{width:9px;height:9px;padding:0;border:0;border-radius:999px;background:#d9b3b8;cursor:pointer;transition:width .3s ease,background .3s ease}
+      .maestro-dots button.is-active{width:24px;background:#a9505e}
+      .maestro-dots button:focus-visible{outline:2px solid #a9505e;outline-offset:2px}
+      @media (prefers-reduced-motion:reduce){.maestro-slides .maestro-slide{transition:opacity .3s ease;transform:none !important}}
+
+      /* ===== Sezione "Come funziona" ===== */
+      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+      .how.how{
+        position:relative;overflow:hidden;
+        background:
+          radial-gradient(ellipse 45% 60% at 100% 100%,rgba(244,207,210,.5),transparent 70%),
+          radial-gradient(ellipse 40% 55% at 0% 0%,rgba(234,214,186,.4),transparent 70%),
+          #fbf3ee;
+      }
+      .how-head{margin-left:auto;margin-right:auto;text-align:center}
+      .how-head h2{color:#3b1f18;margin:14px 0 18px}
+      .how-head p{color:#3b2a24;max-width:560px;margin:0 auto !important}
+      .how-steps{list-style:none;padding:0;margin:44px 0 0;gap:28px;counter-reset:none;position:relative}
+      .how-steps::before{
+        content:"";position:absolute;top:66px;left:16%;right:16%;height:0;border-top:2px dashed #e2b9bd;z-index:0
+      }
+      .how-step{
+        position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;text-align:center;
+        padding:34px 26px 30px;border-radius:24px;background:linear-gradient(180deg,#fff 0%,#fffaf8 100%);border:2px solid #fff;
+        box-shadow:0 14px 34px rgba(150,90,90,.12);transition:transform .25s ease,box-shadow .25s ease
+      }
+      .how-step:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(150,90,90,.2)}
+      .how-num{
+        position:absolute;top:14px;right:20px;font-family:Georgia,serif;font-style:italic;font-size:2.6rem;line-height:1;
+        color:transparent;-webkit-text-stroke:1px #d8b98a
+      }
+      .how-icon{
+        width:64px;height:64px;display:grid;place-items:center;border-radius:50%;
+        background:linear-gradient(135deg,#b9606d,#a9505e);box-shadow:0 0 0 8px #fbe6e6,0 12px 24px rgba(169,80,94,.3)
+      }
+      .how-icon svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      .how-step h3{margin:24px 0 2px;color:#3b1f18;font-size:1.45rem}
+      .how-step .occ-ribbon{margin:6px 0 12px}
+      .how-step p{margin:0;color:#4a3028;font-size:.96rem;line-height:1.6;max-width:260px}
+      .how-link{margin-top:16px;font-size:.9rem;font-weight:600;color:#a9505e;border-bottom:1.5px solid rgba(169,80,94,.3);padding-bottom:1px}
+      .how-link:hover{border-color:#a9505e}
+      .how-cta{display:flex;justify-content:center;margin-top:44px}
+      .how-cta .btn{padding:14px 30px;font-weight:600;background:#a9505e;box-shadow:0 10px 24px rgba(169,80,94,.25)}
+      @media (max-width:900px){
+        .how-steps{grid-template-columns:1fr;max-width:520px;margin-left:auto;margin-right:auto;gap:22px}
+        .how-steps::before{top:40px;bottom:40px;left:50%;right:auto;height:auto;border-top:0;border-left:2px dashed #e2b9bd}
+      }
+      @media (max-width:600px){
+        .how-step{padding:28px 20px 24px}
+        .how-cta .btn{width:100%}
+      }
       /* PC: foto hero più grande */
       @media (min-width:901px){
         .hero-home .hero-grid{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:12px}
@@ -1620,16 +1743,95 @@ const productListStructuredData = {
         </div>
       </section>
 
+      <section class="maestro" id="formazione-ceri-griffiths" aria-labelledby="maestro-title">
+        <div class="wrap maestro-grid">
+          <figure class="maestro-media">
+            <div class="maestro-frame maestro-carousel" data-maestro-carousel aria-roledescription="carousel" aria-label="Foto di Lucia Garro">
+              <div class="maestro-slides">
+                <img
+                  class="maestro-slide is-active"
+                  src="/images/cake-design-con-cerri-griffiths.png"
+                  alt="Lucia Garro con il maestro pasticcere Ceri Griffiths accanto a una wedding cake decorata in ghiaccia reale"
+                  width="1122" height="1402" loading="lazy"
+                  data-caption="Lucia Garro con il maestro <em>Ceri Griffiths</em>"
+                />
+                <img
+                  class="maestro-slide"
+                  src="/images/Lucy-Garro-arte-della-Wedding-Cake.png"
+                  alt="Lucia Garro mentre decora una wedding cake a piani con rose verdi in pasta di zucchero"
+                  width="1122" height="1402" loading="lazy"
+                  data-caption="Lucia Garro e l'arte della <em>Wedding Cake</em>"
+                />
+              </div>
+              <div class="maestro-dots" role="tablist" aria-label="Scegli la foto">
+                <button type="button" class="is-active" aria-label="Foto 1" aria-selected="true"></button>
+                <button type="button" aria-label="Foto 2" aria-selected="false"></button>
+              </div>
+            </div>
+            <figcaption data-maestro-caption aria-live="polite">Lucia Garro con il maestro <em>Ceri Griffiths</em></figcaption>
+          </figure>
+
+          <div class="maestro-copy">
+            <span class="occ-eyebrow">Formazione d'eccellenza</span>
+            <h2 id="maestro-title">Alla scuola del maestro <em>Ceri Griffiths</em></h2>
+            <svg class="maestro-ribbon" viewBox="0 0 180 16" aria-hidden="true"><path d="M4 8h66M110 8h66"/><path d="M90 8c-6-7-16-7-16 0s10 7 16 0Zm0 0c6-7 16-7 16 0s-10 7-16 0Zm0 0-6 7m6-7 6 7"/></svg>
+            <p class="maestro-lead">C'è un sapere che non si trova nei libri: si impara guardando le mani di un grande maestro. Lucia ha avuto il privilegio di apprendere l'arte della <strong>ghiaccia reale</strong> da <strong>Ceri Griffiths</strong>, uno dei più grandi interpreti al mondo di questa tecnica.</p>
+            <p>Pasticcere, cake designer e autore britannico di origini gallesi, nato a Cardiff nel 1960, Ceri Griffiths è conosciuto come il <em>"guru della ghiaccia reale"</em>. È un'autorità nel <em>piping</em> con il sac à poche, nei raffinati bordi in stile <em>Lambeth</em> e nella creazione di fiori di zucchero. Nel 2021 è entrato nella <em>Hall of Fame</em> dell'International Cake Exploration Society (ICES) e ha ricevuto la <em>Medal of Honour</em> all'Oklahoma State Sugar Art Show.</p>
+            <p>Da lui Lucia ha imparato i segreti che fanno la differenza: la consistenza perfetta della ghiaccia, la precisione del tratto, la pazienza dei dettagli più minuti. Oggi quella stessa cura vive in ogni biscotto decorato e in ogni torta che esce dal suo laboratorio in Sicilia.</p>
+
+            <ul class="maestro-skills">
+              <li><span>01</span>Ghiaccia reale e <em>piping</em></li>
+              <li><span>02</span>Bordi in stile <em>Lambeth</em></li>
+              <li><span>03</span>Fiori e decori in zucchero</li>
+            </ul>
+
+            <aside class="maestro-school">
+              <svg class="maestro-crest" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 4 40 10v12c0 10-7 18-16 22C15 40 8 32 8 22V10l16-6Z"/><path d="M16 20h16M16 26h16M24 14v20"/></svg>
+              <div>
+                <h3>Squires Kitchen School</h3>
+                <p>Ceri Griffiths ha collaborato per anni come docente e autore con la <strong>Squires Kitchen School</strong>, rinomata scuola britannica specializzata nell'arte della pasticceria, nel <em>cake design</em> e nella lavorazione dello zucchero (<em>sugarcraft</em>). Attiva dal 1987 e situata a Medstead, nei pressi di Alton nell'Hampshire (Regno Unito), offre corsi pratici guidati da tutor esperti, per studenti di ogni livello: dai principianti agli aspiranti professionisti.</p>
+              </div>
+            </aside>
+
+            <a class="maestro-link" href="/certificazioni">Scopri le certificazioni di Lucia<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+      </section>
+
       <section class="how" id="come-funziona">
         <div class="wrap">
-          <div class="section-head">
-            <span class="eyebrow">Semplice e veloce</span>
-            <h2>Come funziona</h2>
+          <div class="section-head how-head">
+            <span class="occ-eyebrow">Semplice e veloce</span>
+            <h2><span class="occ-title">Come funziona<svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10c40-6 80-8 116-4"/></svg></span></h2>
+            <p>Tre semplici passaggi separano la tua idea da una scatola di biscotti decorati a mano, pronti a stupire i tuoi ospiti.</p>
           </div>
-          <div class="steps">
-            <article class="card"><div class="step-no">1</div><h3>Scegli il tema</h3><p>Esplora le categorie e trova il modello più adatto all'evento.</p></article>
-            <article class="card"><div class="step-no">2</div><h3>Personalizza</h3><p>Nome, data, colori e dettagli possono essere adattati alla tua festa.</p></article>
-            <article class="card"><div class="step-no">3</div><h3>Ordina su Etsy</h3><p>Il pagamento e la gestione dell'ordine avvengono sulla piattaforma Etsy.</p></article>
+          <ol class="steps how-steps">
+            <li class="how-step">
+              <span class="how-num" aria-hidden="true">01</span>
+              <div class="how-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4"/><path d="M8.5 11c.6-1.6 1.6-2.4 2.5-2.4"/></svg></div>
+              <h3><span class="sr-only">Passo 1: </span>Scegli il tema</h3>
+              <svg class="occ-ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+              <p>Esplora le categorie e trova il modello più adatto all'evento.</p>
+              <a class="how-link" href="#categorie">Vedi le categorie</a>
+            </li>
+            <li class="how-step">
+              <span class="how-num" aria-hidden="true">02</span>
+              <div class="how-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20c1.5-.2 3-1 4-2l9.5-9.5a2.1 2.1 0 0 0-3-3L5 15c-1 1-1.8 2.5-2 4"/><path d="m13 7 3 3"/><path d="M18.5 15.5c1 1 1.5 2 .5 3s-2 .5-3-.5"/></svg></div>
+              <h3><span class="sr-only">Passo 2: </span>Personalizza</h3>
+              <svg class="occ-ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+              <p>Nome, data, colori e dettagli possono essere adattati alla tua festa.</p>
+            </li>
+            <li class="how-step">
+              <span class="how-num" aria-hidden="true">03</span>
+              <div class="how-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="m9.5 14 2 2 3.5-4"/></svg></div>
+              <h3><span class="sr-only">Passo 3: </span>Ordina su Etsy</h3>
+              <svg class="occ-ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+              <p>Il pagamento e la gestione dell'ordine avvengono sulla piattaforma Etsy.</p>
+              <a class="how-link" href={{etsyUrl}} target="_blank" rel="noopener">Vai al negozio</a>
+            </li>
+          </ol>
+          <div class="how-cta">
+            <a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Inizia il tuo ordine su Etsy</a>
           </div>
         </div>
       </section>
@@ -1926,5 +2128,38 @@ const whatsappUrl =
       });
     </script>
 
+
+    <script>
+      (() => {
+        const root = document.querySelector('[data-maestro-carousel]');
+        if (!root) return;
+        const slides = [...root.querySelectorAll('.maestro-slide')];
+        const dots = [...root.querySelectorAll('.maestro-dots button')];
+        const caption = document.querySelector('[data-maestro-caption]');
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let index = 0;
+        let timer;
+
+        const show = (i) => {
+          index = (i + slides.length) % slides.length;
+          slides.forEach((s, n) => s.classList.toggle('is-active', n === index));
+          dots.forEach((d, n) => {
+            d.classList.toggle('is-active', n === index);
+            d.setAttribute('aria-selected', String(n === index));
+          });
+          if (caption) caption.innerHTML = slides[index].dataset.caption || '';
+        };
+        const start = () => { if (!reduce) { stop(); timer = setInterval(() => show(index + 1), 5000); } };
+        const stop = () => clearInterval(timer);
+
+        dots.forEach((d, n) => d.addEventListener('click', () => { show(n); start(); }));
+        root.addEventListener('mouseenter', stop);
+        root.addEventListener('mouseleave', start);
+        root.addEventListener('focusin', stop);
+        root.addEventListener('focusout', start);
+        document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
+        start();
+      })();
+    </script>
   </body>
 </html>
