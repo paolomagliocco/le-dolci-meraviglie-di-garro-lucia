@@ -120,6 +120,10 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
       .header-etsy{padding:12px 20px;white-space:nowrap}
       @media (max-width:1180px){.brand{font-size:1.15rem}.header-etsy{font-size:.9rem;padding:11px 16px}}
       @media (min-width:901px) and (max-width:1100px){.nav{gap:14px}.brand{font-size:1.02rem}.nav>nav{gap:14px}.nav>nav a{font-size:.88rem}.header-etsy{font-size:.84rem;padding:10px 14px}.header-etsy .ico{display:none}}
+      /* con 7 voci di menu: header un po' più largo e, fino a 1480px, bottone Etsy solo icona (testo come tooltip) */
+      .nav.wrap{width:min(1440px,calc(100% - 32px))}
+      @media (min-width:901px) and (max-width:1480px){.header-etsy{width:46px;height:46px;flex:0 0 46px;padding:0;gap:0;font-size:0}.header-etsy .ico{display:block;width:20px;height:20px}}
+      @media (min-width:901px) and (max-width:980px){.nav,.nav>nav{gap:10px}.nav>nav a{font-size:.82rem}.brand{font-size:.95rem}}
 
       .mobile-menu-toggle{
         display:none;width:46px;height:46px;flex:0 0 46px;align-items:center;justify-content:center;
@@ -244,12 +248,19 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
         transition:all .2s ease
       }
       .chip span::before{
-        content:"";width:16px;height:16px;border-radius:50%;border:1.5px solid var(--rose-line);background:#fff;
-        transition:all .2s ease
+        content:"";width:17px;height:17px;flex:0 0 17px;border-radius:5px;border:1.5px solid var(--rose-line);background:#fff;
+        background-repeat:no-repeat;background-position:center;background-size:12px;transition:all .2s ease
       }
+      .chips-label{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px;font-size:.86rem;font-weight:600;color:var(--text)}
+      .chips-label .req{color:var(--rose)}
+      .chips-label small{font-weight:400;color:var(--muted);font-size:.8rem}
+      .chips.is-invalid .chip span{border-color:#c4475a;background:#fff6f6}
       .chip span:hover{border-color:var(--rose-line)}
       .chip input:checked+span{background:var(--rose-soft);border-color:var(--rose);color:#5a2a2a;box-shadow:0 6px 16px rgba(169,80,94,.15)}
-      .chip input:checked+span::before{background:var(--rose);border-color:var(--rose);box-shadow:inset 0 0 0 3px #fff}
+      .chip input:checked+span::before{
+        border-color:var(--rose);background-color:var(--rose);
+        background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7.5'/%3E%3C/svg%3E")
+      }
       .chip input:focus-visible+span{outline:3px solid rgba(169,80,94,.4);outline-offset:2px}
 
       /* consenso */
@@ -363,13 +374,15 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
 
         <nav aria-label="Navigazione principale">
           <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/torte-artistiche">Torte artistiche</a>
           <a href="/sweet-table">Sweet Table</a>
+          <a href="/vip-e-collaborazioni">VIP e collab.</a>
           <a href="/curriculum-lucia-garro">Curriculum</a>
           <a href="/certificazioni">Certificazioni</a>
           <a href="/contatti" aria-current="page">Contatti</a>
         </nav>
 
-        <a class="btn btn-primary header-etsy" href={etsyUrl} target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
+        <a class="btn btn-primary header-etsy" href={etsyUrl} title="Vai su Etsy" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
 
         <button
           class="mobile-menu-toggle"
@@ -385,7 +398,9 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
         <div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
           <nav aria-label="Navigazione mobile">
             <a href="/biscotti-decorati">Biscotti</a>
+            <a href="/torte-artistiche">Torte artistiche</a>
             <a href="/sweet-table">Sweet Table</a>
+            <a href="/vip-e-collaborazioni">VIP e collab.</a>
             <a href="/curriculum-lucia-garro">Curriculum</a>
             <a href="/certificazioni">Certificazioni</a>
             <a href="/contatti" aria-current="page">Contatti</a>
@@ -410,7 +425,7 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
         <div class="wrap contact-grid">
           <aside class="contact-aside" aria-label="Altri modi per contattare Lucia">
             <figure class="aside-card aside-photo">
-              <img src="/images/biscotti-decorati-a-tema-rose-e-cuori.png" alt="Biscotti decorati a tema rose e cuori realizzati da Lucia Garro" loading="lazy" />
+              <img src="/images/biscotti-decorati-a-tema-rose-e-cuori.webp" alt="Biscotti decorati a tema rose e cuori realizzati da Lucia Garro" loading="lazy" />
               <figcaption>Ogni biscotto nasce dalla tua storia.</figcaption>
             </figure>
 
@@ -520,12 +535,13 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
                 <legend><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>Il tuo evento</legend>
                 <div class="fields">
                   <div class="field full">
-                    <span class="sr-only" id="prodotto-label">Cosa ti interessa</span>
-                    <div class="chips" role="radiogroup" aria-labelledby="prodotto-label">
-                      <label class="chip"><input type="radio" name="Interesse" value="Biscotti decorati" checked /><span>Biscotti decorati</span></label>
-                      <label class="chip"><input type="radio" name="Interesse" value="Sweet Table" /><span>Sweet Table</span></label>
-                      <label class="chip"><input type="radio" name="Interesse" value="Biscotti + Sweet Table" /><span>Entrambi</span></label>
+                    <span class="chips-label" id="prodotto-label">Cosa ti interessa?<span class="req" aria-hidden="true">*</span><small>(puoi sceglierne più di uno)</small></span>
+                    <div class="chips" role="group" aria-labelledby="prodotto-label" data-interest-group>
+                      <label class="chip"><input type="checkbox" name="Interesse" value="Biscotti decorati" /><span>Biscotti decorati</span></label>
+                      <label class="chip"><input type="checkbox" name="Interesse" value="Torta artistica" /><span>Torta artistica</span></label>
+                      <label class="chip"><input type="checkbox" name="Interesse" value="Sweet Table" /><span>Sweet Table</span></label>
                     </div>
+                    <span class="field-error" aria-live="polite" data-interest-error></span>
                   </div>
                   <div class="field span-2">
                     <label for="occasione">Occasione<span class="req" aria-hidden="true">*</span></label>
@@ -675,9 +691,20 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
         },
       };
 
+      const interestGroup = form?.querySelector('[data-interest-group]');
+      const interestError = form?.querySelector('[data-interest-error]');
+
+      function validateInterest() {
+        const ok = Boolean(interestGroup?.querySelector('input:checked'));
+        interestGroup?.classList.toggle('is-invalid', !ok);
+        if (interestError) interestError.textContent = ok ? '' : 'Scegli almeno un prodotto.';
+        return ok;
+      }
+
       function validateField(field) {
         if (!(field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement)) return true;
         if (field.type === 'radio' || field.type === 'hidden' || field.name === '_honey') return true;
+        if (field.type === 'checkbox' && field.name === 'Interesse') return validateInterest();
         if (field.type === 'checkbox') {
           consentBox?.classList.toggle('is-invalid', !field.checked);
           return field.checked;
@@ -732,13 +759,15 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
         const fields = Array.from(form.elements);
         const results = fields.map((field) => validateField(field));
         if (results.includes(false)) {
-          const firstInvalid = form.querySelector('.is-invalid, [data-consent].is-invalid input');
+          const firstInvalid = form.querySelector('.control.is-invalid, .chips.is-invalid input, [data-consent].is-invalid input');
           if (firstInvalid instanceof HTMLElement) firstInvalid.focus();
           showError('Controlla i campi evidenziati e riprova.');
           return;
         }
 
-        const data = Object.fromEntries(new FormData(form).entries());
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+        data['Interesse'] = formData.getAll('Interesse').join(', '); // scelta multipla
         if (data._honey) return; // bot
 
         const nome = String(data['Nome'] ?? '').trim();

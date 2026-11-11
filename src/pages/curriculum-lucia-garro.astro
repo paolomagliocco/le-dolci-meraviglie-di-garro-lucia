@@ -189,6 +189,10 @@ const iconeMilestone = [
       .header-etsy{padding:12px 20px;white-space:nowrap}
       @media (max-width:1180px){.brand{font-size:1.15rem}.header-etsy{font-size:.9rem;padding:11px 16px}}
       @media (min-width:901px) and (max-width:1100px){.nav{gap:14px}.brand{font-size:1.02rem}.nav>nav{gap:14px}.nav>nav a{font-size:.88rem}.header-etsy{font-size:.84rem;padding:10px 14px}.header-etsy .ico{display:none}}
+      /* con 7 voci di menu: header un po' più largo e, fino a 1480px, bottone Etsy solo icona (testo come tooltip) */
+      .nav.wrap{width:min(1440px,calc(100% - 32px))}
+      @media (min-width:901px) and (max-width:1480px){.header-etsy{width:46px;height:46px;flex:0 0 46px;padding:0;gap:0;font-size:0}.header-etsy .ico{display:block;width:20px;height:20px}}
+      @media (min-width:901px) and (max-width:980px){.nav,.nav>nav{gap:10px}.nav>nav a{font-size:.82rem}.brand{font-size:.95rem}}
 
       .mobile-menu-toggle{
         display:none;width:46px;height:46px;flex:0 0 46px;align-items:center;justify-content:center;
@@ -494,13 +498,15 @@ const iconeMilestone = [
 
         <nav aria-label="Navigazione principale">
           <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/torte-artistiche">Torte artistiche</a>
           <a href="/sweet-table">Sweet Table</a>
+          <a href="/vip-e-collaborazioni">VIP e collab.</a>
           <a href="/curriculum-lucia-garro" aria-current="page">Curriculum</a>
           <a href="/certificazioni">Certificazioni</a>
           <a href="/contatti">Contatti</a>
         </nav>
 
-        <a class="btn btn-primary header-etsy" href={etsyUrl} target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
+        <a class="btn btn-primary header-etsy" href={etsyUrl} title="Vai su Etsy" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
 
         <button
           class="mobile-menu-toggle"
@@ -516,7 +522,9 @@ const iconeMilestone = [
         <div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
           <nav aria-label="Navigazione mobile">
             <a href="/biscotti-decorati">Biscotti</a>
+            <a href="/torte-artistiche">Torte artistiche</a>
             <a href="/sweet-table">Sweet Table</a>
+            <a href="/vip-e-collaborazioni">VIP e collab.</a>
             <a href="/curriculum-lucia-garro" aria-current="page">Curriculum</a>
             <a href="/certificazioni">Certificazioni</a>
             <a href="/contatti">Contatti</a>
@@ -545,7 +553,7 @@ const iconeMilestone = [
             <div class="framed">
               <div class="profile-photo">
                 <img
-                  src="/images/foto-curriculum-lucia-garro.jpg"
+                  src="/images/foto-curriculum-lucia-garro.webp"
                   alt="Lucia Garro, cake designer e pasticcera a Siracusa"
                   width="320"
                   height="320"
@@ -653,7 +661,7 @@ const iconeMilestone = [
           <figure class="press-media">
             <div class="framed">
               <img
-                src="/images/lucia-garro-articolo-su-sky-tg24.jpg"
+                src="/images/lucia-garro-articolo-su-sky-tg24.webp"
                 alt="Articolo Sky TG24 dedicato a Cake International con Lucia Garro"
                 loading="lazy"
               />
