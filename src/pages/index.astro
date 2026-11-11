@@ -879,6 +879,10 @@ const productListStructuredData = {
       .cta h2 { margin: 0 0 8px; font-size: clamp(2rem, 4vw, 3.3rem); }
       .cta p { margin: 0; opacity: .88; }
       .cta .btn { background: white; color: var(--rose-dark); white-space: nowrap; }
+      .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+      .cta .btn-ghost { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,.75); }
+      .cta .btn-ghost:hover { background: rgba(255,255,255,.12); }
+      .cta .btn .ico-inline { width: 19px; height: 19px; flex: 0 0 auto; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 
       footer { padding: 40px 0 56px; color: var(--muted); font-size: .9rem; }
 
@@ -895,6 +899,7 @@ const productListStructuredData = {
         .hero { padding-top: 48px; }
         .categories, .steps, .products { grid-template-columns: 1fr; }
         .cta { flex-direction: column; align-items: flex-start; padding: 28px; }
+        .cta-actions, .cta-actions .btn { width: 100%; }
         .nav .btn { display: none; }
         .category-dialog {
           width: calc(100% - 16px);
@@ -1616,7 +1621,7 @@ const productListStructuredData = {
           <a href="/sweet-table">Sweet Table</a>
           <a href="/curriculum-lucia-garro">Curriculum</a>
           <a href="/certificazioni">Certificazioni</a>
-          <a href="/#contatti">Contatti</a>
+          <a href="/contatti">Contatti</a>
         </nav>
 
         <a class="btn btn-primary header-etsy" href={etsyUrl} target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
@@ -1638,7 +1643,7 @@ const productListStructuredData = {
             <a href="/sweet-table">Sweet Table</a>
             <a href="/curriculum-lucia-garro">Curriculum</a>
             <a href="/certificazioni">Certificazioni</a>
-            <a href="/#contatti">Contatti</a>
+            <a href="/contatti">Contatti</a>
           </nav>
           <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener">
             Vai su Etsy per Acquistare Online
@@ -1843,14 +1848,20 @@ const productListStructuredData = {
               <h2>Hai un'idea particolare?</h2>
               <p>Scrivici per creare un set di biscotti completamente personalizzato. Le Dolci Meraviglie di Lucy Garro ha sede a Siracusa e realizza proposte per eventi e occasioni speciali.</p>
             </div>
-            <a
-              class="btn"
-              href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20sui%20biscotti%20decorati%20personalizzati."
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Contatta Lucia su WhatsApp
-            </a>
+            <div class="cta-actions">
+              <a class="btn" href="/contatti">
+                <svg class="ico-inline" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>
+                Compila il modulo
+              </a>
+              <a
+                class="btn btn-ghost"
+                href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20sui%20biscotti%20decorati%20personalizzati."
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contatta Lucia su WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
