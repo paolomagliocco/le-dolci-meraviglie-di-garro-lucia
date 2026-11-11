@@ -1,0 +1,642 @@
+---
+const seoTitle = 'Torte Artistiche e Wedding Cake Personalizzate | Lucia Garro Cake Designer';
+const seoDescription = 'Torte artistiche personalizzate di Lucia Garro, cake designer a Siracusa: wedding cake, torte di compleanno, torte scenografiche vere o finte, realizzate con pasta di zucchero, royal icing e fiori in zucchero.';
+const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/torte-artistiche';
+const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
+const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/torta-nuziale-eleganza-rosa-cipria-con-sposi.jpg';
+const whatsappBase = 'https://wa.me/393519425808?text=';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'Torte artistiche personalizzate',
+  url: canonicalUrl,
+  description: seoDescription,
+  image: ogImage,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'Le Dolci Meraviglie di Lucy Garro',
+    url: 'https://www.ledolcimeravigliedigarrolucia.com/'
+  },
+  about: {
+    '@type': 'Person',
+    name: 'Lucia Garro',
+    jobTitle: 'Cake Designer e Pasticcera',
+    address: { '@type': 'PostalAddress', addressLocality: 'Siracusa', addressCountry: 'IT' }
+  }
+};
+
+/*
+  Ogni torta ha 1 o 2 foto. Le torte nuziali hanno la coppia "torta" + "con gli sposi":
+  le due foto si alternano automaticamente nella card.
+  fit: 'cover' (predefinito) riempie il riquadro; 'contain' mostra la foto intera lasciando spazio vuoto.
+  pos: punto da tenere al centro quando la foto viene ritagliata (es. 'center 65%' = un po' più in basso).
+*/
+type Foto = { src: string; label: string; fit?: 'cover' | 'contain'; pos?: string };
+type Torta = { titolo: string; categoria: string; descrizione: string; foto: Foto[] };
+
+const torteNuziali: Torta[] = [
+  {
+    titolo: 'Eleganza Rosa Cipria',
+    categoria: 'Matrimonio',
+    descrizione: 'Wedding cake a più piani nei toni del rosa cipria, raffinata e romantica, pensata per un matrimonio dallo stile elegante.',
+    foto: [
+      { src: '/images/torta-nuziale-eleganza-rosa-cipria.webp', label: 'La torta' },
+      { src: '/images/torta-nuziale-eleganza-rosa-cipria-con-sposi.webp', label: 'Con gli sposi' },
+    ],
+  },
+  {
+    titolo: 'Eleganza Floreale con Rose',
+    categoria: 'Matrimonio',
+    descrizione: 'Torta nuziale impreziosita da rose modellate a mano in zucchero, un tributo alla bellezza dei fiori e al giorno del sì.',
+    foto: [
+      { src: '/images/torta-nuziale-eleganza-floreale-con-rose.webp', label: 'La torta' },
+      { src: '/images/torta-nuziale-eleganza-floreale-con-rose-sposi.webp', label: 'Con gli sposi' },
+    ],
+  },
+  {
+    titolo: 'Butterfly Lavender',
+    categoria: 'Matrimonio',
+    descrizione: 'Wedding cake nei toni della lavanda con farfalle decorative: leggera, poetica e coordinata ai colori dell’evento.',
+    foto: [
+      { src: '/images/torta-nuziale-butterfly-lavender.webp', label: 'La torta' },
+      { src: '/images/torta-nuziale-butterfly-lavender-con-sposi.webp', label: 'Con gli sposi' },
+    ],
+  },
+  {
+    titolo: 'Bianca e Fiori Azzurri',
+    categoria: 'Matrimonio',
+    descrizione: 'Torta nuziale bianca con delicati fiori azzurri, un design pulito e luminoso per un matrimonio fresco e senza tempo.',
+    foto: [
+      { src: '/images/torta-nuziale-bianca-e-fiori-azzurri.webp', label: 'La torta' },
+      { src: '/images/torta-nuziale-bianca-e-fiori-azzurri-con-sposi.webp', label: 'Con gli sposi' },
+    ],
+  },
+  {
+    titolo: 'Bianca con Rose Rosse',
+    categoria: 'Matrimonio',
+    descrizione: 'Il contrasto classico tra il bianco candido e il rosso intenso delle rose: una wedding cake elegante e di grande impatto.',
+    foto: [
+      { src: '/images/torta-nuziale-bianca-con-rose-rosse.webp', label: 'La torta', pos: 'center 65%' },
+    ],
+  },
+];
+
+const torteCompleanno: Torta[] = [
+  { titolo: 'Bambi', categoria: 'Compleanno', descrizione: 'Torta di compleanno ispirata a Bambi, con dettagli dolci e colori delicati per una festa da fiaba.', foto: [{ src: '/images/torta-compleanno-a-tema-Disney-Bambi.webp', label: 'La torta' }] },
+  { titolo: 'Aladdin', categoria: 'Compleanno', descrizione: 'Torta a tema Aladdin per un compleanno magico, ricca di colori e atmosfere d’oriente.', foto: [{ src: '/images/torta-compleanno-bambina-tema-disney-aladdin.webp', label: 'La torta' }] },
+  { titolo: 'Encanto', categoria: 'Compleanno', descrizione: 'Torta ispirata al mondo di Encanto, vivace e piena di dettagli fioriti.', foto: [{ src: '/images/torta-compleanno-bambina-tema-disney-encanto.webp', label: 'La torta' }] },
+  { titolo: 'Unicorno', categoria: 'Compleanno', descrizione: 'Torta a tema unicorno dai toni pastello, un classico intramontabile per le feste delle bambine.', foto: [{ src: '/images/torta-compleanno-bambina-tema-unicorno.webp', label: 'La torta' }] },
+  { titolo: 'Sirenetta e mondo marino', categoria: 'Compleanno', descrizione: 'Torta a tema marino con la sirenetta, conchiglie e sfumature del mare.', foto: [{ src: '/images/torta-compleanno-bambina-tema-marino-sirenetta.webp', label: 'La torta' }] },
+  { titolo: 'Fenicottero', categoria: 'Compleanno', descrizione: 'Torta di compleanno a tema fenicottero, allegra e colorata, perfetta per una festa estiva.', foto: [{ src: '/images/torta-compleanno-bambina-tema-fenicottero.webp', label: 'La torta' }] },
+  { titolo: 'Masha e Orso', categoria: 'Compleanno', descrizione: 'Torta ispirata a Masha e Orso, con personaggi modellati e tanti dettagli divertenti.', foto: [{ src: '/images/torta-compleanno-bambina-tema-masha-orso.webp', label: 'La torta' }] },
+  { titolo: 'Fattoria', categoria: 'Compleanno', descrizione: 'Torta a tema fattoria con animali modellati a mano, ideale per i più piccoli.', foto: [{ src: '/images/torta-compleanno-bambina-tema-fattoria.webp', label: 'La torta' }] },
+  { titolo: 'Safari', categoria: 'Compleanno', descrizione: 'Torta a tema safari con gli animali della savana, per un compleanno all’insegna dell’avventura.', foto: [{ src: '/images/torta-compleanno-bambino-tema-safari.webp', label: 'La torta' }] },
+  { titolo: 'Trucchi e make-up', categoria: 'Compleanno', descrizione: 'Torta a tema trucchi e make-up, con accessori realizzati in zucchero in modo realistico.', foto: [{ src: '/images/torta-compleanno-bambina-tema-trucchi.webp', label: 'La torta' }] },
+  { titolo: 'Whisky il ragnetto', categoria: 'Compleanno', descrizione: 'Torta ispirata a Whisky il ragnetto, simpatica e colorata, per una festa piena di sorrisi.', foto: [{ src: '/images/torta-compleanno-bambina-tema-whisky-ragnetto.webp', label: 'La torta' }] },
+];
+
+const sezioni = [
+  { id: 'nuziali', eyebrow: 'Wedding Cake', titolo: 'Torte <em>nuziali</em>', testo: 'Torte a più piani progettate insieme agli sposi, coordinate con fiori, colori e stile del matrimonio.', torte: torteNuziali },
+  { id: 'compleanno', eyebrow: 'Feste e compleanni', titolo: 'Torte di <em>compleanno</em>', testo: 'Personaggi, animali e mondi fantastici modellati a mano per rendere unica ogni festa.', torte: torteCompleanno },
+];
+
+const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia, vorrei informazioni per una torta simile a: ${titolo}`);
+---
+
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{seoTitle}</title>
+<meta name="description" content={seoDescription} />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<meta property="og:locale" content="it_IT" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+<meta property="og:title" content={seoTitle} />
+<meta property="og:description" content={seoDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content="Torta nuziale rosa cipria realizzata da Lucia Garro, con gli sposi" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={seoTitle} />
+<meta name="twitter:description" content={seoDescription} />
+<meta name="twitter:image" content={ogImage} />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <style>
+      :root {
+        --cream: #fffaf6;
+        --ink: #3b1f18;
+        --text: #4a3028;
+        --muted: #7a5a50;
+        --rose: #a9505e;
+        --rose-soft: #f4cfd2;
+        --rose-line: #c98a93;
+        --gold: #d8b98a;
+        --gold-dark: #c9a46b;
+        --line: #eadfd5;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; }
+      .wrap { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+      h1, h2, h3 { font-family: Georgia, serif; line-height: 1.12; margin-top: 0; color: var(--ink); }
+      section { padding: 88px 0; }
+
+      /* ---------- icone e decori condivisi ---------- */
+      .ico{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+      .ribbon{display:block;width:120px;height:12px;fill:none;stroke:var(--rose-line);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+      .eyebrow{
+        position:relative;display:inline-block;margin:0 22px;padding:6px 18px;border-radius:999px;
+        background:var(--rose-soft);color:#5a2a2a;font-family:Georgia,serif;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase
+      }
+      .eyebrow::before,.eyebrow::after{content:"";position:absolute;top:50%;width:12px;height:12px;transform:translateY(-50%)}
+      .eyebrow::before{left:-20px;background:
+        linear-gradient(-20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 0/100% 50% no-repeat,
+        linear-gradient(#c97c86,#c97c86) 0 60%/100% 1.5px no-repeat,
+        linear-gradient(20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 100%/100% 50% no-repeat}
+      .eyebrow::after{right:-20px;background:
+        linear-gradient(20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 0/100% 50% no-repeat,
+        linear-gradient(#c97c86,#c97c86) 0 60%/100% 1.5px no-repeat,
+        linear-gradient(-20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 100%/100% 50% no-repeat}
+      .swash{position:relative;display:inline-block}
+      .swash svg{position:absolute;left:10%;bottom:-.18em;width:80%;height:.3em;fill:none;stroke:var(--rose-line);stroke-width:2;stroke-linecap:round}
+      .section-head{max-width:720px;margin:0 auto 48px;text-align:center}
+      .section-head h2{font-size:clamp(2.1rem,4vw,3.3rem);margin:16px 0 20px}
+      .section-head h2 em{font-style:italic;color:var(--rose)}
+      .section-head p{margin:0 auto;color:var(--text);max-width:620px}
+
+      /* ---------- bottoni ---------- */
+      .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 26px;font-weight:600;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+      .btn:hover{transform:translateY(-1px)}
+      .btn-primary{background:var(--rose);color:#fff;box-shadow:0 10px 24px rgba(169,80,94,.25)}
+      .btn-outline{background:transparent;border:1.5px solid var(--rose);color:var(--ink)}
+      .btn-outline:hover{background:#fff}
+      .btn-light{background:#fff;color:var(--rose);box-shadow:0 10px 24px rgba(60,20,20,.18)}
+
+      /* ---------- header (come nelle altre pagine) ---------- */
+      header{position:sticky;top:0;z-index:20;background:rgba(255,250,245,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+      .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+      .brand{display:inline-flex;flex-direction:column;align-items:center;font-family:Georgia,serif;font-weight:700;color:var(--ink);font-size:1.4rem;line-height:1.15}
+      .brand-text{white-space:nowrap}
+      .brand-text span{color:var(--rose)}
+      .brand-ribbon{width:min(180px,80%);height:14px;margin-top:4px;fill:none;stroke:var(--rose);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+      .nav>nav{display:flex;gap:clamp(14px,2vw,26px);font-size:.95rem}
+      .nav>nav a{font-family:Georgia,serif;color:var(--ink);white-space:nowrap}
+      .nav>nav a:hover,.nav>nav a[aria-current="page"]{color:var(--rose)}
+      .nav>nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--rose-line);text-underline-offset:6px}
+      .header-etsy{padding:12px 20px;white-space:nowrap}
+      @media (max-width:1180px){.brand{font-size:1.15rem}.header-etsy{font-size:.9rem;padding:11px 16px}}
+      @media (min-width:901px) and (max-width:1100px){.nav{gap:14px}.brand{font-size:1.02rem}.nav>nav{gap:14px}.nav>nav a{font-size:.88rem}.header-etsy{font-size:.84rem;padding:10px 14px}.header-etsy .ico{display:none}}
+      /* con 7 voci di menu: header un po' più largo e, fino a 1480px, bottone Etsy solo icona (testo come tooltip) */
+      .nav.wrap{width:min(1440px,calc(100% - 32px))}
+      @media (min-width:901px) and (max-width:1480px){.header-etsy{width:46px;height:46px;flex:0 0 46px;padding:0;gap:0;font-size:0}.header-etsy .ico{display:block;width:20px;height:20px}}
+      @media (min-width:901px) and (max-width:980px){.nav,.nav>nav{gap:10px}.nav>nav a{font-size:.82rem}.brand{font-size:.95rem}}
+
+      .mobile-menu-toggle{
+        display:none;width:46px;height:46px;flex:0 0 46px;align-items:center;justify-content:center;
+        padding:0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);
+        cursor:pointer;box-shadow:0 8px 22px rgba(72,48,34,.08)
+      }
+      .mobile-menu-toggle span,.mobile-menu-toggle span::before,.mobile-menu-toggle span::after{
+        display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,opacity .2s ease
+      }
+      .mobile-menu-toggle span{position:relative}
+      .mobile-menu-toggle span::before,.mobile-menu-toggle span::after{content:"";position:absolute;left:0}
+      .mobile-menu-toggle span::before{top:-7px}.mobile-menu-toggle span::after{top:7px}
+      .mobile-menu-toggle[aria-expanded="true"] span{background:transparent}
+      .mobile-menu-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+      .mobile-menu-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+      .mobile-nav-panel{display:none}
+
+      /* ---------- intro ---------- */
+      .cake-hero{
+        position:relative;overflow:hidden;padding:72px 0 88px;
+        background:linear-gradient(100deg,#fdf6f1 0%,#fbeee8 45%,#f6dfdc 100%)
+      }
+      .cake-hero::before{content:"";position:absolute;width:460px;height:460px;left:-160px;top:-180px;border-radius:50%;background:radial-gradient(circle,rgba(244,207,210,.7),transparent 70%);pointer-events:none}
+      .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+      .hero-copy .eyebrow{margin-left:22px}
+      .hero-copy h1{font-size:clamp(2.4rem,4.6vw,4rem);margin:22px 0 24px;letter-spacing:-.01em}
+      .hero-copy h1 em{font-style:italic;color:var(--rose)}
+      .hero-copy h1 .swash svg{left:0;width:100%}
+      .hero-copy .lead{font-family:Georgia,serif;font-style:italic;font-size:1.18rem;line-height:1.65;color:var(--ink);margin:0 0 16px}
+      .hero-copy p{color:var(--text);margin:0 0 16px;font-size:1.02rem;line-height:1.75}
+      .hero-copy p strong{color:var(--ink)}
+      .hero-quote{
+        margin:24px 0 0;padding:20px 24px 20px 28px;border-radius:20px;
+        background:rgba(255,255,255,.7);border:1px solid #f1d6d6;border-left:4px solid var(--rose);
+        font-family:Georgia,serif;font-size:1.04rem;line-height:1.65;color:var(--ink)
+      }
+      .hero-quote a{color:var(--rose);text-decoration:underline;text-underline-offset:3px}
+
+      .hero-visual{position:relative;margin:0;isolation:isolate;max-width:460px;justify-self:center;width:100%}
+      .framed{position:relative;padding:12px;border-radius:28px;background:#fff;box-shadow:0 30px 70px rgba(120,70,60,.18)}
+      .framed::before{content:"";position:absolute;inset:-12px;border:1.5px solid var(--gold);border-radius:36px;z-index:-1;pointer-events:none}
+      .framed img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px}
+      .hero-badge{
+        position:absolute;left:-26px;bottom:34px;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:18px;
+        background:#fff;box-shadow:0 16px 36px rgba(120,70,60,.2);font-family:Georgia,serif;font-size:.92rem;line-height:1.25
+      }
+      .hero-badge .ico{width:26px;height:26px;color:var(--gold-dark)}
+      .hero-badge small{display:block;font-family:Inter,system-ui,sans-serif;font-size:.74rem;color:var(--muted)}
+
+      .skills{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+      .skill{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:18px;background:rgba(255,255,255,.85);border:2px solid #fff;box-shadow:0 10px 28px rgba(150,90,90,.1)}
+      .skill-icon{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#b9606d,#a9505e);box-shadow:0 0 0 5px #fbe6e6}
+      .skill-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      .skill strong{display:block;font-family:Georgia,serif;font-size:1rem;line-height:1.3;margin-bottom:3px;color:var(--ink)}
+      .skill span{display:block;color:var(--muted);font-size:.86rem;line-height:1.5}
+
+      /* ---------- catalogo torte ---------- */
+      .cakes{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .cakes + .cakes{padding-top:24px}
+      .cake-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+      .cake-card{
+        min-width:0;display:flex;flex-direction:column;overflow:hidden;border-radius:24px;background:#fff;border:2px solid #fff;
+        box-shadow:0 10px 28px rgba(150,90,90,.12);transition:transform .25s ease,box-shadow .25s ease
+      }
+      .cake-card:hover{transform:translateY(-6px);box-shadow:0 22px 46px rgba(150,90,90,.22)}
+
+      .cake-gallery{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:22px 22px 0 0;
+        background:radial-gradient(circle at 50% 40%,#fff 0%,#f8ece8 75%)}
+      .cake-gallery img{
+        position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
+        opacity:0;transform:scale(1.04);transition:opacity 1s ease,transform 6s ease
+      }
+      .cake-gallery img.fit-contain{object-fit:contain;padding:10px}
+      .cake-gallery img.is-active{opacity:1;transform:scale(1)}
+      .cake-card:hover .cake-gallery img.is-active{transform:scale(1.04)}
+      .cake-gallery .category{
+        position:absolute;left:12px;top:12px;z-index:2;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.93);
+        color:var(--rose);font-family:Georgia,serif;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 4px 12px rgba(80,40,40,.12)
+      }
+      .photo-label{
+        position:absolute;right:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;
+        background:rgba(59,31,24,.62);backdrop-filter:blur(6px);color:#fff;font-size:.76rem;font-weight:600;letter-spacing:.02em
+      }
+      .photo-label .ico{width:14px;height:14px}
+      .gallery-dots{
+        position:absolute;left:50%;bottom:14px;z-index:2;transform:translateX(-50%);display:flex;gap:6px;padding:6px 8px;border-radius:999px;
+        background:rgba(255,255,255,.88);box-shadow:0 6px 16px rgba(80,40,40,.15)
+      }
+      .gallery-dots button{
+        width:9px;height:9px;padding:0;border:0;border-radius:999px;background:#e3c4c4;cursor:pointer;transition:width .3s ease,background .3s ease
+      }
+      .gallery-dots button[aria-pressed="true"]{width:24px;background:var(--rose)}
+      .gallery-dots button:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+      .gallery-progress{position:absolute;left:0;bottom:0;z-index:2;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--rose))}
+      .cake-gallery.is-running .gallery-progress{animation:progress var(--swap-ms,4000ms) linear infinite}
+      @keyframes progress{from{width:0}to{width:100%}}
+
+      .cake-body{display:flex;flex:1;flex-direction:column;align-items:center;text-align:center;padding:22px 22px 24px;background:linear-gradient(180deg,#fff 0%,#fdf3f1 100%)}
+      .cake-body h3{font-size:1.32rem;line-height:1.25;margin:0}
+      .cake-body .ribbon{margin:10px 0 12px}
+      .cake-body p{color:var(--text);font-size:.93rem;line-height:1.6;margin:0 0 20px}
+      .cake-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px dashed #ecd2d2}
+      .cake-actions .btn{width:100%;padding:11px 18px;font-size:.9rem}
+      .cake-actions .ico{width:17px;height:17px}
+
+      /* ---------- CTA finale ---------- */
+      .final{padding:88px 0}
+      .cta{
+        position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:28px;
+        padding:52px 56px;border-radius:32px;color:#fff;
+        background:radial-gradient(ellipse 60% 120% at 100% 0%,rgba(255,255,255,.18),transparent 60%),linear-gradient(120deg,#b9606d 0%,#a9505e 55%,#93404e 100%);
+        box-shadow:0 26px 60px rgba(169,80,94,.3)
+      }
+      .cta::before{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.35);border-radius:24px;pointer-events:none}
+      .cta>div:first-child{min-width:0;position:relative}
+      .cta h2{color:#fff;margin:0 0 8px;font-size:clamp(1.9rem,3.6vw,2.9rem)}
+      .cta p{margin:0;opacity:.92;max-width:560px}
+      .cta .ribbon{stroke:rgba(255,255,255,.7);margin:0 0 14px}
+      .cta-actions{display:flex;flex-wrap:wrap;gap:12px;position:relative}
+      .cta .btn{white-space:nowrap}
+      .cta .btn-ghost{border:1.5px solid rgba(255,255,255,.7);color:#fff}
+      .cta .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+      footer{padding:36px 0 56px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+      .whatsapp-floating{
+        position:fixed;right:20px;bottom:20px;z-index:30;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;
+        background:#25d366;color:#fff;font-weight:700;font-size:.92rem;box-shadow:0 12px 28px rgba(37,211,102,.35);transition:transform .2s ease
+      }
+      .whatsapp-floating:hover{transform:translateY(-2px)}
+      .whatsapp-floating svg{width:20px;height:20px;fill:#fff}
+
+      /* ---------- responsive ---------- */
+      @media (max-width:900px){
+        section{padding:68px 0}
+        .nav{min-height:76px;gap:14px}
+        .nav>nav,.nav>.btn-primary{display:none}
+        .brand{align-items:flex-start;font-size:clamp(.95rem,4.2vw,1.25rem);min-width:0}
+        .brand-text{white-space:normal}
+        .brand-ribbon{display:none}
+        .mobile-menu-toggle{display:inline-flex;margin-left:auto}
+        .mobile-nav-panel{
+          display:block;position:absolute;top:calc(100% + 8px);left:16px;right:16px;padding:12px;
+          border:1px solid var(--line);border-radius:22px;background:rgba(255,250,245,.99);
+          box-shadow:0 22px 54px rgba(72,48,34,.18);transform:translateY(-8px);opacity:0;
+          visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease
+        }
+        .mobile-nav-panel.is-open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
+        .mobile-nav-panel nav{display:grid;gap:4px}
+        .mobile-nav-panel nav a{display:block;padding:13px 14px;border-radius:14px;font-size:1rem;font-weight:700}
+        .mobile-nav-panel nav a:hover,.mobile-nav-panel nav a:focus-visible{background:#f7e1dc;outline:none}
+        .mobile-nav-panel .mobile-etsy{display:inline-flex;width:100%;margin-top:10px}
+
+        .cake-hero{padding:44px 0 64px}
+        .hero-grid{grid-template-columns:1fr;gap:48px}
+        .hero-visual{max-width:400px;width:calc(100% - 28px)}
+        .cake-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+        .cta{flex-direction:column;align-items:flex-start;padding:40px 32px}
+      }
+      @media (max-width:600px){
+        .skills{grid-template-columns:1fr}
+        .hero-badge{left:-8px;bottom:20px}
+        .cake-grid{grid-template-columns:1fr}
+        .cake-actions{flex-direction:row}
+        .cake-actions .btn{width:auto;flex:1 1 0}
+        .cta{padding:36px 24px}
+        .cta-actions,.cta-actions .btn{width:100%}
+        .whatsapp-floating span{display:none}
+        .whatsapp-floating{padding:14px}
+      }
+      @media (prefers-reduced-motion:reduce){
+        *{transition:none !important}
+        .gallery-progress{display:none}
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="/"><span class="brand-text">Le Dolci Meraviglie<span> di Lucy Garro</span></span><svg class="brand-ribbon" viewBox="0 0 180 16" aria-hidden="true"><path d="M4 8h66M110 8h66"/><path d="M90 8c-6-7-16-7-16 0s10 7 16 0Zm0 0c6-7 16-7 16 0s-10 7-16 0Zm0 0-6 7m6-7 6 7"/></svg></a>
+
+        <nav aria-label="Navigazione principale">
+          <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/torte-artistiche" aria-current="page">Torte artistiche</a>
+          <a href="/sweet-table">Sweet Table</a>
+          <a href="/vip-e-collaborazioni">VIP e collab.</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
+          <a href="/certificazioni">Certificazioni</a>
+          <a href="/contatti">Contatti</a>
+        </nav>
+
+        <a class="btn btn-primary header-etsy" href={etsyUrl} title="Vai su Etsy" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Apri menu di navigazione"
+          aria-expanded="false"
+          aria-controls="mobile-nav-panel"
+          data-mobile-menu-toggle
+        >
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
+          <nav aria-label="Navigazione mobile">
+            <a href="/biscotti-decorati">Biscotti</a>
+            <a href="/torte-artistiche" aria-current="page">Torte artistiche</a>
+            <a href="/sweet-table">Sweet Table</a>
+            <a href="/vip-e-collaborazioni">VIP e collab.</a>
+            <a href="/curriculum-lucia-garro">Curriculum</a>
+            <a href="/certificazioni">Certificazioni</a>
+            <a href="/contatti">Contatti</a>
+          </nav>
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener">
+            Vai su Etsy per acquistare online
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="cake-hero">
+        <div class="wrap hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Cake Design</span>
+            <h1>Torte artistiche <span class="swash"><em>per ogni evento</em><svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10c40-6 80-8 116-4"/></svg></span></h1>
+            <p class="lead">Lucia Garro è una grandissima cake designer: non c’è torta che non sappia immaginare e realizzare.</p>
+            <p>Dalla <strong>wedding cake a più piani</strong> alla torta di compleanno con i personaggi preferiti dei più piccoli, fino alle <strong>torte scenografiche</strong> per allestimenti ed esposizioni: Lucia crea torte <strong>vere, da gustare</strong>, e torte <strong>finte</strong> (dummy cake), perfette come centrotavola, per servizi fotografici o per allestimenti che devono durare nel tempo.</p>
+            <p>Ogni creazione nasce da un progetto su misura e prende forma con <strong>tecniche di alta decorazione</strong>: modellazione in pasta di zucchero, fiori in zucchero realizzati petalo per petalo, royal icing, piping e pittura a mano. Battesimi, comunioni, cresime, lauree, anniversari, baby shower e matrimoni: per ogni evento una torta unica, coordinata a tema, colori e atmosfera.</p>
+            <blockquote class="hero-quote">Formata alla Squires Kitchen International School (UK), diplomata PME e premiata al Cake International di Londra: <a href="/certificazioni">scopri le certificazioni</a>.</blockquote>
+
+            <ul class="skills">
+              <li class="skill">
+                <span class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20v-6h12v6M8 14v-4h8v4M12 10V6"/><path d="M12 6c-1.2-1-1.2-2.4 0-3.2 1.2.8 1.2 2.2 0 3.2Z"/></svg></span>
+                <div><strong>Torte vere e finte</strong><span>Da gustare o scenografiche, anche a più piani</span></div>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c-3-4-7-3-7 0s4 4 7 0Zm0 0c3-4 7-3 7 0s-4 4-7 0Zm0 0c-4-3-3-7 0-7s4 4 0 7Zm0 0c4 3 3 7 0 7s-4-4 0-7Z"/></svg></span>
+                <div><strong>Fiori in zucchero</strong><span>Modellati a mano, petalo per petalo</span></div>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6-9 9H5v-6l9-9Z"/><path d="m12 6 6 6"/></svg></span>
+                <div><strong>Tecniche artistiche</strong><span>Pasta di zucchero, royal icing, pittura</span></div>
+              </li>
+              <li class="skill">
+                <span class="skill-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg></span>
+                <div><strong>Per ogni evento</strong><span>Matrimoni, compleanni, cerimonie e feste</span></div>
+              </li>
+            </ul>
+          </div>
+
+          <figure class="hero-visual">
+            <div class="framed"><img src="/images/torta-nuziale-eleganza-rosa-cipria-con-sposi.webp" alt="Wedding cake rosa cipria realizzata da Lucia Garro, con gli sposi" fetchpriority="high" /></div>
+            <figcaption class="hero-badge">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg>
+              <span>Cake International<small>Londra · Certificate of Merit</small></span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {sezioni.map((sezione) => (
+        <section class="cakes" id={sezione.id} aria-labelledby={`${sezione.id}-title`}>
+          <div class="wrap">
+            <div class="section-head">
+              <span class="eyebrow">{sezione.eyebrow}</span>
+              <h2 id={`${sezione.id}-title`} set:html={sezione.titolo} />
+              <p>{sezione.testo}</p>
+            </div>
+
+            <div class="cake-grid">
+              {sezione.torte.map((torta) => (
+                <article class="cake-card">
+                  <div class="cake-gallery" data-cake-gallery>
+                    <span class="category">{torta.categoria}</span>
+                    {torta.foto.length > 1 && (
+                      <span class="photo-label" aria-hidden="true">
+                        <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+                        <span data-photo-label>{torta.foto[0].label}</span>
+                      </span>
+                    )}
+                    {torta.foto.map((foto, i) => (
+                      <img
+                        src={foto.src}
+                        alt={`${torta.titolo} – ${foto.label.toLowerCase()}, torta artistica di Lucia Garro`}
+                        class:list={[{ 'is-active': i === 0, 'fit-contain': foto.fit === 'contain' }]}
+                        data-label={foto.label}
+                        style={foto.pos ? `object-position:${foto.pos}` : undefined}
+                        loading="lazy"
+                        decoding="async"
+                      />
+                    ))}
+                    {torta.foto.length > 1 && (
+                      <>
+                        <div class="gallery-dots" role="group" aria-label={`Foto di ${torta.titolo}`}>
+                          {torta.foto.map((foto, i) => (
+                            <button type="button" aria-label={`Mostra foto: ${foto.label}`} aria-pressed={i === 0 ? 'true' : 'false'} data-index={i}></button>
+                          ))}
+                        </div>
+                        <span class="gallery-progress" aria-hidden="true"></span>
+                      </>
+                    )}
+                  </div>
+                  <div class="cake-body">
+                    <h3>{torta.titolo}</h3>
+                    <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+                    <p>{torta.descrizione}</p>
+                    <div class="cake-actions">
+                      <a class="btn btn-primary" href="/contatti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>Richiedi una torta simile</a>
+                      <a class="btn btn-outline" href={waLink(torta.titolo)} target="_blank" rel="noopener noreferrer">Chiedi su WhatsApp</a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section class="final">
+        <div class="wrap">
+          <div class="cta">
+            <div>
+              <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+              <h2>Sogni una torta unica per il tuo evento?</h2>
+              <p>Raccontami tema, colori, numero di invitati e stile: insieme progetteremo una torta vera o scenografica, creata su misura per te.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="btn btn-light" href="/contatti">Compila il modulo</a>
+              <a class="btn btn-ghost" href={waLink('una torta artistica personalizzata')} target="_blank" rel="noopener noreferrer">Scrivi su WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Torte artistiche, biscotti decorati e Sweet Table · Siracusa</div></footer>
+
+    <a class="whatsapp-floating" href={waLink('una torta artistica personalizzata')} target="_blank" rel="noopener noreferrer" aria-label="Contatta Lucia Garro su WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+
+    <script>
+      /* ---------- menu mobile (come nelle altre pagine) ---------- */
+      const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+      const mobileNav = document.querySelector('[data-mobile-nav]');
+
+      const closeMobileMenu = () => {
+        if (!(mobileMenuToggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.setAttribute('aria-label', 'Apri menu di navigazione');
+        mobileNav.classList.remove('is-open');
+      };
+
+      const openMobileMenu = () => {
+        if (!(mobileMenuToggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        mobileMenuToggle.setAttribute('aria-label', 'Chiudi menu di navigazione');
+        mobileNav.classList.add('is-open');
+      };
+
+      if (mobileMenuToggle instanceof HTMLButtonElement && mobileNav instanceof HTMLElement) {
+        mobileMenuToggle.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeMobileMenu() : openMobileMenu();
+        });
+        mobileNav.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (event.target instanceof HTMLAnchorElement) closeMobileMenu();
+        });
+        document.addEventListener('click', closeMobileMenu);
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeMobileMenu();
+        });
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 900) closeMobileMenu();
+        });
+      }
+
+      /* ---------- card con doppia foto che si alterna ---------- */
+      const SWAP_MS = 4000;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      document.querySelectorAll('[data-cake-gallery]').forEach((gallery, galleryIndex) => {
+        if (!(gallery instanceof HTMLElement)) return;
+        const images = Array.from(gallery.querySelectorAll('img'));
+        if (images.length < 2) return;
+
+        const dots = Array.from(gallery.querySelectorAll('.gallery-dots button'));
+        const label = gallery.querySelector('[data-photo-label]');
+        let current = 0;
+        let timer = 0;
+        let visible = false;
+
+        gallery.style.setProperty('--swap-ms', `${SWAP_MS}ms`);
+
+        const show = (index) => {
+          current = (index + images.length) % images.length;
+          images.forEach((img, i) => img.classList.toggle('is-active', i === current));
+          dots.forEach((dot, i) => dot.setAttribute('aria-pressed', i === current ? 'true' : 'false'));
+          if (label) label.textContent = images[current].dataset.label ?? '';
+        };
+
+        const restartProgress = () => {
+          gallery.classList.remove('is-running');
+          void gallery.offsetWidth; // riavvia l'animazione della barra
+          gallery.classList.add('is-running');
+        };
+
+        const stop = () => { window.clearInterval(timer); timer = 0; gallery.classList.remove('is-running'); };
+        const start = () => {
+          if (reduceMotion || timer || !visible) return;
+          restartProgress();
+          timer = window.setInterval(() => { show(current + 1); }, SWAP_MS);
+        };
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            show(Number(dot.dataset.index ?? 0));
+            stop();
+            start();
+          });
+        });
+
+        // le card partono sfalsate, e girano solo quando sono visibili
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            visible = entry.isIntersecting;
+            if (visible) window.setTimeout(start, (galleryIndex % 3) * 700);
+            else stop();
+          });
+        }, { threshold: 0.35 });
+        observer.observe(gallery);
+      });
+    </script>
+  </body>
+</html>
