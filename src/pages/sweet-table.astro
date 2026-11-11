@@ -85,123 +85,477 @@ const prodotti = [
 <meta name="twitter:image" content={ogImage} />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
-<style>
-:root{--cream:#fffaf5;--paper:#fff;--ink:#302820;--muted:#786b60;--rose-dark:#b76773;--beige:#efe4d7;--line:#eadfd5;--shadow:0 14px 40px rgba(72,48,34,.08)}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}a{color:inherit;text-decoration:none}.wrap{width:min(1180px,calc(100% - 32px));margin:0 auto}
-header{position:sticky;top:0;z-index:20;background:rgba(255,250,245,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{font-family:Georgia,serif;font-size:1.25rem;font-weight:700}.brand span{color:var(--rose-dark)}nav{display:flex;gap:22px;font-size:.95rem}
-.mobile-menu-toggle{display:none;width:46px;height:46px;flex:0 0 46px;align-items:center;justify-content:center;padding:0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 8px 22px rgba(72,48,34,.08)}
-.mobile-menu-toggle span,.mobile-menu-toggle span::before,.mobile-menu-toggle span::after{display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,opacity .2s ease}
-.mobile-menu-toggle span{position:relative}
-.mobile-menu-toggle span::before,.mobile-menu-toggle span::after{content:"";position:absolute;left:0}
-.mobile-menu-toggle span::before{top:-7px}.mobile-menu-toggle span::after{top:7px}
-.mobile-menu-toggle[aria-expanded="true"] span{background:transparent}
-.mobile-menu-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
-.mobile-menu-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
-.mobile-nav-panel{display:none}
+    <style>
+      :root {
+        --cream: #fffaf6;
+        --ink: #3b1f18;
+        --text: #4a3028;
+        --muted: #7a5a50;
+        --rose: #a9505e;
+        --rose-soft: #f4cfd2;
+        --rose-line: #c98a93;
+        --gold: #d8b98a;
+        --gold-dark: #c9a46b;
+        --line: #eadfd5;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; }
+      .wrap { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+      h1, h2, h3 { font-family: Georgia, serif; line-height: 1.12; margin-top: 0; color: var(--ink); }
+      section { padding: 88px 0; }
+      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:13px 20px;font-weight:700;transition:.2s ease}.btn:hover{transform:translateY(-2px)}.btn-primary,.etsy-btn{background:var(--rose-dark);color:#fff}.whatsapp-btn{background:#fff;border:1px solid var(--line)}
-.hero{padding:82px 0 54px;text-align:center}.eyebrow{display:inline-block;background:var(--beige);padding:7px 12px;border-radius:999px;font-size:.82rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase}h1,h2,h3{font-family:Georgia,serif;line-height:1.1;margin-top:0}h1{font-size:clamp(2.8rem,6vw,5rem);margin:18px auto;max-width:900px}h1 em{color:var(--rose-dark);font-style:normal}.lead{max-width:850px;margin:0 auto;color:var(--muted);font-size:1.1rem}
-.catalogo{padding:30px 0 84px}.products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.product-card{min-width:0;overflow:hidden;display:flex;flex-direction:column;background:var(--paper);border:1px solid var(--line);border-radius:26px;box-shadow:var(--shadow);cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.product-card *{cursor:pointer}.product-card:hover{transform:translateY(-3px);box-shadow:0 18px 46px rgba(72,48,34,.13)}.product-card:focus-visible{outline:3px solid rgba(183,103,115,.35);outline-offset:3px}
-.product-image{width:100%;height:275px;overflow:hidden;background:#f6eee8}.product-image img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .3s ease}.product-card:hover .product-image img{transform:scale(1.025)}
-.product-body{display:flex;flex:1;flex-direction:column;padding:24px}.category{color:var(--rose-dark);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.product-body h2{font-size:1.55rem;margin:8px 0 12px}.product-body p{color:var(--muted);margin:0 0 22px}.product-actions{margin-top:auto;display:flex;gap:10px;flex-wrap:wrap}
-.info-box{margin-top:56px;padding:38px;border-radius:30px;background:#f4ece4;text-align:center}.info-box h2{font-size:clamp(2rem,4vw,3rem);margin-bottom:12px}.info-box p{max-width:780px;margin:0 auto 22px;color:var(--muted)}
-.product-modal{position:relative;width:min(1000px,calc(100% - 32px));max-height:90vh;padding:0;border:0;border-radius:28px;overflow:hidden;background:var(--paper);color:var(--ink);box-shadow:0 30px 90px rgba(31,20,14,.28)}.product-modal::backdrop{background:rgba(36,27,23,.68);backdrop-filter:blur(5px)}.modal-grid{display:grid;grid-template-columns:1.08fr .92fr;min-height:560px}.modal-image-wrap{min-width:0;min-height:560px;background:#f6eee8;display:grid;place-items:center;overflow:hidden}.modal-image-wrap img{width:100%;height:100%;max-height:78vh;display:block;object-fit:contain}.modal-content{padding:48px 40px 40px;display:flex;flex-direction:column;justify-content:center}.modal-content h2{font-size:clamp(2rem,4vw,3rem);margin:10px 0 16px}.modal-content p{color:var(--muted);font-size:1.05rem;margin:0}.modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
-.modal-close{position:absolute;top:18px;right:18px;z-index:20;width:46px;height:46px;display:grid;place-items:center;padding:0;border:2px solid rgba(255,255,255,.9);border-radius:50%;background:var(--rose-dark);color:white;font-size:1.75rem;line-height:1;cursor:pointer;box-shadow:0 8px 22px rgba(48,40,32,.22);transition:.18s ease}.modal-close:hover{transform:scale(1.08);background:#9f5561}
-footer{padding:40px 0 56px;color:var(--muted);font-size:.9rem}.whatsapp-floating{position:fixed;right:24px;bottom:24px;z-index:1000;padding:14px 20px;border-radius:999px;background:#25D366;color:#fff;font-weight:800;box-shadow:0 10px 30px rgba(0,0,0,.2)}
-@media(max-width:900px){
-.nav{min-height:76px;gap:14px}
-.nav>nav,.nav>.btn-primary{display:none}
-.brand{min-width:0;font-size:clamp(1rem,4vw,1.25rem);line-height:1.2}
-.mobile-menu-toggle{display:inline-flex;margin-left:auto}
-.mobile-nav-panel{display:block;position:absolute;top:calc(100% + 8px);left:16px;right:16px;padding:12px;border:1px solid var(--line);border-radius:22px;background:rgba(255,250,245,.99);box-shadow:0 22px 54px rgba(72,48,34,.18);transform:translateY(-8px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
-.mobile-nav-panel.is-open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
-.mobile-nav-panel nav{display:grid;gap:4px}
-.mobile-nav-panel nav a{display:block;padding:13px 14px;border-radius:14px;font-size:1rem;font-weight:700}
-.mobile-nav-panel nav a:hover,.mobile-nav-panel nav a:focus-visible{background:var(--beige);outline:none}
-.mobile-nav-panel .mobile-etsy{width:100%;margin-top:10px}
-.products{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:600px){.hero{padding-top:56px}.products{grid-template-columns:1fr}.product-image{height:250px}.product-modal{width:calc(100% - 20px);max-height:94vh;border-radius:22px}.modal-grid{grid-template-columns:1fr;min-height:auto}.modal-image-wrap{min-height:280px;height:42vh}.modal-content{padding:28px 22px 24px}.modal-actions{flex-direction:column}.modal-actions .btn{width:100%}.whatsapp-floating{right:16px;bottom:16px;padding:12px 16px}}
-</style>
-</head>
-<body>
-<header><div class="wrap nav">
-<a class="brand" href="/">Le Dolci Meraviglie<span> di Lucy Garro</span></a>
-<nav aria-label="Navigazione principale">
-  <a href="/biscotti-decorati">Biscotti</a>
-  <a href="/sweet-table">Sweet Table</a>
-  <a href="/curriculum-lucia-garro">Curriculum</a>
-  <a href="/certificazioni">Certificazioni</a>
-  <a href="/#contatti">Contatti</a>
-</nav>
-<a class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener noreferrer">Vai su Etsy per Acquistare Online</a>
+      /* ---------- icone e decori condivisi ---------- */
+      .ico{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+      .ribbon{display:block;width:120px;height:12px;fill:none;stroke:var(--rose-line);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+      .ribbon-gold{stroke:var(--gold-dark);width:180px;height:16px}
+      .eyebrow{
+        position:relative;display:inline-block;margin:0 22px;padding:6px 18px;border-radius:999px;
+        background:var(--rose-soft);color:#5a2a2a;font-family:Georgia,serif;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase
+      }
+      .eyebrow::before,.eyebrow::after{content:"";position:absolute;top:50%;width:12px;height:12px;transform:translateY(-50%)}
+      .eyebrow::before{left:-20px;background:
+        linear-gradient(-20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 0/100% 50% no-repeat,
+        linear-gradient(#c97c86,#c97c86) 0 60%/100% 1.5px no-repeat,
+        linear-gradient(20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 100%/100% 50% no-repeat}
+      .eyebrow::after{right:-20px;background:
+        linear-gradient(20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 0/100% 50% no-repeat,
+        linear-gradient(#c97c86,#c97c86) 0 60%/100% 1.5px no-repeat,
+        linear-gradient(-20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 100%/100% 50% no-repeat}
+      .swash{position:relative;display:inline-block}
+      .swash svg{position:absolute;left:40%;bottom:-.18em;width:60%;height:.3em;fill:none;stroke:var(--rose-line);stroke-width:2;stroke-linecap:round}
+      .section-head{max-width:720px;margin:0 auto 48px;text-align:center}
+      .section-head h2{font-size:clamp(2.1rem,4vw,3.3rem);margin:16px 0 20px}
+      .section-head h2 em{font-style:italic;color:var(--rose)}
+      .section-head p{margin:0 auto;color:var(--text);max-width:620px}
 
-<button class="mobile-menu-toggle" type="button" aria-label="Apri menu di navigazione" aria-expanded="false" aria-controls="mobile-nav-panel" data-mobile-menu-toggle>
-  <span aria-hidden="true"></span>
-</button>
+      /* ---------- bottoni ---------- */
+      .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 26px;font-weight:600;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+      .btn:hover{transform:translateY(-1px)}
+      .btn-primary{background:var(--rose);color:#fff;box-shadow:0 10px 24px rgba(169,80,94,.25)}
+      .btn-outline{background:transparent;border:1.5px solid var(--rose);color:var(--ink)}
+      .btn-outline:hover{background:#fff}
+      .btn-light{background:#fff;color:var(--rose);box-shadow:0 10px 24px rgba(60,20,20,.18)}
 
-<div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
-  <nav aria-label="Navigazione mobile">
-    <a href="/biscotti-decorati">Biscotti</a>
-    <a href="/sweet-table">Sweet Table</a>
-    <a href="/curriculum-lucia-garro">Curriculum</a>
-    <a href="/certificazioni">Certificazioni</a>
-    <a href="/#contatti">Contatti</a>
-  </nav>
-  <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener noreferrer">Vai su Etsy per Acquistare Online</a>
-</div>
-</div></header>
+      /* ---------- header (come in home) ---------- */
+      header{position:sticky;top:0;z-index:20;background:rgba(255,250,245,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+      .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+      .brand{display:inline-flex;flex-direction:column;align-items:center;font-family:Georgia,serif;font-weight:700;color:var(--ink);font-size:1.4rem;line-height:1.15}
+      .brand-text{white-space:nowrap}
+      .brand-text span{color:var(--rose)}
+      .brand-ribbon{width:min(180px,80%);height:14px;margin-top:4px;fill:none;stroke:var(--rose);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+      .nav>nav{display:flex;gap:clamp(14px,2vw,26px);font-size:.95rem}
+      .nav>nav a{font-family:Georgia,serif;color:var(--ink);white-space:nowrap}
+      .nav>nav a:hover,.nav>nav a[aria-current="page"]{color:var(--rose)}
+      .nav>nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--rose-line);text-underline-offset:6px}
+      .header-etsy{padding:12px 20px;white-space:nowrap}
+      @media (max-width:1180px){.brand{font-size:1.15rem}.header-etsy{font-size:.9rem;padding:11px 16px}}
+      @media (min-width:901px) and (max-width:1100px){.nav{gap:14px}.brand{font-size:1.02rem}.nav>nav{gap:14px}.nav>nav a{font-size:.88rem}.header-etsy{font-size:.84rem;padding:10px 14px}.header-etsy .ico{display:none}}
 
-<main>
-<section class="hero"><div class="wrap">
-<span class="eyebrow">Allestimenti personalizzati</span>
-<h1>Sweet Table <em>personalizzati per ogni occasione</em></h1>
-<p class="lead">Scopri gli sweet table realizzati da Lucia Garro: allestimenti coordinati con biscotti decorati, colori, temi e dettagli personalizzati per compleanni, battesimi, baby shower, nascite, Gender Reveal, Comunione, Cresima, matrimoni e occasioni speciali.</p>
-</div></section>
+      .mobile-menu-toggle{
+        display:none;width:46px;height:46px;flex:0 0 46px;align-items:center;justify-content:center;
+        padding:0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);
+        cursor:pointer;box-shadow:0 8px 22px rgba(72,48,34,.08)
+      }
+      .mobile-menu-toggle span,.mobile-menu-toggle span::before,.mobile-menu-toggle span::after{
+        display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,opacity .2s ease
+      }
+      .mobile-menu-toggle span{position:relative}
+      .mobile-menu-toggle span::before,.mobile-menu-toggle span::after{content:"";position:absolute;left:0}
+      .mobile-menu-toggle span::before{top:-7px}.mobile-menu-toggle span::after{top:7px}
+      .mobile-menu-toggle[aria-expanded="true"] span{background:transparent}
+      .mobile-menu-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+      .mobile-menu-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+      .mobile-nav-panel{display:none}
 
-<section class="catalogo"><div class="wrap">
-<div class="products">
-{prodotti.map((prodotto)=>(
-<article class="product-card" data-product-card data-title={prodotto.titolo} data-category={prodotto.categoria} data-description={prodotto.descrizione} data-image={prodotto.immagine} data-etsy={prodotto.etsy} tabindex="0" role="button" aria-label={`Apri i dettagli di ${prodotto.titolo}`}>
-<div class="product-image"><img src={prodotto.immagine} alt={`${prodotto.titolo} realizzato da Lucia Garro`} loading="lazy"/></div>
-<div class="product-body">
-<span class="category">{prodotto.categoria}</span><h2>{prodotto.titolo}</h2><p>{prodotto.descrizione}</p>
-<div class="product-actions">
-<a class="btn etsy-btn" href={prodotto.etsy} target="_blank" rel="noopener noreferrer">Acquista su Etsy</a>
-<a class="btn whatsapp-btn" href={`https://wa.me/393519425808?text=${encodeURIComponent(`Ciao Lucia, vorrei avere informazioni su: ${prodotto.titolo}`)}`} target="_blank" rel="noopener noreferrer">Chiedi informazioni</a>
-</div>
-</div>
-</article>
-))}
-</div>
+      /* ---------- hero: chi è Lucia ---------- */
+      .about{
+        position:relative;overflow:hidden;padding:64px 0 88px;
+        background:linear-gradient(100deg,#fdf6f1 0%,#fbeee8 45%,#f6dfdc 100%);
+      }
+      .about-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:start}
+      .about-copy .eyebrow{margin-left:22px}
+      .about-copy h1{font-size:clamp(2.4rem,4.4vw,3.9rem);margin:22px 0 24px;letter-spacing:-.01em}
+      .about-copy h1 em{font-style:italic;color:var(--rose)}
+      .about-copy h1 .swash svg{left:0;width:100%}
+      .about-copy p{color:var(--text);margin:0 0 16px;font-size:1.02rem;line-height:1.75}
+      .about-copy p strong{color:var(--ink)}
+      .about-copy .lead{font-family:Georgia,serif;font-style:italic;font-size:1.18rem;line-height:1.65;color:var(--ink)}
+      .about-quote{
+        position:relative;margin:24px 0;padding:22px 26px 22px 30px;border-radius:20px;
+        background:rgba(255,255,255,.7);border:1px solid #f1d6d6;border-left:4px solid var(--rose);
+        font-family:Georgia,serif;font-size:1.06rem;line-height:1.65;color:var(--ink)
+      }
+      .about-quote strong{color:var(--rose)}
 
-<div class="info-box">
-<span class="eyebrow">Progetto personalizzato</span>
-<h2>Vuoi uno Sweet Table creato apposta per il tuo evento?</h2>
-<p>Tema, colori, biscotti, decorazioni e stile possono essere coordinati in base all’occasione. Contatta Lucia Garro su WhatsApp per descrivere l’evento e ricevere informazioni.</p>
-<a class="btn btn-primary" href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20su%20uno%20Sweet%20Table%20personalizzato." target="_blank" rel="noopener noreferrer">Contatta Lucia su WhatsApp</a>
-</div>
-</div></section>
-</main>
+      .highlights{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+      .highlight{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:18px;background:rgba(255,255,255,.85);border:2px solid #fff;box-shadow:0 10px 28px rgba(150,90,90,.1)}
+      .highlight-icon{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#b9606d,#a9505e);box-shadow:0 0 0 5px #fbe6e6}
+      .highlight-icon svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      .highlight strong{display:block;font-family:Georgia,serif;font-size:1.02rem;line-height:1.3;margin-bottom:4px;color:var(--ink)}
+      .highlight div span{display:block;color:var(--muted);font-size:.88rem;line-height:1.5}
 
-<footer><div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Sweet Table e Biscotti Decorati · Siracusa</div></footer>
+      .sky-card{position:sticky;top:104px;margin:0;isolation:isolate}
+      .framed{position:relative;padding:12px;border-radius:28px;background:#fff;box-shadow:0 30px 70px rgba(120,70,60,.18)}
+      .framed::before{content:"";position:absolute;inset:-12px;border:1.5px solid var(--gold);border-radius:36px;z-index:-1;pointer-events:none}
+      .framed img{display:block;width:100%;height:auto;border-radius:18px}
+      .sky-card .framed img{max-height:620px;object-fit:contain;background:#fff}
+      .sky-caption{margin-top:30px;text-align:center}
+      .sky-caption .tag{display:inline-block;padding:4px 12px;border-radius:999px;background:#fff;color:var(--rose);font-family:Georgia,serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 12px rgba(80,40,40,.08)}
+      .sky-caption h2{font-size:1.5rem;margin:12px 0 4px}
+      .sky-caption .ribbon{margin:6px auto 12px}
+      .sky-caption p{margin:0 auto 18px;color:var(--text);font-size:.95rem;max-width:400px}
 
-<dialog id="product-modal" class="product-modal" aria-labelledby="modal-title">
-<button class="modal-close" type="button" aria-label="Chiudi finestra">×</button>
-<div class="modal-grid">
-<div class="modal-image-wrap"><img id="modal-image" src="" alt=""/></div>
-<div class="modal-content">
-<span id="modal-category" class="category"></span><h2 id="modal-title"></h2><p id="modal-description"></p>
-<div class="modal-actions">
-<a id="modal-etsy" class="btn etsy-btn" href={etsyUrl} target="_blank" rel="noopener noreferrer">Acquista su Etsy</a>
-<a id="modal-whatsapp" class="btn whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer">Chiedi informazioni</a>
-</div>
-</div>
-</div>
-</dialog>
+      /* ---------- specializzazione artistica ---------- */
+      .expertise{background:linear-gradient(180deg,#fcf1ec 0%,#fbf3ef 100%)}
+      .expertise-grid{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+      .exp-card{
+        display:flex;flex-direction:column;align-items:center;text-align:center;padding:32px 22px 28px;border-radius:24px;
+        background:linear-gradient(180deg,#fff 0%,#fffaf8 100%);border:2px solid #fff;box-shadow:0 14px 34px rgba(150,90,90,.12);
+        transition:transform .25s ease,box-shadow .25s ease
+      }
+      .exp-card:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(150,90,90,.2)}
+      .exp-icon{width:60px;height:60px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#fdf1ef,#fbe3e3);border:1.5px solid #f0cfd2}
+      .exp-icon svg{width:28px;height:28px;fill:none;stroke:var(--rose);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+      .exp-card h3{margin:20px 0 4px;font-size:1.22rem}
+      .exp-card .ribbon{margin:6px 0 12px}
+      .exp-card p{margin:0;color:var(--text);font-size:.93rem;line-height:1.6}
 
-<a class="whatsapp-floating" href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20su%20uno%20Sweet%20Table." target="_blank" rel="noopener noreferrer" aria-label="Contatta Lucia Garro su WhatsApp">WhatsApp</a>
+      /* ---------- certificazioni internazionali ---------- */
+      .certs{
+        position:relative;overflow:hidden;
+        background:
+          radial-gradient(ellipse 60% 50% at 0% 30%,rgba(244,207,210,.45),transparent 70%),
+          radial-gradient(ellipse 50% 40% at 100% 70%,rgba(234,214,186,.45),transparent 70%),
+          var(--cream);
+      }
+      .certs::before{content:"";position:absolute;left:50%;top:36px;width:min(1160px,calc(100% - 32px));height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--gold) 20%,var(--gold) 80%,transparent)}
+      .banner{margin:0 0 80px;isolation:isolate}
+      .banner.framed::before{border-radius:40px}
+      .banner img{border-radius:20px}
+
+      .cert-list{display:grid;gap:72px}
+      .cert{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:64px;align-items:center}
+      .cert:nth-child(even) .cert-media{order:2}
+      .cert-media{position:relative;margin:0;isolation:isolate}
+      .cert-media .framed img{aspect-ratio:4/3;object-fit:contain;background:linear-gradient(135deg,#fdf3ef,#f8e6e3)}
+      .cert-year{
+        position:absolute;top:-20px;right:-10px;z-index:2;width:84px;height:84px;display:grid;place-items:center;border-radius:50%;
+        background:linear-gradient(135deg,#b9606d,#a9505e);color:#fff;font-family:Georgia,serif;font-size:1.3rem;font-weight:700;
+        box-shadow:0 0 0 6px #fbe6e6,0 14px 30px rgba(169,80,94,.35)
+      }
+      .cert:nth-child(even) .cert-year{right:auto;left:-10px}
+      .cert-tag{display:inline-block;padding:5px 14px;border-radius:999px;background:var(--rose-soft);color:#5a2a2a;font-family:Georgia,serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+      .cert-body h3{font-size:clamp(1.7rem,3vw,2.3rem);margin:16px 0 6px}
+      .cert-body .ribbon{margin:6px 0 18px}
+      .cert-body p{margin:0 0 14px;color:var(--text);line-height:1.75}
+      .cert-body p strong{color:var(--ink)}
+      .cert-facts{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-wrap:wrap;gap:10px}
+      .cert-facts li{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid #f0d8d8;font-size:.86rem;color:var(--ink)}
+      .cert-facts .ico{width:16px;height:16px;color:var(--rose)}
+
+      /* ---------- social ---------- */
+      .social{background:linear-gradient(180deg,#fbf3ef 0%,#fcf1ec 100%)}
+      .social-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:center}
+      .social-intro .eyebrow{margin-left:22px}
+      .social-intro h2{font-size:clamp(2rem,3.6vw,3rem);margin:16px 0 20px}
+      .social-intro h2 em{font-style:italic;color:var(--rose)}
+      .social-intro p{color:var(--text);margin:0 0 14px}
+      .social-card{
+        display:flex;gap:22px;align-items:center;padding:28px;border-radius:24px;background:#fff;border:2px solid #fff;
+        box-shadow:0 14px 34px rgba(150,90,90,.14);transition:transform .25s ease,box-shadow .25s ease
+      }
+      .social-card:hover{transform:translateY(-5px);box-shadow:0 24px 48px rgba(150,90,90,.22)}
+      .yt-icon{width:76px;height:76px;flex:0 0 76px;display:grid;place-items:center;border-radius:22px;background:linear-gradient(135deg,#e0525f,#b8323f);box-shadow:0 12px 24px rgba(184,50,63,.3)}
+      .yt-icon svg{width:34px;height:34px;fill:#fff}
+      .social-label{font-family:Georgia,serif;font-size:.78rem;letter-spacing:.14em;color:var(--rose);text-transform:uppercase}
+      .social-card h3{font-size:1.5rem;margin:4px 0 6px}
+      .social-card p{margin:0 0 10px;color:var(--text);font-size:.94rem}
+      .social-link{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--rose);font-size:.92rem}
+      .social-link .ico{width:16px;height:16px;transition:transform .2s ease}
+      .social-card:hover .social-link .ico{transform:translateX(3px)}
+
+      /* ---------- CTA finale ---------- */
+      .final{padding:88px 0}
+      .cta{
+        position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:28px;
+        padding:52px 56px;border-radius:32px;color:#fff;
+        background:radial-gradient(ellipse 60% 120% at 100% 0%,rgba(255,255,255,.18),transparent 60%),linear-gradient(120deg,#b9606d 0%,#a9505e 55%,#93404e 100%);
+        box-shadow:0 26px 60px rgba(169,80,94,.3)
+      }
+      .cta::before{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.35);border-radius:24px;pointer-events:none}
+      .cta h2{color:#fff;margin:0 0 8px;font-size:clamp(1.9rem,3.6vw,2.9rem)}
+      .cta p{margin:0;opacity:.92;max-width:560px}
+      .cta .ribbon{stroke:rgba(255,255,255,.7);margin:0 0 14px}
+      .cta-actions{display:flex;flex-wrap:wrap;gap:12px;position:relative}
+      .cta .btn-ghost{border:1.5px solid rgba(255,255,255,.7);color:#fff}
+      .cta .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+      footer{padding:36px 0 56px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+      /* ---------- responsive ---------- */
+      @media (max-width:1000px){
+        .expertise-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      }
+      @media (max-width:900px){
+        section{padding:68px 0}
+        .nav{min-height:76px;gap:14px}
+        .nav>nav,.nav>.btn-primary{display:none}
+        .brand{align-items:flex-start;font-size:clamp(.95rem,4.2vw,1.25rem);min-width:0}
+        .brand-text{white-space:normal}
+        .brand-ribbon{display:none}
+        .mobile-menu-toggle{display:inline-flex;margin-left:auto}
+        .mobile-nav-panel{
+          display:block;position:absolute;top:calc(100% + 8px);left:16px;right:16px;padding:12px;
+          border:1px solid var(--line);border-radius:22px;background:rgba(255,250,245,.99);
+          box-shadow:0 22px 54px rgba(72,48,34,.18);transform:translateY(-8px);opacity:0;
+          visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease
+        }
+        .mobile-nav-panel.is-open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
+        .mobile-nav-panel nav{display:grid;gap:4px}
+        .mobile-nav-panel nav a{display:block;padding:13px 14px;border-radius:14px;font-size:1rem;font-weight:700}
+        .mobile-nav-panel nav a:hover,.mobile-nav-panel nav a:focus-visible{background:#f7e1dc;outline:none}
+        .mobile-nav-panel .mobile-etsy{display:inline-flex;width:100%;margin-top:10px}
+
+        .about{padding:40px 0 64px}
+        .about-grid,.social-grid{grid-template-columns:1fr;gap:48px}
+        .sky-card{position:static;max-width:520px;margin:0 auto;width:calc(100% - 28px)}
+        .cert{grid-template-columns:1fr;gap:36px}
+        .cert:nth-child(even) .cert-media{order:0}
+        .cert-media{width:calc(100% - 28px);margin:0 auto}
+        .cert:nth-child(even) .cert-year{left:auto;right:-10px}
+        .banner{width:calc(100% - 28px);margin:0 auto 64px}
+        .cta{flex-direction:column;align-items:flex-start;padding:40px 32px}
+      }
+      @media (max-width:600px){
+        .highlights,.expertise-grid{grid-template-columns:1fr}
+        .cert-year{width:68px;height:68px;font-size:1.1rem}
+        .social-card{flex-direction:column;align-items:flex-start}
+        .cta{padding:36px 24px}
+        .cta-actions,.cta-actions .btn{width:100%}
+      }
+      @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+
+      /* ===== Sweet Table: stili specifici ===== */
+      .cta .btn{white-space:nowrap}
+      .cta>div:first-child{min-width:0}
+      .st-hero{padding:72px 0 88px;text-align:center}
+      .st-hero .eyebrow{margin-left:22px}
+      .st-hero h1{font-size:clamp(2.4rem,5vw,4.2rem);margin:22px auto 26px;max-width:900px;letter-spacing:-.01em}
+      .st-hero h1 em{font-style:italic;color:var(--rose)}
+      .st-hero .swash svg{left:10%;width:80%}
+      .st-hero .lead{max-width:780px;margin:0 auto;font-family:Georgia,serif;font-style:italic;font-size:1.15rem;line-height:1.7;color:var(--text)}
+      .st-features{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;margin:34px 0 0;padding:0}
+      .st-features li{display:flex;align-items:center;gap:10px;padding:2px 22px;font-size:.92rem;line-height:1.25;color:var(--ink);text-align:left}
+      .st-features li+li{border-left:1px solid #e3c4c4}
+      .st-features .ico{width:28px;height:28px;stroke-width:1.4}
+
+      .catalogo{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+      .product-card{
+        min-width:0;display:flex;flex-direction:column;overflow:hidden;border-radius:22px;background:#fff;border:2px solid #fff;
+        box-shadow:0 10px 28px rgba(150,90,90,.12);cursor:pointer;transition:transform .25s ease,box-shadow .25s ease
+      }
+      .product-card:hover{transform:translateY(-6px);box-shadow:0 22px 46px rgba(150,90,90,.22)}
+      .product-card:focus-visible{outline:3px solid rgba(169,80,94,.4);outline-offset:3px}
+      .product-image{position:relative;aspect-ratio:4/3;overflow:hidden;background:#f8ece8;border-radius:20px 20px 0 0}
+      .product-image img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .5s ease}
+      .product-card:hover .product-image img{transform:scale(1.06)}
+      .product-image .category{
+        position:absolute;left:12px;top:12px;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.93);
+        color:var(--rose);font-family:Georgia,serif;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 4px 12px rgba(80,40,40,.12)
+      }
+      .zoom-hint{
+        position:absolute;right:12px;bottom:12px;width:38px;height:38px;display:grid;place-items:center;border-radius:50%;
+        background:rgba(255,255,255,.9);color:var(--rose);opacity:0;transform:translateY(6px);transition:opacity .25s ease,transform .25s ease
+      }
+      .zoom-hint .ico{width:18px;height:18px}
+      .product-card:hover .zoom-hint,.product-card:focus-visible .zoom-hint{opacity:1;transform:none}
+      .product-body{display:flex;flex:1;flex-direction:column;align-items:center;text-align:center;padding:22px 22px 24px;background:linear-gradient(180deg,#fff 0%,#fdf3f1 100%)}
+      .product-body h2{font-size:1.3rem;line-height:1.25;margin:0}
+      .product-body .ribbon{margin:10px 0 12px}
+      .product-body p{color:var(--text);font-size:.93rem;line-height:1.6;margin:0 0 20px}
+      .product-actions{margin-top:auto;width:100%;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;padding-top:16px;border-top:1px dashed #ecd2d2}
+      .product-actions{flex-direction:column}
+      .product-actions .btn{width:100%;padding:11px 18px;font-size:.9rem}
+      .btn-sm .ico{width:17px;height:17px}
+
+      .product-modal{
+        position:relative;width:min(1000px,calc(100% - 32px));max-height:90vh;padding:0;border:0;border-radius:30px;overflow:hidden;
+        background:linear-gradient(135deg,#fffaf6,#fbeee8);color:var(--ink);box-shadow:0 32px 90px rgba(31,20,14,.3)
+      }
+      .product-modal::backdrop{background:rgba(36,27,23,.7);backdrop-filter:blur(6px)}
+      .modal-grid{display:grid;grid-template-columns:1.08fr .92fr;min-height:540px}
+      .modal-image-wrap{min-width:0;min-height:540px;padding:18px;display:grid;place-items:center}
+      .modal-image-wrap img{width:100%;height:100%;max-height:76vh;display:block;object-fit:contain;border-radius:20px;background:#fff;box-shadow:0 16px 40px rgba(120,70,60,.15)}
+      .modal-content{padding:48px 40px 40px;display:flex;flex-direction:column;justify-content:center}
+      .modal-content .category{align-self:flex-start;padding:5px 14px;border-radius:999px;background:var(--rose-soft);color:#5a2a2a;font-family:Georgia,serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}
+      .modal-content h2{font-size:clamp(1.9rem,3.6vw,2.7rem);margin:16px 0 6px}
+      .modal-content .ribbon{margin:8px 0 18px}
+      .modal-content p{color:var(--text);font-size:1.04rem;line-height:1.7;margin:0}
+      .modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+      .modal-close{
+        position:absolute;top:18px;right:18px;z-index:20;width:46px;height:46px;display:grid;place-items:center;padding:0;
+        border:2px solid #fff;border-radius:50%;background:var(--rose);color:#fff;font-size:1.7rem;line-height:1;cursor:pointer;
+        box-shadow:0 8px 22px rgba(48,40,32,.22);transition:transform .18s ease,background .18s ease
+      }
+      .modal-close:hover{transform:scale(1.08);background:#93404e}
+
+      .whatsapp-floating{
+        position:fixed;right:20px;bottom:20px;z-index:30;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;
+        background:#25d366;color:#fff;font-weight:700;font-size:.92rem;box-shadow:0 12px 28px rgba(37,211,102,.35);transition:transform .2s ease
+      }
+      .whatsapp-floating:hover{transform:translateY(-2px)}
+      .whatsapp-floating svg{width:20px;height:20px;fill:#fff}
+
+      @media (max-width:900px){
+        .products{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+        .st-hero{padding:44px 0 64px}
+      }
+      @media (max-width:600px){
+        .products{grid-template-columns:1fr}
+        .st-features{gap:12px;justify-content:flex-start}
+        .product-actions{flex-direction:row}
+        .product-actions .btn{width:auto;flex:1 1 0}
+        .st-features li{padding:0 14px 0 0}
+        .st-features li+li{border-left:0}
+        .product-modal{width:calc(100% - 20px);max-height:94vh;border-radius:22px;overflow-y:auto}
+        .modal-grid{grid-template-columns:1fr;min-height:auto}
+        .modal-image-wrap{min-height:0;height:42vh;padding:12px}
+        .modal-content{padding:24px 22px 26px}
+        .modal-actions{flex-direction:column}
+        .modal-actions .btn{width:100%}
+        .whatsapp-floating span{display:none}
+        .whatsapp-floating{padding:14px}
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="/"><span class="brand-text">Le Dolci Meraviglie<span> di Lucy Garro</span></span><svg class="brand-ribbon" viewBox="0 0 180 16" aria-hidden="true"><path d="M4 8h66M110 8h66"/><path d="M90 8c-6-7-16-7-16 0s10 7 16 0Zm0 0c6-7 16-7 16 0s-10 7-16 0Zm0 0-6 7m6-7 6 7"/></svg></a>
+
+        <nav aria-label="Navigazione principale">
+          <a href="/biscotti-decorati">Biscotti</a>
+          <a href="/sweet-table" aria-current="page">Sweet Table</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
+          <a href="/certificazioni">Certificazioni</a>
+          <a href="/#contatti">Contatti</a>
+        </nav>
+
+        <a class="btn btn-primary header-etsy" href={etsyUrl} target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Apri menu di navigazione"
+          aria-expanded="false"
+          aria-controls="mobile-nav-panel"
+          data-mobile-menu-toggle
+        >
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
+          <nav aria-label="Navigazione mobile">
+            <a href="/biscotti-decorati">Biscotti</a>
+            <a href="/sweet-table" aria-current="page">Sweet Table</a>
+            <a href="/curriculum-lucia-garro">Curriculum</a>
+            <a href="/certificazioni">Certificazioni</a>
+            <a href="/#contatti">Contatti</a>
+          </nav>
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener">
+            Vai su Etsy per acquistare online
+          </a>
+        </div>
+      </div>
+    </header>
+    <main>
+      <section class="about st-hero">
+        <div class="wrap">
+          <span class="eyebrow">Allestimenti personalizzati</span>
+          <h1>Sweet Table <span class="swash"><em>personalizzati per ogni occasione</em><svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10c40-6 80-8 116-4"/></svg></span></h1>
+          <p class="lead">Scopri gli sweet table realizzati da Lucia Garro: allestimenti coordinati con biscotti decorati, colori, temi e dettagli personalizzati per compleanni, battesimi, baby shower, nascite, Gender Reveal, Comunione, Cresima, matrimoni e occasioni speciali.</p>
+          <ul class="st-features">
+            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></svg><span>Fatti a mano<br />in Sicilia</span></li>
+            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.3 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/></svg><span>Temi e colori<br />su misura</span></li>
+            <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg><span>Allestimenti<br />coordinati</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="catalogo" aria-labelledby="catalogo-title">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Il catalogo</span>
+            <h2 id="catalogo-title"><span class="swash">Lasciati ispirare<svg viewBox="0 0 120 14" preserveAspectRatio="none" aria-hidden="true"><path d="M2 10c40-6 80-8 116-4"/></svg></span></h2>
+            <p>Clicca su un allestimento per vederlo in grande, poi acquistalo su Etsy o chiedi a Lucia di personalizzarlo per il tuo evento.</p>
+          </div>
+
+          <div class="products">
+            {prodotti.map((prodotto) => (
+              <article class="product-card" data-product-card data-title={prodotto.titolo} data-category={prodotto.categoria} data-description={prodotto.descrizione} data-image={prodotto.immagine} data-etsy={prodotto.etsy} tabindex="0" role="button" aria-label={`Apri i dettagli di ${prodotto.titolo}`}>
+                <div class="product-image">
+                  <img src={prodotto.immagine} alt={`${prodotto.titolo} realizzato da Lucia Garro`} loading="lazy" />
+                  <span class="category">{prodotto.categoria}</span>
+                  <span class="zoom-hint" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.4-4.4M11 8.5v5M8.5 11h5"/></svg></span>
+                </div>
+                <div class="product-body">
+                  <h2>{prodotto.titolo}</h2>
+                  <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+                  <p>{prodotto.descrizione}</p>
+                  <div class="product-actions">
+                    <a class="btn btn-primary btn-sm" href={prodotto.etsy} target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Acquista su Etsy</a>
+                    <a class="btn btn-outline btn-sm" href={`https://wa.me/393519425808?text=${encodeURIComponent(`Ciao Lucia, vorrei avere informazioni su: ${prodotto.titolo}`)}`} target="_blank" rel="noopener noreferrer">Chiedi informazioni</a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="final">
+        <div class="wrap">
+          <div class="cta">
+            <div>
+              <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+              <h2>Vuoi uno Sweet Table creato apposta per il tuo evento?</h2>
+              <p>Tema, colori, biscotti, decorazioni e stile possono essere coordinati in base all’occasione. Contatta Lucia Garro su WhatsApp per descrivere l’evento e ricevere informazioni.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="btn btn-light" href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20su%20uno%20Sweet%20Table%20personalizzato." target="_blank" rel="noopener noreferrer">Contatta Lucia su WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer><div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Sweet Table e Biscotti Decorati · Siracusa</div></footer>
+
+    <dialog id="product-modal" class="product-modal" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" aria-label="Chiudi finestra">×</button>
+      <div class="modal-grid">
+        <div class="modal-image-wrap"><img id="modal-image" src="" alt="" /></div>
+        <div class="modal-content">
+          <span id="modal-category" class="category"></span>
+          <h2 id="modal-title"></h2>
+          <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+          <p id="modal-description"></p>
+          <div class="modal-actions">
+            <a id="modal-etsy" class="btn btn-primary" href={etsyUrl} target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Acquista su Etsy</a>
+            <a id="modal-whatsapp" class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer">Chiedi informazioni</a>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
+    <a class="whatsapp-floating" href="https://wa.me/393519425808?text=Ciao%20Lucia%2C%20vorrei%20avere%20informazioni%20su%20uno%20Sweet%20Table." target="_blank" rel="noopener noreferrer" aria-label="Contatta Lucia Garro su WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
+      <span>WhatsApp</span>
+    </a>
 
 <script>
 const mobileMenuToggle=document.querySelector('[data-mobile-menu-toggle]');
