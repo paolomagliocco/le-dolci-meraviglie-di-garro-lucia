@@ -102,6 +102,13 @@ const sezioni = [
 ];
 
 const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia, vorrei informazioni per una torta simile a: ${titolo}`);
+
+// punti in evidenza mostrati nella scheda (dialog) di ogni torta, in base alla categoria
+const dettagliPerCategoria: Record<string, string[]> = {
+  Matrimonio: ['Progettata insieme agli sposi', 'Fiori e dettagli in zucchero fatti a mano', 'Vera da gustare o scenografica'],
+  Compleanno: ['Personaggi e decori modellati a mano', 'Tema e colori su misura', 'Vera da gustare o scenografica'],
+};
+const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Progetto su misura', 'Decorazioni fatte a mano', 'Vera da gustare o scenografica'];
 ---
 
 <html lang="it">
@@ -370,9 +377,110 @@ const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia
         .whatsapp-floating span{display:none}
         .whatsapp-floating{padding:14px}
       }
+
+      /* ---------- card cliccabili ---------- */
+      .cake-card{cursor:pointer}
+      .cake-card.is-source{visibility:hidden}
+      .card-open{all:unset;cursor:pointer}
+      .card-open:focus-visible{outline:2px solid var(--rose);outline-offset:4px;border-radius:6px}
+      .zoom-cue{
+        position:absolute;left:50%;top:50%;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
+        background:rgba(255,255,255,.94);color:var(--rose);font-family:Georgia,serif;font-size:.92rem;white-space:nowrap;
+        box-shadow:0 10px 26px rgba(80,40,40,.2);opacity:0;transform:translate(-50%,-35%);transition:opacity .3s ease,transform .3s ease;pointer-events:none
+      }
+      .zoom-cue .ico{width:18px;height:18px}
+      .cake-card:hover .zoom-cue{opacity:1;transform:translate(-50%,-50%)}
+      @media (hover:none){
+        .zoom-cue{left:auto;top:auto;right:12px;bottom:12px;padding:9px;opacity:1;transform:none}
+        .zoom-cue span{display:none}
+      }
+
+      /* ---------- scheda torta (dialog) ---------- */
+      .cake-modal{
+        width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:clamp(12px,3vw,40px);
+        border:0;background:transparent;overflow:hidden;color:var(--ink)
+      }
+      .cake-modal[open]{display:grid;place-items:center}
+      .cake-modal::backdrop{background:rgba(48,22,20,.55);backdrop-filter:blur(6px);animation:cm-fade .45s ease both}
+      .cake-modal.is-closing::backdrop{animation:cm-fade-out .4s ease both}
+      @keyframes cm-fade{from{opacity:0}}
+      @keyframes cm-fade-out{to{opacity:0}}
+
+      .cm-panel{
+        position:relative;width:min(1000px,100%);height:min(640px,calc(100dvh - 2 * clamp(12px,3vw,40px)));
+        display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);overflow:hidden;border-radius:30px;background:#fff;
+        box-shadow:0 40px 100px rgba(40,15,15,.4);transform-origin:top left
+      }
+      .cm-panel::after{content:"";position:absolute;inset:10px;border:1px solid rgba(216,185,138,.55);border-radius:22px;pointer-events:none;z-index:4}
+
+      .cm-media{position:relative;min-height:0;overflow:hidden;background:#f3e6e1}
+      .cm-bg{position:absolute;inset:-40px;background-size:cover;background-position:center;filter:blur(30px) saturate(1.15);opacity:.75;transform:scale(1.1)}
+      .cm-media :global(.cm-photo){position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:0;transform:scale(1.04);transition:opacity .7s ease,transform 1.4s cubic-bezier(.22,1,.36,1)}
+      .cm-media :global(.cm-photo.is-active){opacity:1;transform:none}
+      .cm-category{
+        position:absolute;left:24px;top:24px;z-index:3;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.94);
+        color:var(--rose);font-family:Georgia,serif;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;box-shadow:0 4px 12px rgba(80,40,40,.12)
+      }
+      .cm-thumbs{
+        position:absolute;left:50%;bottom:24px;z-index:3;display:flex;gap:6px;padding:6px;border-radius:999px;transform:translateX(-50%);
+        background:rgba(255,255,255,.92);box-shadow:0 10px 24px rgba(80,40,40,.18)
+      }
+      .cm-thumbs:empty{display:none}
+      .cm-thumbs :global(button){
+        display:inline-flex;align-items:center;gap:8px;padding:4px 14px 4px 4px;border:0;border-radius:999px;background:transparent;
+        color:var(--ink);font:600 .8rem/1 Inter,system-ui,sans-serif;white-space:nowrap;cursor:pointer;transition:background .25s ease,color .25s ease
+      }
+      .cm-thumbs :global(button img){width:30px;height:30px;border-radius:50%;object-fit:cover;border:2px solid #fff}
+      .cm-thumbs :global(button[aria-pressed="true"]){background:var(--rose);color:#fff}
+      .cm-thumbs :global(button:focus-visible){outline:2px solid var(--rose);outline-offset:2px}
+
+      .cm-content{
+        position:relative;display:flex;flex-direction:column;min-height:0;overflow-y:auto;padding:76px 44px 36px;
+        background:radial-gradient(circle at 100% 0%,rgba(244,207,210,.45),transparent 45%),linear-gradient(180deg,#fff 0%,#fdf3f1 100%)
+      }
+      .cm-eyebrow{font-family:Georgia,serif;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+      .cm-content h2{font-size:clamp(1.9rem,3.2vw,2.6rem);margin:8px 0 0}
+      .cm-content .ribbon{margin:14px 0 18px}
+      .cm-desc{margin:0 0 22px;color:var(--text);font-size:1rem;line-height:1.7}
+      .cm-highlights{list-style:none;margin:0 0 26px;padding:0;display:grid;gap:10px}
+      .cm-highlights :global(li){display:flex;align-items:center;gap:12px;font-size:.94rem;color:var(--ink)}
+      .cm-highlights :global(li)::before{
+        content:"";flex:0 0 26px;height:26px;border-radius:50%;box-shadow:0 0 0 4px #fbe6e6;
+        background:#a9505e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 4.5 4.5L19 7'/%3E%3C/svg%3E") center/14px no-repeat
+      }
+      .cm-actions{margin-top:auto;display:flex;flex-wrap:wrap;gap:10px;padding-top:20px;border-top:1px dashed #ecd2d2}
+      .cm-actions .btn{flex:1 1 200px;padding:13px 20px;font-size:.92rem}
+
+      .cm-close{
+        position:absolute;top:22px;right:22px;z-index:5;display:inline-flex;align-items:center;gap:8px;padding:9px 16px 9px 12px;
+        border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.96);color:var(--ink);
+        font:600 .88rem/1 Inter,system-ui,sans-serif;cursor:pointer;box-shadow:0 8px 20px rgba(80,40,40,.14);
+        transition:background .25s ease,color .25s ease,border-color .25s ease
+      }
+      .cm-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;transition:transform .35s cubic-bezier(.22,1,.36,1)}
+      .cm-close:hover{background:var(--rose);border-color:var(--rose);color:#fff}
+      .cm-close:hover svg{transform:rotate(90deg)}
+      .cm-close:focus-visible{outline:2px solid var(--rose);outline-offset:3px}
+
+      /* il contenuto entra in sequenza dopo l'espansione, ed esce subito alla chiusura */
+      .cake-modal.is-entering .cm-reveal{animation:cm-up .6s cubic-bezier(.22,1,.36,1) both;animation-delay:calc(var(--i,0) * 70ms + 280ms)}
+      @keyframes cm-up{from{opacity:0;transform:translateY(16px)}}
+      .cake-modal.is-closing .cm-reveal{opacity:0;transition:opacity .15s ease}
+
+      @media (max-width:760px){
+        .cm-panel{display:flex;flex-direction:column;height:auto;max-height:calc(100dvh - 24px);border-radius:24px}
+        .cm-media{flex:0 0 auto;height:min(46dvh,420px)}
+        .cm-content{flex:1 1 auto;padding:26px 22px 22px}
+        .cm-category{left:16px;top:16px}
+        .cm-close{top:14px;right:14px}
+        .cm-thumbs{bottom:14px}
+        .cm-actions .btn{flex:1 1 100%}
+      }
+
       @media (prefers-reduced-motion:reduce){
         *{transition:none !important}
         .gallery-progress{display:none}
+        .cake-modal.is-entering .cm-reveal{animation:none}
       }
     </style>
   </head>
@@ -473,9 +581,10 @@ const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia
 
             <div class="cake-grid">
               {sezione.torte.map((torta) => (
-                <article class="cake-card">
+                <article class="cake-card" data-cake-card data-dettagli={JSON.stringify(dettagli(torta.categoria))}>
                   <div class="cake-gallery" data-cake-gallery>
                     <span class="category">{torta.categoria}</span>
+                    <span class="zoom-cue" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Scopri la torta</span></span>
                     {torta.foto.length > 1 && (
                       <span class="photo-label" aria-hidden="true">
                         <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
@@ -505,7 +614,7 @@ const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia
                     )}
                   </div>
                   <div class="cake-body">
-                    <h3>{torta.titolo}</h3>
+                    <h3><button type="button" class="card-open" aria-haspopup="dialog">{torta.titolo}</button></h3>
                     <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
                     <p>{torta.descrizione}</p>
                     <div class="cake-actions">
@@ -536,6 +645,31 @@ const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia
         </div>
       </section>
     </main>
+
+    <dialog class="cake-modal" data-cake-modal aria-labelledby="cm-title">
+      <div class="cm-panel">
+        <button type="button" class="cm-close" data-cm-close aria-label="Chiudi la scheda">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Chiudi
+        </button>
+        <div class="cm-media">
+          <div class="cm-bg" data-cm-bg></div>
+          <div data-cm-photos></div>
+          <span class="cm-category cm-reveal" style="--i:0" data-cm-category></span>
+          <div class="cm-thumbs cm-reveal" style="--i:1" role="group" aria-label="Scegli la foto" data-cm-thumbs></div>
+        </div>
+        <div class="cm-content">
+          <span class="cm-eyebrow cm-reveal" style="--i:0">Torta artistica · Lucia Garro</span>
+          <h2 class="cm-reveal" style="--i:1" id="cm-title" data-cm-title></h2>
+          <svg class="ribbon cm-reveal" style="--i:2" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+          <p class="cm-desc cm-reveal" style="--i:3" data-cm-desc></p>
+          <ul class="cm-highlights cm-reveal" style="--i:4" data-cm-highlights></ul>
+          <div class="cm-actions cm-reveal" style="--i:5">
+            <a class="btn btn-primary" href="/contatti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>Richiedi una torta simile</a>
+            <a class="btn btn-outline" href="#" target="_blank" rel="noopener noreferrer" data-cm-whatsapp>Chiedi su WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </dialog>
 
     <footer><div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Torte artistiche, biscotti decorati e Sweet Table · Siracusa</div></footer>
 
@@ -637,6 +771,187 @@ const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia
         }, { threshold: 0.35 });
         observer.observe(gallery);
       });
+
+      /* ---------- scheda torta: si espande dalla card cliccata e ci ritorna alla chiusura ---------- */
+      const modal = document.querySelector('[data-cake-modal]');
+
+      if (modal instanceof HTMLDialogElement) {
+        const panel = modal.querySelector('.cm-panel');
+        const photosBox = modal.querySelector('[data-cm-photos]');
+        const bg = modal.querySelector('[data-cm-bg]');
+        const thumbsBox = modal.querySelector('[data-cm-thumbs]');
+        const closeBtn = modal.querySelector('[data-cm-close]');
+        const EASE_OPEN = 'cubic-bezier(.22,1,.36,1)';
+        const EASE_CLOSE = 'cubic-bezier(.55,0,.75,.2)';
+        let sourceCard = null;
+        let closing = false;
+        let closeToken = 0;
+
+        const setText = (selector, text) => {
+          const el = modal.querySelector(selector);
+          if (el) el.textContent = text;
+        };
+
+        // trasformazione che porta il pannello esattamente sopra la card
+        const transformToCard = (card) => {
+          const from = card.getBoundingClientRect();
+          const to = panel.getBoundingClientRect();
+          return `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(${from.width / to.width}, ${from.height / to.height})`;
+        };
+
+        const isInViewport = (el) => {
+          const r = el.getBoundingClientRect();
+          return r.bottom > 0 && r.top < window.innerHeight;
+        };
+
+        const showPhoto = (index) => {
+          const photos = Array.from(photosBox.querySelectorAll('.cm-photo'));
+          photos.forEach((img, i) => img.classList.toggle('is-active', i === index));
+          thumbsBox.querySelectorAll('button').forEach((b, i) => b.setAttribute('aria-pressed', i === index ? 'true' : 'false'));
+          if (bg instanceof HTMLElement && photos[index]) bg.style.backgroundImage = `url("${photos[index].getAttribute('src')}")`;
+        };
+
+        const fillFromCard = (card) => {
+          const cardImgs = Array.from(card.querySelectorAll('.cake-gallery img'));
+          const active = Math.max(0, cardImgs.findIndex((img) => img.classList.contains('is-active')));
+
+          photosBox.replaceChildren(...cardImgs.map((img) => {
+            const photo = document.createElement('img');
+            photo.className = 'cm-photo';
+            photo.src = img.currentSrc || img.src;
+            photo.alt = img.alt;
+            photo.decoding = 'async';
+            return photo;
+          }));
+
+          thumbsBox.replaceChildren(...(cardImgs.length > 1 ? cardImgs.map((img, i) => {
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.setAttribute('aria-pressed', 'false');
+            const thumb = document.createElement('img');
+            thumb.src = img.currentSrc || img.src;
+            thumb.alt = '';
+            button.append(thumb, img.dataset.label ?? `Foto ${i + 1}`);
+            button.addEventListener('click', () => showPhoto(i));
+            return button;
+          }) : []));
+
+          setText('[data-cm-title]', card.querySelector('h3')?.textContent?.trim() ?? '');
+          setText('[data-cm-category]', card.querySelector('.category')?.textContent ?? '');
+          setText('[data-cm-desc]', card.querySelector('.cake-body p')?.textContent ?? '');
+
+          let punti = [];
+          try { punti = JSON.parse(card.dataset.dettagli ?? '[]'); } catch { punti = []; }
+          modal.querySelector('[data-cm-highlights]')?.replaceChildren(...punti.map((testo) => {
+            const li = document.createElement('li');
+            li.textContent = testo;
+            return li;
+          }));
+
+          const wa = modal.querySelector('[data-cm-whatsapp]');
+          const cardWa = card.querySelector('.cake-actions .btn-outline');
+          if (wa instanceof HTMLAnchorElement && cardWa instanceof HTMLAnchorElement) wa.href = cardWa.href;
+
+          showPhoto(active);
+        };
+
+        const lockScroll = () => {
+          const scrollbar = window.innerWidth - document.documentElement.clientWidth;
+          document.documentElement.style.overflow = 'hidden';
+          if (scrollbar > 0) document.body.style.paddingRight = `${scrollbar}px`;
+        };
+        const unlockScroll = () => {
+          document.documentElement.style.overflow = '';
+          document.body.style.paddingRight = '';
+        };
+
+        const openModal = (card) => {
+          if (modal.open) return;
+          sourceCard = card;
+          closing = false;
+          fillFromCard(card);
+          const fromRect = card.getBoundingClientRect();
+          lockScroll();
+          modal.classList.remove('is-closing');
+          modal.classList.add('is-entering');
+          modal.showModal();
+          modal.scrollTop = 0;
+          modal.querySelector('.cm-content')?.scrollTo(0, 0);
+
+          if (reduceMotion) {
+            panel.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200 });
+          } else {
+            // la card "diventa" la scheda: parte dalla sua posizione e si espande al centro
+            const to = panel.getBoundingClientRect();
+            const from = `translate(${fromRect.left - to.left}px, ${fromRect.top - to.top}px) scale(${fromRect.width / to.width}, ${fromRect.height / to.height})`;
+            card.classList.add('is-source');
+            panel.animate(
+              [
+                { transform: from, borderRadius: '24px', opacity: 0.7 },
+                { transform: 'none', borderRadius: '30px', opacity: 1 },
+              ],
+              { duration: 620, easing: EASE_OPEN }
+            );
+          }
+          closeBtn?.focus({ preventScroll: true });
+        };
+
+        const finishClose = () => {
+          panel.getAnimations().forEach((a) => a.cancel());
+          if (modal.open) modal.close();
+          modal.classList.remove('is-closing', 'is-entering');
+          unlockScroll();
+          if (sourceCard) {
+            sourceCard.classList.remove('is-source');
+            sourceCard.querySelector('.card-open')?.focus({ preventScroll: true });
+          }
+          sourceCard = null;
+          closing = false;
+        };
+
+        const closeModal = () => {
+          if (!modal.open || closing) return;
+          closing = true;
+          modal.classList.remove('is-entering');
+          modal.classList.add('is-closing');
+
+          let animation;
+          if (!reduceMotion && sourceCard && isInViewport(sourceCard)) {
+            // la scheda torna a rimpicciolirsi dentro la card da cui è partita
+            animation = panel.animate(
+              [
+                { transform: 'none', opacity: 1 },
+                { transform: transformToCard(sourceCard), opacity: 0.85 },
+              ],
+              { duration: 460, easing: EASE_CLOSE, fill: 'forwards' }
+            );
+          } else {
+            animation = panel.animate(
+              [{ transform: 'none', opacity: 1 }, { transform: 'scale(.94)', opacity: 0 }],
+              { duration: reduceMotion ? 120 : 260, easing: 'ease', fill: 'forwards' }
+            );
+          }
+          // chiude a fine animazione; il timer di riserva evita che la scheda resti bloccata
+          const token = ++closeToken;
+          const done = () => { if (closing && token === closeToken) finishClose(); };
+          animation.finished.then(done, done);
+          window.setTimeout(done, (reduceMotion ? 120 : 460) + 200);
+        };
+
+        closeBtn?.addEventListener('click', closeModal);
+        modal.addEventListener('cancel', (event) => { event.preventDefault(); closeModal(); }); // tasto Esc
+        modal.addEventListener('click', (event) => { if (event.target === modal) closeModal(); }); // clic fuori dalla scheda
+        // chiusure non passate da closeModal (es. dal browser); un evento close in ritardo non deve chiudere una scheda riaperta
+        modal.addEventListener('close', () => { if (!modal.open && sourceCard && !closing) finishClose(); });
+
+        document.querySelectorAll('[data-cake-card]').forEach((card) => {
+          card.addEventListener('click', (event) => {
+            // i link della card (contatti, WhatsApp) e i pallini delle foto mantengono il loro comportamento
+            if (event.target instanceof Element && event.target.closest('a, .gallery-dots')) return;
+            openModal(card);
+          });
+        });
+      }
     </script>
   </body>
 </html>
