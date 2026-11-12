@@ -60,6 +60,20 @@ const dettagliTrendWedding = [
   { etichetta: 'Attestato', valore: 'Partecipazione attestata a Berry Cakes, firmato da Cira Lombardo' },
 ];
 
+/* Corsi di cake design tenuti da Lucia come teacher presso Ermes Comunicazione (Siracusa) */
+const corsiErmes = {
+  src: '/images/ermes-formazione-corsi-cake-design-lucia-ottimizzata.webp',
+  alt: 'Lucia Garro, teacher di cake design, durante i corsi di formazione presso gli uffici di Ermes Comunicazione a Siracusa: lezione in aula con proiezioni, lavagna e una torta decorata di esempio.'
+};
+
+const dettagliCorsiErmes = [
+  { etichetta: 'Ruolo', valore: 'Teacher di cake design' },
+  { etichetta: 'Dove', valore: 'Uffici di Ermes Comunicazione, Siracusa' },
+  { etichetta: 'Corsi', valore: 'Formazione professionale sulle tecniche di cake design' },
+  { etichetta: 'Argomenti', valore: 'Decorazione, progettazione e presentazione artistica delle torte' },
+  { etichetta: 'Metodo', valore: 'Lezioni teoriche con proiezioni ed esempi pratici su torte reali' },
+];
+
 const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'CollectionPage',
@@ -113,6 +127,15 @@ const structuredData = {
         '@type': 'ImageObject',
         contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${trendWedding.src}`,
         caption: trendWedding.alt
+      }]
+    },
+    {
+      '@type': 'ImageGallery',
+      name: 'Lucia Garro teacher di cake design presso Ermes Comunicazione, Siracusa',
+      image: [{
+        '@type': 'ImageObject',
+        contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${corsiErmes.src}`,
+        caption: corsiErmes.alt
       }]
     }
   ]
@@ -370,6 +393,16 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
       .cake-list .fact-icon svg{width:16px;height:16px}
       .cake-list strong{display:block;font-family:Georgia,serif;font-size:1rem;line-height:1.3;color:var(--ink)}
       .cake-list span{display:block;color:var(--muted);font-size:.89rem;line-height:1.5}
+      /* ---------- corsi di cake design presso Ermes Comunicazione ---------- */
+      .teacher{background:linear-gradient(180deg,#fffaf6 0%,#fbf3ef 100%)}
+      .teacher-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px;align-items:start}
+      .teacher .collage{margin:0}
+      .teacher .collage img{aspect-ratio:1122/1402}
+      .teacher-pills{list-style:none;margin:22px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+      .teacher-pills li{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;background:#fff;
+        border:1px solid #f1d6d6;box-shadow:0 8px 20px rgba(150,90,90,.08);font-family:Georgia,serif;font-size:.92rem;color:var(--ink)}
+      .teacher-pills .ico{width:16px;height:16px;color:var(--gold-dark)}
+
       /* ---------- Trend Wedding 2024 ---------- */
       .wedding{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
       .wedding-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:56px;align-items:start}
@@ -496,6 +529,8 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
         .remmler-grid{grid-template-columns:minmax(0,1fr);gap:48px}
         .remmler .collage-col{max-width:520px;margin:0 auto;width:100%}
         .remmler .collage{margin:0 auto}
+        .teacher-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+        .teacher .collage-col{max-width:520px;margin:0 auto;width:100%}
         .collage{width:calc(100% - 24px);margin:0 auto 48px}
         .birthdays .collage{max-width:560px;margin:0 auto}
         .collage-col{position:static}
@@ -815,6 +850,60 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
             <span class="zoom-hint" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M11 8.5v5M8.5 11h5"/></svg>Clicca per ingrandire</span>
             <img src={trendWedding.src} alt={trendWedding.alt} width="1122" height="1402" loading="lazy" decoding="async" />
           </button>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
+
+      <section class="teacher" id="corsi-cake-design-ermes" aria-labelledby="teacher-title">
+        <div class="wrap teacher-grid">
+          <div class="collage-col">
+            <button
+              type="button"
+              class="collage"
+              data-zoom
+              data-zoom-src={corsiErmes.src}
+              data-zoom-alt={corsiErmes.alt}
+              data-zoom-title="Lucia Garro, teacher di cake design"
+              data-zoom-text="I corsi di formazione sulle tecniche di cake design presso Ermes Comunicazione, Siracusa."
+              aria-label="Apri a schermo intero le foto dei corsi di cake design tenuti da Lucia"
+            >
+              <span class="zoom-hint" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M11 8.5v5M8.5 11h5"/></svg>Clicca per ingrandire</span>
+              <img src={corsiErmes.src} alt={corsiErmes.alt} width="1122" height="1402" loading="lazy" decoding="async" />
+            </button>
+            <p class="collage-note">Lucia in aula durante i corsi presso Ermes Comunicazione</p>
+          </div>
+
+          <div class="story">
+            <span class="eyebrow">Formazione</span>
+            <h2 id="teacher-title">Lucia, <em>teacher</em> di cake design</h2>
+            <p class="lead">Dalla pasticceria all’aula: Lucia ha tenuto corsi di formazione professionale sulle tecniche di cake design presso gli uffici di Ermes Comunicazione a Siracusa.</p>
+            <p>Nel ruolo di <strong>teacher</strong>, Lucia ha guidato diversi incontri dedicati a chi vuole imparare il cake design o perfezionare la propria tecnica. Ha condiviso <strong>competenze teoriche e pratiche</strong> su <strong>decorazione, progettazione e presentazione artistica</strong> delle torte, con proiezioni, esempi su torte reali e tanto spazio per le domande degli allievi.</p>
+
+            <blockquote class="quote-box">
+              <p>Insegnare è il modo migliore per dimostrare la propria esperienza: chi sceglie le torte di Lucia sceglie una professionista che conosce il <strong>metodo</strong> dietro ogni decorazione, al punto da trasmetterlo ad altri.</p>
+            </blockquote>
+
+            <div class="facts-box">
+              <h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 9l10-5 10 5-10 5-10-5Z"/><path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5"/><path d="M22 9v6"/></svg>I corsi in breve</h3>
+              <dl>
+                {dettagliCorsiErmes.map((d) => (
+                  <Fragment><dt>{d.etichetta}</dt><dd>{d.valore}</dd></Fragment>
+                ))}
+              </dl>
+            </div>
+
+            <ul class="teacher-pills" aria-label="Temi dei corsi">
+              {['Formazione', 'Tecnica', 'Creatività', 'Cake Design'].map((tema) => (
+                <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg>{tema}</li>
+              ))}
+            </ul>
+
+            <div class="story-actions">
+              <a class="btn btn-primary" href={waLink('ho visto i corsi di cake design che hai tenuto presso Ermes Comunicazione e vorrei informazioni sui prossimi corsi')} target="_blank" rel="noopener noreferrer"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>Chiedi informazioni sui corsi</a>
+              <a class="btn btn-outline" href="/curriculum-lucia-garro">Scopri il curriculum</a>
+            </div>
+          </div>
         </div>
       </section>
 
