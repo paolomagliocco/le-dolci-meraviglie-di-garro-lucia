@@ -158,6 +158,14 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
       h1, h2, h3 { font-family: Georgia, serif; line-height: 1.12; margin-top: 0; color: var(--ink); }
       section { padding: 88px 0; }
 
+      /* ---------- divisore tra le sezioni (fiocco come nel logo) ---------- */
+      .section-divider{position:relative;height:0;display:flex;justify-content:center;pointer-events:none;z-index:1}
+      .section-divider span{display:flex;align-items:center;gap:14px;width:min(560px,82%);transform:translateY(-50%)}
+      .section-divider span::before,.section-divider span::after{content:"";flex:1;height:1px}
+      .section-divider span::before{background:linear-gradient(90deg,transparent,#d8b98a 70%,#c98a93)}
+      .section-divider span::after{background:linear-gradient(90deg,#c98a93,#d8b98a 30%,transparent)}
+      .section-divider svg{width:46px;height:22px;flex:0 0 auto;fill:none;stroke:#a9505e;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+
       /* ---------- icone e decori condivisi ---------- */
       .ico{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
       .ribbon{display:block;width:120px;height:12px;fill:none;stroke:var(--rose-line);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
@@ -570,7 +578,9 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
         </div>
       </section>
 
-      {sezioni.map((sezione) => (
+      {sezioni.map((sezione, i) => (
+        <Fragment>
+        {i > 0 && <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>}
         <section class="cakes" id={sezione.id} aria-labelledby={`${sezione.id}-title`}>
           <div class="wrap">
             <div class="section-head">
@@ -627,6 +637,7 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
             </div>
           </div>
         </section>
+        </Fragment>
       ))}
 
       <section class="final">

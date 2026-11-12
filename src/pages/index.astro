@@ -609,6 +609,14 @@ const productListStructuredData = {
       }
 
       section { padding: 72px 0; }
+
+      /* ---------- divisore tra le sezioni (fiocco come nel logo) ---------- */
+      .section-divider{position:relative;height:0;display:flex;justify-content:center;pointer-events:none;z-index:1}
+      .section-divider span{display:flex;align-items:center;gap:14px;width:min(560px,82%);transform:translateY(-50%)}
+      .section-divider span::before,.section-divider span::after{content:"";flex:1;height:1px}
+      .section-divider span::before{background:linear-gradient(90deg,transparent,#d8b98a 70%,#c98a93)}
+      .section-divider span::after{background:linear-gradient(90deg,#c98a93,#d8b98a 30%,transparent)}
+      .section-divider svg{width:46px;height:22px;flex:0 0 auto;fill:none;stroke:#a9505e;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
       .section-head { max-width: 760px; margin-bottom: 30px; }
       .section-head h2 { font-size: clamp(2rem, 4vw, 3.4rem); margin-bottom: 10px; }
       .section-head p { margin: 0; color: var(--muted); }
@@ -1637,7 +1645,7 @@ const productListStructuredData = {
           type="button"
           aria-label="Apri menu di navigazione"
           aria-expanded="false"
-          aria-controls="mobile-nav-panel"
+          aria-controls="mobile-nalv-panel"
           data-mobile-menu-toggle
         >
           <span aria-hidden="true"></span>
@@ -1718,6 +1726,8 @@ const productListStructuredData = {
         </div>
       </section>
 
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
+
       <section id="biscotti" class="richiesti">
         <div class="wrap">
           <div class="section-head richiesti-head">
@@ -1755,6 +1765,8 @@ const productListStructuredData = {
           </div>
         </div>
       </section>
+
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
 
       <section class="maestro" id="formazione-ceri-griffiths" aria-labelledby="maestro-title">
         <div class="wrap maestro-grid">

@@ -1,6 +1,6 @@
 ---
 const seoTitle = 'Personaggi VIP e Collaborazioni | Lucia Garro Cake Designer';
-const seoDescription = 'Torte, biscotti decorati e cupcakes di Lucia Garro per personaggi VIP, volti dello spettacolo e location esclusive: tra questi il battesimo di Alessio, figlio di Luigi Mastroianni e Anna Scuderi.';
+const seoDescription = 'Le torte di Lucia Garro per personaggi VIP: la torta per gli 80 anni di Stephan Remmler, voce dei Trio e di “Da Da Da”, i compleanni dei figli di Alessia Cammarota e Aldo Palmieri, il battesimo di Alessio e il Trend Wedding 2024 con Cira Lombardo.';
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/vip-e-collaborazioni';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/evento-mastroianni-scuderi-og.jpg';
@@ -18,6 +18,46 @@ const fotoBattesimo: Foto[] = [
   { src: '/images/evento-mastroianni-scuderi-1.webp', titolo: 'Gli ultimi ritocchi', didascalia: 'Lucia Garro rifinisce a mano i fiori in zucchero, accanto ai cupcakes pronti per la festa.' },
   { src: '/images/evento-mastroianni-scuderi-3.webp', titolo: 'L’allestimento', didascalia: 'La torta scenografica e le composizioni di biscotti decorati e cupcakes nei toni del bianco e dell’azzurro.' },
   { src: '/images/evento-mastroianni-scuderi-5.webp', titolo: 'Il battesimo di Alessio', didascalia: 'Il giardino dell’evento con il pannello “Il battesimo di Alessio” e il dessert table completo.', pos: 'center 70%' },
+];
+
+/* Torta per gli 80 anni di Stephan Remmler (Trio, “Da Da Da”) */
+const torta80Remmler = {
+  src: '/images/band-trio-stephan-remmler-da-da-da.webp',
+  alt: 'Stephan Remmler, voce dei Trio e di “Da Da Da”, con la torta per i suoi 80 anni realizzata da Lucia Garro: un palco nero con la sua statuina al microfono, chitarra, amplificatori, la folla illuminata e la scritta “80 Jahre bei der Stange”.'
+};
+
+const highlightsRemmler = [
+  { valore: '80', etichetta: 'anni festeggiati' },
+  { valore: '1982', etichetta: '“Da Da Da”, hit mondiale' },
+  { valore: 'Trio', etichetta: 'icona della Neue Deutsche Welle' },
+];
+
+/* Torte di compleanno per i figli di Alessia Cammarota e Aldo Palmieri */
+const collageCompleanni = {
+  src: '/images/eventi-cammarota-palmieri.webp',
+  alt: 'Collage delle torte di compleanno realizzate da Lucia Garro per i figli di Alessia Cammarota e Aldo Palmieri: torta Crash Bandicoot per gli 8 anni di Niccolò, nave pirata per i 6 anni di Niccolò, torta Toy Story per Leonardo e torta Minecraft.'
+};
+
+const torteCompleanno = [
+  { titolo: 'Crash Bandicoot', testo: 'Per gli 8 anni di Niccolò: casse TNT, la maschera tribale e il personaggio modellati a mano.' },
+  { titolo: 'Nave dei pirati', testo: 'Per i 6 anni di Niccolò: un galeone in pasta di zucchero con vele, bandiera e onde.' },
+  { titolo: 'Toy Story', testo: 'Per Leonardo: torta a piani con Woody, Buzz e i personaggi del film, tra stelle e nuvole.' },
+  { titolo: 'Minecraft', testo: 'Una torta a blocchi pixel con Creeper e cassa TNT, coordinata con l’allestimento verde.' },
+];
+
+/* Trend Wedding 2024 con la wedding planner Cira Lombardo */
+const trendWedding = {
+  src: '/images/trend-wedding-sicilia-2024.webp',
+  alt: 'Berry Cakes al Trend Wedding 2024: la torta nuziale a più piani con fiori rosa e fucsia di Lucia Garro, gli sposi, la wedding planner Cira Lombardo e l’attestato di partecipazione.'
+};
+
+const dettagliTrendWedding = [
+  { etichetta: 'Evento', valore: 'Trend Wedding 2024' },
+  { etichetta: 'Data', valore: '1 ottobre 2023' },
+  { etichetta: 'Dove', valore: 'Sicilia, area di Catania' },
+  { etichetta: 'Finalità', valore: 'Presentazione delle tendenze e delle collezioni per la stagione nuziale 2024' },
+  { etichetta: 'Organizzazione e partner', valore: 'Cira Lombardo, Gianni Di Bella S.r.l. e Filly Auteri Floral Designer' },
+  { etichetta: 'Attestato', valore: 'Partecipazione attestata a Berry Cakes, firmato da Cira Lombardo' },
 ];
 
 const structuredData = {
@@ -38,15 +78,44 @@ const structuredData = {
     jobTitle: 'Cake Designer e Pasticcera',
     address: { '@type': 'PostalAddress', addressLocality: 'Siracusa', addressCountry: 'IT' }
   },
-  hasPart: {
-    '@type': 'ImageGallery',
-    name: 'Il battesimo di Alessio – Luigi Mastroianni e Anna Scuderi',
-    image: fotoBattesimo.map((f) => ({
-      '@type': 'ImageObject',
-      contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${f.src}`,
-      caption: f.didascalia
-    }))
-  }
+  hasPart: [
+    {
+      '@type': 'ImageGallery',
+      name: 'La torta per gli 80 anni di Stephan Remmler',
+      image: [{
+        '@type': 'ImageObject',
+        contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${torta80Remmler.src}`,
+        caption: torta80Remmler.alt
+      }]
+    },
+    {
+      '@type': 'ImageGallery',
+      name: 'Il battesimo di Alessio – Luigi Mastroianni e Anna Scuderi',
+      image: fotoBattesimo.map((f) => ({
+        '@type': 'ImageObject',
+        contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${f.src}`,
+        caption: f.didascalia
+      }))
+    },
+    {
+      '@type': 'ImageGallery',
+      name: 'Le torte di compleanno dei figli di Alessia Cammarota e Aldo Palmieri',
+      image: [{
+        '@type': 'ImageObject',
+        contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${collageCompleanni.src}`,
+        caption: collageCompleanni.alt
+      }]
+    },
+    {
+      '@type': 'ImageGallery',
+      name: 'Trend Wedding 2024 con la wedding planner Cira Lombardo',
+      image: [{
+        '@type': 'ImageObject',
+        contentUrl: `https://www.ledolcimeravigliedigarrolucia.com${trendWedding.src}`,
+        caption: trendWedding.alt
+      }]
+    }
+  ]
 };
 
 const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia, ${testo}`);
@@ -186,7 +255,7 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
       .hero-pills .ico{width:18px;height:18px;color:var(--gold-dark)}
 
       /* ---------- evento: book fotografico + racconto ---------- */
-      .event{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .event{background:linear-gradient(180deg,#fffaf6 0%,#fbf3ef 100%)}
       .event-grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);gap:56px;align-items:start}
 
       .book{position:relative;padding:14px;border-radius:30px;background:#fff;box-shadow:0 30px 70px rgba(120,70,60,.18);isolation:isolate}
@@ -260,6 +329,73 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
       .event-facts strong{display:block;font-family:Georgia,serif;font-size:.98rem;line-height:1.3;color:var(--ink)}
       .event-facts div span{display:block;color:var(--muted);font-size:.88rem;line-height:1.5}
       .story-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+
+      /* ---------- in evidenza: torta per gli 80 anni di Stephan Remmler (stessi colori chiari delle altre sezioni, accenti oro) ---------- */
+      .remmler{background:linear-gradient(180deg,#fffaf6 0%,#fbf3ef 100%)}
+      .remmler-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:64px;align-items:start}
+      .remmler .eyebrow{background:linear-gradient(135deg,#f3dfb6,#e2c48f);color:#4a3015}
+      .remmler .story h2{font-size:clamp(2.2rem,4.2vw,3.4rem)}
+      .remmler-highlights{list-style:none;margin:26px 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+      .remmler-highlights li{padding:18px 12px;border-radius:18px;text-align:center;background:rgba(255,255,255,.9);border:1.5px solid #ecd9b8;
+        box-shadow:0 10px 24px rgba(150,110,60,.1)}
+      .remmler-highlights strong{display:block;font-family:Georgia,serif;font-size:clamp(1.6rem,2.6vw,2.1rem);line-height:1.1;color:#a87b3c}
+      .remmler-highlights span{display:block;margin-top:6px;font-size:.8rem;line-height:1.35;color:var(--muted)}
+      .remmler .collage{margin:0}
+      .remmler .collage img{aspect-ratio:1122/1402}
+      .remmler .collage .zoom-hint{top:auto;bottom:28px}
+      .remmler-badge{
+        position:absolute;z-index:3;left:-18px;bottom:48px;display:grid;place-items:center;width:104px;height:104px;border-radius:50%;
+        background:radial-gradient(circle at 30% 30%,#f6e3b4,#c9a46b 70%);color:#2a1712;text-align:center;font-family:Georgia,serif;
+        box-shadow:0 14px 34px rgba(120,80,40,.3),0 0 0 6px #fff;transform:rotate(-8deg);pointer-events:none
+      }
+      .remmler-badge strong{display:block;font-size:2.2rem;line-height:1}
+      .remmler-badge span{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+
+      /* ---------- compleanni Cammarota-Palmieri ---------- */
+      .birthdays{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .collage{position:relative;display:block;width:100%;margin:0 0 56px;padding:14px;border:0;border-radius:30px;background:#fff;cursor:zoom-in;
+        box-shadow:0 30px 70px rgba(120,70,60,.18);isolation:isolate}
+      .collage::before{content:"";position:absolute;inset:-12px;border:1.5px solid var(--gold);border-radius:38px;z-index:-1;pointer-events:none}
+      .collage img{display:block;width:100%;height:auto;aspect-ratio:3/2;border-radius:20px;background:#f3e6e1}
+      .collage .zoom-hint{right:28px;top:28px}
+      .collage:focus-visible{outline:3px solid var(--rose);outline-offset:6px}
+      .birthday-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.9fr);gap:48px;align-items:start}
+      .birthdays .collage{margin:0}
+      .birthdays .collage img{aspect-ratio:5/4;object-fit:cover;object-position:center}
+      .collage-col{position:sticky;top:110px}
+      .collage-note{margin:22px 0 0;text-align:center;color:var(--muted);font-family:Georgia,serif;font-style:italic;font-size:.95rem}
+      .cake-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+      .cake-list li{display:flex;gap:14px;align-items:flex-start}
+      .cake-list .fact-icon{width:34px;height:34px;flex:0 0 34px;box-shadow:0 0 0 4px #fbe6e6}
+      .cake-list .fact-icon svg{width:16px;height:16px}
+      .cake-list strong{display:block;font-family:Georgia,serif;font-size:1rem;line-height:1.3;color:var(--ink)}
+      .cake-list span{display:block;color:var(--muted);font-size:.89rem;line-height:1.5}
+      /* ---------- Trend Wedding 2024 ---------- */
+      .wedding{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .wedding-grid{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:56px;align-items:start}
+      .wedding .collage{margin:0;position:sticky;top:110px}
+      .wedding .collage img{aspect-ratio:1122/1402}
+      .quote-box{margin:24px 0;padding:22px 24px;border-left:3px solid var(--gold);border-radius:0 20px 20px 0;background:rgba(255,255,255,.85);
+        box-shadow:0 10px 28px rgba(150,90,90,.08)}
+      .quote-box p{margin:0}
+      .facts-box{margin:24px 0 0;padding:22px 24px;border-radius:22px;background:rgba(255,255,255,.85);border:2px solid #fff;
+        box-shadow:0 10px 28px rgba(150,90,90,.1)}
+      .facts-box h3{display:flex;align-items:center;gap:10px;font-size:1.15rem;margin:0 0 14px}
+      .facts-box h3 .ico{color:var(--gold-dark)}
+      .facts-box dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px 18px;font-size:.92rem;line-height:1.5}
+      .facts-box dt{font-weight:700;color:var(--ink)}
+      .facts-box dd{margin:0;color:var(--text)}
+
+      .lb-single{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;margin:0;padding:0 clamp(12px,4vw,60px)}
+      .lb-single img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+
+      /* ---------- divisore tra le sezioni (fiocco come nel logo) ---------- */
+      .section-divider{position:relative;height:0;display:flex;justify-content:center;pointer-events:none;z-index:1}
+      .section-divider span{display:flex;align-items:center;gap:14px;width:min(560px,82%);transform:translateY(-50%)}
+      .section-divider span::before,.section-divider span::after{content:"";flex:1;height:1px}
+      .section-divider span::before{background:linear-gradient(90deg,transparent,var(--gold) 70%,var(--rose-line))}
+      .section-divider span::after{background:linear-gradient(90deg,var(--rose-line),var(--gold) 30%,transparent)}
+      .section-divider svg{width:46px;height:22px;flex:0 0 auto;fill:none;stroke:var(--rose);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
 
       /* ---------- collaborazioni ---------- */
       .collab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
@@ -356,6 +492,15 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
         .event-grid{grid-template-columns:minmax(0,1fr);gap:48px}
         .book{max-width:520px;width:calc(100% - 24px);margin:0 auto}
         .collab-grid{grid-template-columns:minmax(0,1fr);max-width:520px;margin:0 auto}
+        .birthday-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+        .remmler-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+        .remmler .collage-col{max-width:520px;margin:0 auto;width:100%}
+        .remmler .collage{margin:0 auto}
+        .collage{width:calc(100% - 24px);margin:0 auto 48px}
+        .birthdays .collage{max-width:560px;margin:0 auto}
+        .collage-col{position:static}
+        .wedding-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+        .wedding .collage{max-width:520px;margin:0 auto;position:relative;top:auto}
         .cta{flex-direction:column;align-items:flex-start;padding:40px 32px}
       }
       @media (max-width:600px){
@@ -363,6 +508,14 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
         .book-arrow{width:40px;height:40px;margin-top:-20px}
         .book-arrow.prev{left:8px}.book-arrow.next{right:8px}
         .book-thumbs button{width:58px;height:72px}
+        .collage{padding:8px}
+        .collage .zoom-hint{right:16px;top:16px}
+        .remmler-highlights{gap:8px}
+        .remmler-highlights li{padding:14px 6px}
+        .remmler-badge{width:84px;height:84px;left:-6px;bottom:36px}
+        .remmler-badge strong{font-size:1.8rem}
+        .facts-box dl{grid-template-columns:minmax(0,1fr);gap:2px}
+        .facts-box dd{margin-bottom:10px}
         .lb-arrow{display:none}
         .story-actions .btn{flex:1 1 100%}
         .cta{padding:36px 24px}
@@ -435,6 +588,110 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
           </ul>
         </div>
       </section>
+
+      <section class="remmler" id="torta-80-anni-stephan-remmler" aria-labelledby="remmler-title">
+        <div class="wrap remmler-grid">
+          <div class="story">
+            <span class="eyebrow">In evidenza · Icona della musica</span>
+            <h2 id="remmler-title">La torta per gli 80 anni di <em>Stephan Remmler</em></h2>
+            <p class="lead">La voce dei Trio e di “Da Da Da”, una delle icone della musica europea degli anni Ottanta, ha festeggiato i suoi 80 anni con una torta firmata da Lucia Garro.</p>
+            <p>È stato <strong>Jonni Remmler</strong>, figlio dell’artista, a contattare <strong>direttamente Lucia</strong> e a commissionarle la torta per il compleanno del padre: un progetto speciale, pensato per celebrare un traguardo importante e una carriera che ha fatto la storia della musica.</p>
+
+            <ul class="remmler-highlights" aria-label="In breve">
+              {highlightsRemmler.map((h) => (
+                <li><strong>{h.valore}</strong><span>{h.etichetta}</span></li>
+              ))}
+            </ul>
+
+            <blockquote class="quote-box">
+              <p><strong>Stephan Remmler</strong> è cantante, compositore, paroliere e produttore tedesco. Come frontman e autore dei testi dei <strong>Trio</strong> è diventato un simbolo della <strong>Neue Deutsche Welle</strong>. La loro <strong>“Da Da Da”</strong> (1982) è stata un successo mondiale ed è tornata in classifica anni dopo grazie alla pubblicità di Volkswagen.</p>
+            </blockquote>
+
+            <p>Lucia ha trasformato la torta in un <strong>palco da concerto</strong>: la statuina di Stephan al microfono con gli occhiali scuri, la chitarra e gli amplificatori, le luci di scena e la folla illuminata sul fronte. Tutto modellato a mano in pasta di zucchero, con la dedica <strong>“80 Jahre bei der Stange”</strong>.</p>
+            <p>Un omaggio tra musica, storia e cake design. È anche la conferma che le creazioni di Lucia arrivano oltre i confini italiani, scelte da chi vuole una torta davvero unica per festeggiare una leggenda.</p>
+
+            <div class="story-actions">
+              <a class="btn btn-primary" href="/contatti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>Richiedi una torta su misura</a>
+              <a class="btn btn-outline" href={waLink('ho visto la torta per gli 80 anni di Stephan Remmler e vorrei una torta celebrativa su misura')} target="_blank" rel="noopener noreferrer">Chiedi su WhatsApp</a>
+            </div>
+          </div>
+
+          <div class="collage-col">
+            <div style="position:relative">
+              <button
+                type="button"
+                class="collage"
+                data-zoom
+                data-zoom-src={torta80Remmler.src}
+                data-zoom-alt={torta80Remmler.alt}
+                data-zoom-title="La torta per gli 80 anni di Stephan Remmler"
+                data-zoom-text="Progettata e realizzata da Lucia Garro, su commissione del figlio Jonni Remmler."
+                aria-label="Apri a schermo intero la foto di Stephan Remmler con la torta dei suoi 80 anni"
+              >
+                <span class="zoom-hint" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M11 8.5v5M8.5 11h5"/></svg>Clicca per ingrandire</span>
+                <img src={torta80Remmler.src} alt={torta80Remmler.alt} width="1122" height="1402" loading="eager" decoding="async" />
+              </button>
+              <span class="remmler-badge" aria-hidden="true"><span><strong>80</strong>anni</span></span>
+            </div>
+            <p class="collage-note">Stephan Remmler con la sua torta “palco” per gli 80 anni</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
+
+      <section class="birthdays" id="compleanni-cammarota-palmieri" aria-labelledby="compleanni-title">
+        <div class="wrap birthday-grid">
+          <div class="collage-col">
+          <button
+            type="button"
+            class="collage"
+            data-zoom
+            data-zoom-src={collageCompleanni.src}
+            data-zoom-alt={collageCompleanni.alt}
+            data-zoom-title="I compleanni dei figli di Alessia Cammarota e Aldo Palmieri"
+            data-zoom-text="Torte progettate e realizzate da Lucia Garro, cake designer."
+            aria-label="Apri a schermo intero il collage delle torte di compleanno"
+          >
+            <span class="zoom-hint" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M11 8.5v5M8.5 11h5"/></svg>Clicca per ingrandire</span>
+            <img src={collageCompleanni.src} alt={collageCompleanni.alt} width="1536" height="1024" loading="lazy" decoding="async" />
+          </button>
+          <p class="collage-note">Alcuni dei compleanni festeggiati negli anni con le torte di Lucia</p>
+          </div>
+
+          <div class="story">
+            <span class="eyebrow">Evento VIP</span>
+            <h2 id="compleanni-title">I compleanni dei figli di <em>Alessia Cammarota e Aldo Palmieri</em></h2>
+            <p class="lead">Da anni, a ogni compleanno dei loro bambini, Alessia e Aldo affidano a Lucia la torta della festa.</p>
+            <p>Per ogni festa Lucia segue la torta <strong>dall’idea alla consegna</strong>. Insieme ai genitori sceglie il tema preferito dal bambino, disegna il progetto e lo coordina con palloncini, colori e allestimento. Poi <strong>modella a mano</strong> personaggi, scritte e dettagli in pasta di zucchero.</p>
+
+            <blockquote class="quote-box">
+              <p><strong>Alessia Cammarota e Aldo Palmieri</strong> sono una delle coppie più amate nate a <strong>“Uomini e Donne”</strong>. Oggi sono una famiglia tra le più seguite sui social: le loro feste e i momenti con i figli arrivano ogni giorno a una community di migliaia di persone.</p>
+            </blockquote>
+
+            <p>Essere scelta, anno dopo anno, da una famiglia così seguita è per Lucia un grande riconoscimento: le sue torte non devono solo essere buone, ma anche <strong>stupire i piccoli festeggiati</strong> ed essere protagoniste delle foto condivise con tutti i follower.</p>
+
+            <div class="facts-box">
+              <h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16M6 20v-6h12v6M8 14v-4h8v4M12 10V6"/><path d="M12 6c-1.2-1-1.2-2.4 0-3.2 1.2.8 1.2 2.2 0 3.2Z"/></svg>Le torte realizzate</h3>
+              <ul class="cake-list">
+                {torteCompleanno.map((torta) => (
+                  <li>
+                    <span class="fact-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></svg></span>
+                    <div><strong>{torta.titolo}</strong><span>{torta.testo}</span></div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="story-actions">
+              <a class="btn btn-primary" href="/contatti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>Progetta la tua torta</a>
+              <a class="btn btn-outline" href={waLink('ho visto le torte di compleanno dei figli di Alessia Cammarota e Aldo Palmieri e vorrei una torta a tema per mio figlio')} target="_blank" rel="noopener noreferrer">Chiedi su WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
 
       <section class="event" id="battesimo-alessio" aria-labelledby="battesimo-title">
         <div class="wrap event-grid">
@@ -514,6 +771,55 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
         </div>
       </section>
 
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
+
+      <section class="wedding" id="trend-wedding-2024" aria-labelledby="wedding-title">
+        <div class="wrap wedding-grid">
+          <div class="story">
+            <span class="eyebrow">Evento sposi</span>
+            <h2 id="wedding-title">Trend Wedding 2024 con <em>Cira Lombardo</em></h2>
+            <p class="lead">Lucia, con il suo laboratorio Berry Cakes di Siracusa, è stata scelta per firmare la torta nuziale di uno degli eventi wedding più attesi in Sicilia.</p>
+            <p>Il <strong>Trend Wedding 2024</strong> è l’evento dedicato alle <strong>nuove tendenze e alle collezioni per la stagione nuziale</strong>, che riunisce i migliori professionisti del settore: abiti, fiori, allestimenti e, naturalmente, la torta. Lucia ha realizzato una <strong>wedding cake a più piani</strong> bianca, decorata con fiori in zucchero nei toni del rosa e del fucsia, coordinata con l’arco floreale della scenografia.</p>
+
+            <blockquote class="quote-box">
+              <p><strong>Cira Lombardo</strong> è una delle wedding planner ed event creator più note d’Italia, specializzata in matrimoni di lusso ed eventi su misura. Con oltre 500 matrimoni realizzati, è celebre per le sue scenografie spettacolari e per la capacità di trasformare la storia degli sposi in progetti creativi altamente personalizzati.</p>
+            </blockquote>
+
+            <p>Essere al fianco di Cira Lombardo, insieme a partner come <strong>Gianni Di Bella</strong> e <strong>Filly Auteri Floral Designer</strong>, è un riconoscimento importante: la conferma che le torte di Lucia sono all’altezza dei matrimoni più esclusivi. La partecipazione è certificata da un <strong>attestato ufficiale</strong> firmato da Cira Lombardo.</p>
+
+            <div class="facts-box">
+              <h3><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="5.5"/><path d="m8.5 13.3-1.5 7.7 5-2.6 5 2.6-1.5-7.7"/></svg>Dettagli dell’attestato</h3>
+              <dl>
+                {dettagliTrendWedding.map((d) => (
+                  <Fragment><dt>{d.etichetta}</dt><dd>{d.valore}</dd></Fragment>
+                ))}
+              </dl>
+            </div>
+
+            <div class="story-actions">
+              <a class="btn btn-primary" href="/torte-artistiche">Scopri le torte nuziali</a>
+              <a class="btn btn-outline" href={waLink('ho visto la torta del Trend Wedding 2024 e vorrei informazioni per la torta del mio matrimonio')} target="_blank" rel="noopener noreferrer">Chiedi su WhatsApp</a>
+            </div>
+          </div>
+
+          <button
+            type="button"
+            class="collage"
+            data-zoom
+            data-zoom-src={trendWedding.src}
+            data-zoom-alt={trendWedding.alt}
+            data-zoom-title="Berry Cakes al Trend Wedding 2024"
+            data-zoom-text="La torta nuziale di Lucia Garro, gli sposi, Cira Lombardo e l’attestato di partecipazione."
+            aria-label="Apri a schermo intero le foto del Trend Wedding 2024 e l’attestato"
+          >
+            <span class="zoom-hint" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="m20 20-4.2-4.2M11 8.5v5M8.5 11h5"/></svg>Clicca per ingrandire</span>
+            <img src={trendWedding.src} alt={trendWedding.alt} width="1122" height="1402" loading="lazy" decoding="async" />
+          </button>
+        </div>
+      </section>
+
+      <div class="section-divider" aria-hidden="true"><span><svg viewBox="0 0 46 22"><path d="M23 11c-6-8-17-8-17 0s11 8 17 0Zm0 0c6-8 17-8 17 0s-11 8-17 0Zm0 0-7 9m7-9 7 9"/></svg></span></div>
+
       <section class="collab" aria-labelledby="collab-title">
         <div class="wrap">
           <div class="section-head">
@@ -577,6 +883,21 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
       <div class="lb-caption" aria-live="polite">
         <h3 data-lb-title>{fotoBattesimo[0].titolo}</h3>
         <p data-lb-text>{fotoBattesimo[0].didascalia}</p>
+      </div>
+    </dialog>
+
+    <!-- lightbox per le singole immagini (collage compleanni, Trend Wedding): contenuto impostato dallo script -->
+    <dialog class="lightbox" data-zoom-lightbox aria-label="Immagine a schermo intero">
+      <div class="lb-top">
+        <span class="lb-counter">VIP e collaborazioni</span>
+        <button type="button" class="lb-close" data-zoom-close aria-label="Chiudi">
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <figure class="lb-single" data-zoom-figure><img data-zoom-img alt="" decoding="async" /></figure>
+      <div class="lb-caption">
+        <h3 data-zoom-title-out></h3>
+        <p data-zoom-text-out></p>
       </div>
     </dialog>
 
@@ -759,6 +1080,35 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
           if (!book.contains(document.activeElement)) return;
           if (event.key === 'ArrowRight') { event.preventDefault(); bookSlider.goTo(bookSlider.current + 1); }
           if (event.key === 'ArrowLeft') { event.preventDefault(); bookSlider.goTo(bookSlider.current - 1); }
+        });
+      }
+
+      /* ---------- singole immagini a schermo intero (collage compleanni, Trend Wedding) ---------- */
+      const zoomLightbox = document.querySelector('[data-zoom-lightbox]');
+
+      if (zoomLightbox instanceof HTMLDialogElement) {
+        const zoomImg = zoomLightbox.querySelector('[data-zoom-img]');
+        const zoomTitle = zoomLightbox.querySelector('[data-zoom-title-out]');
+        const zoomText = zoomLightbox.querySelector('[data-zoom-text-out]');
+
+        document.querySelectorAll('[data-zoom]').forEach((trigger) => {
+          trigger.addEventListener('click', () => {
+            if (zoomImg instanceof HTMLImageElement) {
+              zoomImg.src = trigger.getAttribute('data-zoom-src') ?? '';
+              zoomImg.alt = trigger.getAttribute('data-zoom-alt') ?? '';
+            }
+            if (zoomTitle) zoomTitle.textContent = trigger.getAttribute('data-zoom-title') ?? '';
+            if (zoomText) zoomText.textContent = trigger.getAttribute('data-zoom-text') ?? '';
+            zoomLightbox.showModal();
+            document.body.style.overflow = 'hidden';
+          });
+        });
+
+        zoomLightbox.addEventListener('close', () => { document.body.style.overflow = ''; });
+        zoomLightbox.querySelector('[data-zoom-close]')?.addEventListener('click', () => zoomLightbox.close());
+        // clic sullo sfondo scuro (fuori dalla foto) per chiudere
+        zoomLightbox.addEventListener('click', (event) => {
+          if (event.target instanceof HTMLElement && event.target.hasAttribute('data-zoom-figure')) zoomLightbox.close();
         });
       }
     </script>
