@@ -1,0 +1,1325 @@
+---
+/*
+  Pagina prodotto di ogni torta di laurea: /torte-di-laurea/<slug>
+  Generata da src/data/torte-laurea.ts (una pagina per torta).
+  Non è nel menu: si raggiunge dal catalogo /torte-di-laurea.
+*/
+import { torteLaurea, mediaVoti, nomeCompleto, slugProdotto, urlProdotto, type TortaLaurea } from '../../data/torte-laurea';
+
+export function getStaticPaths() {
+  return torteLaurea.map((torta, indice) => ({ params: { slug: slugProdotto(torta) }, props: { torta, indice } }));
+}
+
+const { torta, indice } = Astro.props as { torta: TortaLaurea; indice: number };
+// nome completo del prodotto, es. "Torta di laurea Essenza del Sapere"
+const nome = nomeCompleto(torta);
+// lo stesso nome dentro una frase: "la torta di laurea Essenza del Sapere"
+const nomeInFrase = nome.replace(/^Torta/, "torta");
+
+const siteUrl = 'https://www.ledolcimeravigliedigarrolucia.com';
+const canonicalUrl = `${siteUrl}${urlProdotto(torta)}`;
+const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
+const whatsappBase = 'https://wa.me/393519425808?text=';
+// title ~60 caratteri: prodotto + brand + città; description dedicata (120-160 caratteri) dai dati della torta
+const seoTitle = `${nome} | Lucia Garro Siracusa`;
+const seoDescription = torta.seoDescription;
+const fotoSocial = torta.foto[torta.foto.length - 1];
+const ogImage = `${siteUrl}${fotoSocial.src}`;
+const ogImageAlt = `${nome} – ${fotoSocial.label.toLowerCase()}, realizzata da Lucia Garro a Siracusa`;
+
+const waLink = whatsappBase + encodeURIComponent(`Ciao Lucia, vorrei un preventivo per la ${nomeInFrase}`);
+const waGenerico = waLink;
+
+// recensioni: media, conteggio e distribuzione dei voti
+const recensioni = [...torta.recensioni].sort((a, b) => b.data.localeCompare(a.data));
+const media = mediaVoti(recensioni);
+const totale = recensioni.length;
+const distribuzione = [5, 4, 3, 2, 1].map((voto) => {
+  const n = recensioni.filter((r) => r.voto === voto).length;
+  return { voto, n, perc: totale ? Math.round((n / totale) * 100) : 0 };
+});
+const formatData = (iso: string) => new Date(`${iso}T12:00:00`).toLocaleDateString('it-IT', { day: 'numeric', month: 'long', year: 'numeric' });
+const iniziali = (nome: string) => nome.split(/\s+/).filter(Boolean).slice(0, 2).map((p) => p[0].toUpperCase()).join('');
+
+// torte vicine: precedente/successiva e 3 correlate
+const n = torteLaurea.length;
+const precedente = torteLaurea[(indice - 1 + n) % n];
+const successiva = torteLaurea[(indice + 1) % n];
+const correlate = [1, 2, 3].map((k) => torteLaurea[(indice + k) % n]);
+
+const personalizzazioni = [
+  'Nome del laureato o della laureata e dedica',
+  'Corso di laurea, data e simboli della facoltà',
+  'Colori coordinati alla festa (il rosso della laurea o altre tonalità)',
+  'Numero di piani e dimensioni in base agli invitati',
+  'Torta vera da gustare oppure scenografica (finta)',
+];
+
+const faq = [
+  { d: 'Posso modificare il modello?', r: 'Certo: ogni torta del catalogo è un punto di partenza. Colori, decorazioni, simboli del corso, dedica e numero di piani si adattano alla tua festa.' },
+  { d: 'La torta è vera o finta?', r: 'Puoi scegliere: vera, da gustare, oppure scenografica (dummy cake), perfetta come centrotavola e per le foto. Si può anche abbinare una torta scenografica a una torta vera da servire agli ospiti.' },
+  { d: 'Quanto costa?', r: 'Il prezzo dipende da dimensioni, numero di piani e personalizzazioni. Contatta Lucia con i dettagli della festa per ricevere un preventivo su misura, gratuito e senza impegno.' },
+  { d: 'Con quanto anticipo devo ordinare?', r: 'Prima possibile: le torte artistiche sono realizzate a mano e il calendario si riempie in fretta, soprattutto nei periodi delle sessioni di laurea. Scrivi a Lucia per verificare la disponibilità per la tua data.' },
+];
+
+// l'attività (stessi dati della homepage): collega il prodotto al laboratorio di Siracusa per la ricerca locale
+const attivita = {
+  '@type': 'Bakery',
+  '@id': `${siteUrl}/#bakery`,
+  name: 'Le Dolci Meraviglie di Lucy Garro',
+  url: `${siteUrl}/`,
+  telephone: '+39 351 942 5808',
+  address: { '@type': 'PostalAddress', streetAddress: 'Viale Zecchino 72A', addressLocality: 'Siracusa', addressCountry: 'IT' },
+};
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    '@id': `${canonicalUrl}#prodotto`,
+    name: `${nome}`,
+    url: canonicalUrl,
+    sku: slugProdotto(torta),
+    description: [torta.descrizione, ...torta.descrizioneLunga].join(' ').replace(/<[^>]+>/g, ''),
+    image: torta.foto.map((foto) => `${siteUrl}${foto.src}`),
+    category: 'Torte di laurea',
+    brand: { '@type': 'Brand', name: 'Le Dolci Meraviglie di Lucy Garro' },
+    manufacturer: attivita,
+    additionalProperty: [
+      { '@type': 'PropertyValue', name: 'Forma', value: torta.forma },
+      { '@type': 'PropertyValue', name: 'Corso di laurea', value: torta.corso },
+      { '@type': 'PropertyValue', name: 'Personalizzazione', value: 'Nome, dedica, corso di laurea, data, colori e numero di piani' },
+      { '@type': 'PropertyValue', name: 'Tipologia', value: 'Torta vera da gustare oppure scenografica' },
+    ],
+    ...(totale > 0 && {
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: media, reviewCount: totale, bestRating: 5, worstRating: 1 },
+      review: recensioni.map((r) => ({
+        '@type': 'Review',
+        author: { '@type': 'Person', name: r.nome },
+        datePublished: r.data,
+        reviewBody: r.testo,
+        reviewRating: { '@type': 'Rating', ratingValue: r.voto, bestRating: 5, worstRating: 1 },
+      })),
+    }),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+      { '@type': 'ListItem', position: 2, name: 'Torte artistiche', item: `${siteUrl}/torte-artistiche` },
+      { '@type': 'ListItem', position: 3, name: 'Torte di laurea', item: `${siteUrl}/torte-di-laurea` },
+      { '@type': 'ListItem', position: 4, name: nome, item: canonicalUrl },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faq.map((f) => ({ '@type': 'Question', name: f.d, acceptedAnswer: { '@type': 'Answer', text: f.r } })),
+  },
+];
+---
+
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{seoTitle}</title>
+<meta name="description" content={seoDescription} />
+<meta name="robots" content="index,follow,max-image-preview:large" />
+<meta name="author" content="Lucia Garro" />
+<meta name="geo.region" content="IT-SR" />
+<meta name="geo.placename" content="Siracusa" />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="it" href={canonicalUrl} /><link rel="icon" type="image/png" href="/favicon.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<meta property="og:locale" content="it_IT" />
+<meta property="og:type" content="product" />
+<meta property="og:site_name" content="Le Dolci Meraviglie di Lucy Garro" />
+<meta property="og:title" content={seoTitle} />
+<meta property="og:description" content={seoDescription} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:secure_url" content={ogImage} />
+<meta property="og:image:type" content="image/webp" />
+<meta property="og:image:alt" content={ogImageAlt} />
+<meta property="product:brand" content="Le Dolci Meraviglie di Lucy Garro" />
+<meta property="product:category" content="Torte di laurea" />
+<meta property="product:condition" content="new" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={seoTitle} />
+<meta name="twitter:description" content={seoDescription} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <style>
+      :root {
+        --cream: #fffaf6;
+        --ink: #3b1f18;
+        --text: #4a3028;
+        --muted: #7a5a50;
+        --rose: #a9505e;
+        --rose-soft: #f4cfd2;
+        --rose-line: #c98a93;
+        --gold: #d8b98a;
+        --gold-dark: #c9a46b;
+        --line: #eadfd5;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: var(--ink); background: var(--cream); line-height: 1.6; }
+      a { color: inherit; text-decoration: none; }
+      img { max-width: 100%; }
+      .wrap { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+      h1, h2, h3 { font-family: Georgia, serif; line-height: 1.12; margin-top: 0; color: var(--ink); }
+      section { padding: 88px 0; }
+
+      /* ---------- divisore tra le sezioni (fiocco come nel logo) ---------- */
+      .section-divider{position:relative;height:0;display:flex;justify-content:center;pointer-events:none;z-index:1}
+      .section-divider span{display:flex;align-items:center;gap:14px;width:min(560px,82%);transform:translateY(-50%)}
+      .section-divider span::before,.section-divider span::after{content:"";flex:1;height:1px}
+      .section-divider span::before{background:linear-gradient(90deg,transparent,#d8b98a 70%,#c98a93)}
+      .section-divider span::after{background:linear-gradient(90deg,#c98a93,#d8b98a 30%,transparent)}
+      .section-divider svg{width:46px;height:22px;flex:0 0 auto;fill:none;stroke:#a9505e;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+
+      /* ---------- icone e decori condivisi ---------- */
+      .ico{width:20px;height:20px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+      .ribbon{display:block;width:120px;height:12px;fill:none;stroke:var(--rose-line);stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+      .eyebrow{
+        position:relative;display:inline-block;margin:0 22px;padding:6px 18px;border-radius:999px;
+        background:var(--rose-soft);color:#5a2a2a;font-family:Georgia,serif;font-size:.86rem;letter-spacing:.12em;text-transform:uppercase
+      }
+      .eyebrow::before,.eyebrow::after{content:"";position:absolute;top:50%;width:12px;height:12px;transform:translateY(-50%)}
+      .eyebrow::before{left:-20px;background:
+        linear-gradient(-20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 0/100% 50% no-repeat,
+        linear-gradient(#c97c86,#c97c86) 0 60%/100% 1.5px no-repeat,
+        linear-gradient(20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 100%/100% 50% no-repeat}
+      .eyebrow::after{right:-20px;background:
+        linear-gradient(20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 0/100% 50% no-repeat,
+        linear-gradient(#c97c86,#c97c86) 0 60%/100% 1.5px no-repeat,
+        linear-gradient(-20deg,transparent 45%,#c97c86 45% 58%,transparent 58%) 0 100%/100% 50% no-repeat}
+      .swash{position:relative;display:inline-block}
+      .swash svg{position:absolute;left:10%;bottom:-.18em;width:80%;height:.3em;fill:none;stroke:var(--rose-line);stroke-width:2;stroke-linecap:round}
+      .section-head{max-width:720px;margin:0 auto 48px;text-align:center}
+      .section-head h2{font-size:clamp(2.1rem,4vw,3.3rem);margin:16px 0 20px}
+      .section-head h2 em{font-style:italic;color:var(--rose)}
+      .section-head p{margin:0 auto;color:var(--text);max-width:620px}
+
+      /* ---------- bottoni ---------- */
+      .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:14px 26px;font-weight:600;transition:transform .2s ease,box-shadow .2s ease,background .2s ease}
+      .btn:hover{transform:translateY(-1px)}
+      .btn-primary{background:var(--rose);color:#fff;box-shadow:0 10px 24px rgba(169,80,94,.25)}
+      .btn-outline{background:transparent;border:1.5px solid var(--rose);color:var(--ink)}
+      .btn-outline:hover{background:#fff}
+      .btn-light{background:#fff;color:var(--rose);box-shadow:0 10px 24px rgba(60,20,20,.18)}
+
+      /* ---------- header (come nelle altre pagine) ---------- */
+      header{position:sticky;top:0;z-index:20;background:rgba(255,250,245,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+      .nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+      .brand{display:inline-flex;flex-direction:column;align-items:center;font-family:Georgia,serif;font-weight:700;color:var(--ink);font-size:1.4rem;line-height:1.15}
+      .brand-text{white-space:nowrap}
+      .brand-text span{color:var(--rose)}
+      .brand-ribbon{width:min(180px,80%);height:14px;margin-top:4px;fill:none;stroke:var(--rose);stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+      .nav>nav{display:flex;gap:clamp(14px,2vw,26px);font-size:.95rem}
+      .nav>nav a{font-family:Georgia,serif;color:var(--ink);white-space:nowrap}
+      .nav>nav a:hover,.nav>nav a[aria-current="page"]{color:var(--rose)}
+      .nav>nav a[aria-current="page"]{text-decoration:underline;text-decoration-color:var(--rose-line);text-underline-offset:6px}
+      .header-etsy{padding:12px 20px;white-space:nowrap}
+      @media (max-width:1180px){.brand{font-size:1.15rem}.header-etsy{font-size:.9rem;padding:11px 16px}}
+      @media (min-width:901px) and (max-width:1100px){.nav{gap:14px}.brand{font-size:1.02rem}.nav>nav{gap:14px}.nav>nav a{font-size:.88rem}.header-etsy{font-size:.84rem;padding:10px 14px}.header-etsy .ico{display:none}}
+      /* con 7 voci di menu: header un po' più largo e, fino a 1480px, bottone Etsy solo icona (testo come tooltip) */
+      .nav.wrap{width:min(1440px,calc(100% - 32px))}
+      @media (min-width:901px) and (max-width:1480px){.header-etsy{width:46px;height:46px;flex:0 0 46px;padding:0;gap:0;font-size:0}.header-etsy .ico{display:block;width:20px;height:20px}}
+      @media (min-width:901px) and (max-width:980px){.nav,.nav>nav{gap:10px}.nav>nav a{font-size:.82rem}.brand{font-size:.95rem}}
+
+      .mobile-menu-toggle{
+        display:none;width:46px;height:46px;flex:0 0 46px;align-items:center;justify-content:center;
+        padding:0;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);
+        cursor:pointer;box-shadow:0 8px 22px rgba(72,48,34,.08)
+      }
+      .mobile-menu-toggle span,.mobile-menu-toggle span::before,.mobile-menu-toggle span::after{
+        display:block;width:22px;height:2px;border-radius:2px;background:currentColor;transition:transform .2s ease,opacity .2s ease
+      }
+      .mobile-menu-toggle span{position:relative}
+      .mobile-menu-toggle span::before,.mobile-menu-toggle span::after{content:"";position:absolute;left:0}
+      .mobile-menu-toggle span::before{top:-7px}.mobile-menu-toggle span::after{top:7px}
+      .mobile-menu-toggle[aria-expanded="true"] span{background:transparent}
+      .mobile-menu-toggle[aria-expanded="true"] span::before{top:0;transform:rotate(45deg)}
+      .mobile-menu-toggle[aria-expanded="true"] span::after{top:0;transform:rotate(-45deg)}
+      .mobile-nav-panel{display:none}
+
+      /* ---------- intro ---------- */
+      .cake-hero{
+        position:relative;overflow:hidden;padding:72px 0 88px;
+        background:linear-gradient(100deg,#fdf6f1 0%,#fbeee8 45%,#f6dfdc 100%)
+      }
+      .cake-hero::before{content:"";position:absolute;width:460px;height:460px;left:-160px;top:-180px;border-radius:50%;background:radial-gradient(circle,rgba(244,207,210,.7),transparent 70%);pointer-events:none}
+      .hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:56px;align-items:center}
+      .hero-copy .eyebrow{margin-left:22px}
+      .hero-copy h1{font-size:clamp(2.4rem,4.6vw,4rem);margin:22px 0 24px;letter-spacing:-.01em}
+      .hero-copy h1 em{font-style:italic;color:var(--rose)}
+      .hero-copy h1 .swash svg{left:0;width:100%}
+      .hero-copy .lead{font-family:Georgia,serif;font-style:italic;font-size:1.18rem;line-height:1.65;color:var(--ink);margin:0 0 16px}
+      .hero-copy p{color:var(--text);margin:0 0 16px;font-size:1.02rem;line-height:1.75}
+      .hero-copy p strong{color:var(--ink)}
+      .hero-quote{
+        margin:24px 0 0;padding:20px 24px 20px 28px;border-radius:20px;
+        background:rgba(255,255,255,.7);border:1px solid #f1d6d6;border-left:4px solid var(--rose);
+        font-family:Georgia,serif;font-size:1.04rem;line-height:1.65;color:var(--ink)
+      }
+      .hero-quote a{color:var(--rose);text-decoration:underline;text-underline-offset:3px}
+
+      .hero-visual{position:relative;margin:0;isolation:isolate;max-width:460px;justify-self:center;width:100%}
+      .framed{position:relative;padding:12px;border-radius:28px;background:#fff;box-shadow:0 30px 70px rgba(120,70,60,.18)}
+      .framed::before{content:"";position:absolute;inset:-12px;border:1.5px solid var(--gold);border-radius:36px;z-index:-1;pointer-events:none}
+      .framed img{display:block;width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:18px}
+      .hero-badge{
+        position:absolute;left:-26px;bottom:34px;z-index:2;display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:18px;
+        background:#fff;box-shadow:0 16px 36px rgba(120,70,60,.2);font-family:Georgia,serif;font-size:.92rem;line-height:1.25
+      }
+      .hero-badge .ico{width:26px;height:26px;color:var(--gold-dark)}
+      .hero-badge small{display:block;font-family:Inter,system-ui,sans-serif;font-size:.74rem;color:var(--muted)}
+
+      .skills{list-style:none;padding:0;margin:30px 0 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+      .skill{display:flex;gap:14px;align-items:flex-start;padding:16px;border-radius:18px;background:rgba(255,255,255,.85);border:2px solid #fff;box-shadow:0 10px 28px rgba(150,90,90,.1)}
+      .skill-icon{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#b9606d,#a9505e);box-shadow:0 0 0 5px #fbe6e6}
+      .skill-icon svg{width:20px;height:20px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+      .skill strong{display:block;font-family:Georgia,serif;font-size:1rem;line-height:1.3;margin-bottom:3px;color:var(--ink)}
+      .skill span{display:block;color:var(--muted);font-size:.86rem;line-height:1.5}
+
+      /* ---------- catalogo torte ---------- */
+      .cakes{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .cakes + .cakes{padding-top:24px}
+      .cake-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+      .cake-card{
+        min-width:0;display:flex;flex-direction:column;overflow:hidden;border-radius:24px;background:#fff;border:2px solid #fff;
+        box-shadow:0 10px 28px rgba(150,90,90,.12);transition:transform .25s ease,box-shadow .25s ease
+      }
+      .cake-card:hover{transform:translateY(-6px);box-shadow:0 22px 46px rgba(150,90,90,.22)}
+
+      .cake-gallery{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:22px 22px 0 0;
+        background:radial-gradient(circle at 50% 40%,#fff 0%,#f8ece8 75%)}
+      .cake-gallery img{
+        position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:cover;
+        opacity:0;transform:scale(1.04);transition:opacity 1s ease,transform 6s ease
+      }
+      .cake-gallery img.fit-contain{object-fit:contain;padding:10px}
+      .cake-gallery img.is-active{opacity:1;transform:scale(1)}
+      .cake-card:hover .cake-gallery img.is-active{transform:scale(1.04)}
+      .cake-gallery .category{
+        position:absolute;left:12px;top:12px;z-index:2;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.93);
+        color:var(--rose);font-family:Georgia,serif;font-size:.76rem;letter-spacing:.06em;text-transform:uppercase;box-shadow:0 4px 12px rgba(80,40,40,.12)
+      }
+      .photo-label{
+        position:absolute;right:12px;top:12px;z-index:2;display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;
+        background:rgba(59,31,24,.62);backdrop-filter:blur(6px);color:#fff;font-size:.76rem;font-weight:600;letter-spacing:.02em
+      }
+      .photo-label .ico{width:14px;height:14px}
+      .gallery-dots{
+        position:absolute;left:50%;bottom:14px;z-index:2;transform:translateX(-50%);display:flex;gap:6px;padding:6px 8px;border-radius:999px;
+        background:rgba(255,255,255,.88);box-shadow:0 6px 16px rgba(80,40,40,.15)
+      }
+      .gallery-dots button{
+        width:9px;height:9px;padding:0;border:0;border-radius:999px;background:#e3c4c4;cursor:pointer;transition:width .3s ease,background .3s ease
+      }
+      .gallery-dots button[aria-pressed="true"]{width:24px;background:var(--rose)}
+      .gallery-dots button:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+      .gallery-progress{position:absolute;left:0;bottom:0;z-index:2;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--rose))}
+      .cake-gallery.is-running .gallery-progress{animation:progress var(--swap-ms,4000ms) linear infinite}
+      @keyframes progress{from{width:0}to{width:100%}}
+
+      .cake-body{display:flex;flex:1;flex-direction:column;align-items:center;text-align:center;padding:22px 22px 24px;background:linear-gradient(180deg,#fff 0%,#fdf3f1 100%)}
+      .cake-body h3{font-size:1.32rem;line-height:1.25;margin:0}
+      .cake-body .ribbon{margin:10px 0 12px}
+      .cake-body p{color:var(--text);font-size:.93rem;line-height:1.6;margin:0 0 20px}
+      .cake-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px dashed #ecd2d2}
+      .cake-actions .btn{width:100%;padding:11px 18px;font-size:.9rem}
+      .cake-actions .ico{width:17px;height:17px}
+      .section-more{display:flex;justify-content:center;margin-top:44px}
+      .section-more .btn{padding:15px 30px}
+      .section-more .btn .ico{transition:transform .2s ease}
+      .section-more .btn:hover .ico{transform:translateX(4px)}
+
+      /* ---------- CTA finale ---------- */
+      .final{padding:88px 0}
+      .cta{
+        position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:28px;
+        padding:52px 56px;border-radius:32px;color:#fff;
+        background:radial-gradient(ellipse 60% 120% at 100% 0%,rgba(255,255,255,.18),transparent 60%),linear-gradient(120deg,#b9606d 0%,#a9505e 55%,#93404e 100%);
+        box-shadow:0 26px 60px rgba(169,80,94,.3)
+      }
+      .cta::before{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.35);border-radius:24px;pointer-events:none}
+      .cta>div:first-child{min-width:0;position:relative}
+      .cta h2{color:#fff;margin:0 0 8px;font-size:clamp(1.9rem,3.6vw,2.9rem)}
+      .cta p{margin:0;opacity:.92;max-width:560px}
+      .cta .ribbon{stroke:rgba(255,255,255,.7);margin:0 0 14px}
+      .cta-actions{display:flex;flex-wrap:wrap;gap:12px;position:relative}
+      .cta .btn{white-space:nowrap}
+      .cta .btn-ghost{border:1.5px solid rgba(255,255,255,.7);color:#fff}
+      .cta .btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+      footer{padding:36px 0 56px;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line)}
+
+      .whatsapp-floating{
+        position:fixed;right:20px;bottom:20px;z-index:30;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:999px;
+        background:#25d366;color:#fff;font-weight:700;font-size:.92rem;box-shadow:0 12px 28px rgba(37,211,102,.35);transition:transform .2s ease
+      }
+      .whatsapp-floating:hover{transform:translateY(-2px)}
+      .whatsapp-floating svg{width:20px;height:20px;fill:#fff}
+
+      /* ---------- responsive ---------- */
+      @media (max-width:900px){
+        section{padding:68px 0}
+        .nav{min-height:76px;gap:14px}
+        .nav>nav,.nav>.btn-primary{display:none}
+        .brand{align-items:flex-start;font-size:clamp(.95rem,4.2vw,1.25rem);min-width:0}
+        .brand-text{white-space:normal}
+        .brand-ribbon{display:none}
+        .mobile-menu-toggle{display:inline-flex;margin-left:auto}
+        .mobile-nav-panel{
+          display:block;position:absolute;top:calc(100% + 8px);left:16px;right:16px;padding:12px;
+          border:1px solid var(--line);border-radius:22px;background:rgba(255,250,245,.99);
+          box-shadow:0 22px 54px rgba(72,48,34,.18);transform:translateY(-8px);opacity:0;
+          visibility:hidden;pointer-events:none;transition:opacity .2s ease,transform .2s ease,visibility .2s ease
+        }
+        .mobile-nav-panel.is-open{transform:translateY(0);opacity:1;visibility:visible;pointer-events:auto}
+        .mobile-nav-panel nav{display:grid;gap:4px}
+        .mobile-nav-panel nav a{display:block;padding:13px 14px;border-radius:14px;font-size:1rem;font-weight:700}
+        .mobile-nav-panel nav a:hover,.mobile-nav-panel nav a:focus-visible{background:#f7e1dc;outline:none}
+        .mobile-nav-panel .mobile-etsy{display:inline-flex;width:100%;margin-top:10px}
+
+        .cake-hero{padding:44px 0 64px}
+        .hero-grid{grid-template-columns:1fr;gap:48px}
+        .hero-visual{max-width:400px;width:calc(100% - 28px)}
+        .cake-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+        .cta{flex-direction:column;align-items:flex-start;padding:40px 32px}
+      }
+      @media (max-width:600px){
+        .skills{grid-template-columns:1fr}
+        .hero-badge{left:-8px;bottom:20px}
+        .cake-grid{grid-template-columns:1fr}
+        .cake-actions{flex-direction:row}
+        .cake-actions .btn{width:auto;flex:1 1 0}
+        .cta{padding:36px 24px}
+        .cta-actions,.cta-actions .btn{width:100%}
+        .whatsapp-floating span{display:none}
+        .whatsapp-floating{padding:14px}
+      }
+
+      /* ---------- card cliccabili ---------- */
+      .cake-card{cursor:pointer}
+      .cake-card.is-source{visibility:hidden}
+      .card-open{all:unset;cursor:pointer}
+      .card-open:focus-visible{outline:2px solid var(--rose);outline-offset:4px;border-radius:6px}
+      .zoom-cue{
+        position:absolute;left:50%;top:50%;z-index:2;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;
+        background:rgba(255,255,255,.94);color:var(--rose);font-family:Georgia,serif;font-size:.92rem;white-space:nowrap;
+        box-shadow:0 10px 26px rgba(80,40,40,.2);opacity:0;transform:translate(-50%,-35%);transition:opacity .3s ease,transform .3s ease;pointer-events:none
+      }
+      .zoom-cue .ico{width:18px;height:18px}
+      .cake-card:hover .zoom-cue{opacity:1;transform:translate(-50%,-50%)}
+      @media (hover:none){
+        .zoom-cue{left:auto;top:auto;right:12px;bottom:12px;padding:9px;opacity:1;transform:none}
+        .zoom-cue span{display:none}
+      }
+
+      @media (prefers-reduced-motion:reduce){
+        *{transition:none !important}
+        .gallery-progress{display:none}
+      }
+      /* ---------- pagina torte di laurea ---------- */
+      .breadcrumb{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 18px;font-size:.86rem;color:var(--muted)}
+      .breadcrumb a{color:var(--rose);text-decoration:underline;text-decoration-color:var(--rose-line);text-underline-offset:3px}
+      .breadcrumb [aria-current]{color:var(--ink)}
+      .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+      .product-course{display:block;margin:0 0 8px;font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+      .product-specs{list-style:none;margin:0 0 16px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+      .product-specs li{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#fbe6e6;color:#5a2a2a;font-size:.8rem;font-weight:600}
+      .product-specs .ico{width:14px;height:14px}
+      .product-price{display:flex;align-items:baseline;justify-content:center;gap:8px}
+      .product-price span{font-size:.78rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+      .product-price strong{font-family:Georgia,serif;font-size:1.15rem;color:var(--rose)}
+      .product-card .cake-actions{margin-top:16px}
+      .product-card .cake-body p{margin-bottom:16px}
+      .card-rating{display:inline-flex;align-items:center;gap:6px;margin-top:8px;font-size:.84rem;font-weight:600;color:var(--muted)}
+      .card-stars{position:relative;display:inline-block;color:#e8d3c4;letter-spacing:2px}
+      .card-stars::before{content:"★★★★★";position:absolute;inset:0;width:calc(var(--voto) / 5 * 100%);overflow:hidden;color:var(--gold-dark);letter-spacing:2px}
+
+      .steps{background:linear-gradient(180deg,#fffaf6 0%,#fbf3ef 100%)}
+      .steps-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+      .step{padding:34px 26px 28px;border-radius:24px;background:#fff;border:2px solid #fff;box-shadow:0 10px 28px rgba(150,90,90,.12);text-align:center}
+      .step-num{display:grid;place-items:center;width:52px;height:52px;margin:0 auto 16px;border-radius:50%;background:linear-gradient(135deg,#b9606d,#a9505e);box-shadow:0 0 0 6px #fbe6e6;color:#fff;font-family:Georgia,serif;font-size:1.35rem}
+      .step h3{font-size:1.25rem;margin:0 0 10px}
+      .step p{margin:0;color:var(--text);font-size:.95rem}
+
+      @media (max-width:900px){.steps-list{grid-template-columns:1fr}}
+      @media (max-width:600px){.hero-actions .btn{flex:1 1 100%}}
+    </style>
+    <style>
+      /* ---------- sottomenu "Torte artistiche" > torte di laurea e di compleanno per adulti ---------- */
+      .nav-submenu{display:flex;flex-direction:column;gap:8px}
+      .nav-dropdown{position:relative;display:flex;align-items:center}
+      .nav-dropdown>a{display:inline-flex;align-items:center;gap:6px}
+      .nav-dropdown>a::after{content:"";width:6px;height:6px;margin-top:-4px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .2s ease,margin .2s ease}
+      .nav-dropdown:hover>a::after,.nav-dropdown:focus-within>a::after{transform:rotate(225deg);margin-top:3px}
+      .nav-submenu{position:absolute;left:50%;top:100%;z-index:40;padding-top:14px;transform:translate(-50%,6px);opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
+      .nav-dropdown:hover .nav-submenu,.nav-dropdown:focus-within .nav-submenu{opacity:1;visibility:visible;transform:translate(-50%,0)}
+      .nav .nav-submenu a{display:block;padding:12px 20px;border-radius:16px;background:#fffaf6;border:1px solid #eadfd5;box-shadow:0 18px 40px rgba(72,48,34,.16);font-family:Georgia,serif;color:#3b1f18;white-space:nowrap;text-decoration:none;transition:color .2s ease,background .2s ease}
+      .nav .nav-submenu a:hover,.nav .nav-submenu a:focus-visible,.nav .nav-submenu a[aria-current="page"]{color:#a9505e;background:#fff;text-decoration:none}
+      .nav>nav a.is-current-section{color:#a9505e}
+      .mobile-nav-panel nav a.mobile-sub{position:relative;margin-left:18px;padding-left:32px;font-size:.95rem;font-weight:600;color:#7a5a50}
+      .mobile-nav-panel nav a.mobile-sub::before{content:"";position:absolute;left:12px;top:50%;width:10px;height:10px;margin-top:-9px;border-left:1.5px solid #c98a93;border-bottom:1.5px solid #c98a93;border-radius:0 0 0 4px}
+      .mobile-nav-panel nav a.mobile-sub[aria-current="page"]{color:#a9505e}
+    </style>
+    <style>
+      /* ================= pagina prodotto ================= */
+      .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+      .nav .nav-submenu a[aria-current="true"],.mobile-nav-panel nav a.mobile-sub[aria-current="true"]{color:#a9505e}
+
+      .product-hero{padding:40px 0 88px;background:linear-gradient(100deg,#fdf6f1 0%,#fbeee8 45%,#f6dfdc 100%)}
+      .product-hero .breadcrumb{margin-bottom:28px}
+      .product-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:56px;align-items:start}
+
+      /* ---------- carousel foto ---------- */
+      .pg{position:sticky;top:100px;min-width:0}
+      .pg-stage{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:28px;background:#2d1714;box-shadow:0 30px 70px rgba(120,70,60,.22);outline:none;touch-action:pan-y}
+      .pg-stage:focus-visible{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--rose)}
+      .pg-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.22,1,.36,1);will-change:transform}
+      .pg-slide{position:relative;flex:0 0 100%;height:100%;margin:0;overflow:hidden}
+      .pg-slide-bg{position:absolute;inset:-30px;background-size:cover;background-position:center;filter:blur(26px) saturate(1.1);opacity:.7;transform:scale(1.08)}
+      .pg-slide img{position:relative;display:block;width:100%;height:100%;object-fit:contain;cursor:zoom-in}
+      .pg-btn{
+        position:absolute;top:50%;z-index:3;display:grid;place-items:center;width:48px;height:48px;padding:0;border:0;border-radius:50%;
+        background:rgba(255,255,255,.94);color:var(--ink);cursor:pointer;box-shadow:0 10px 24px rgba(40,15,15,.25);transform:translateY(-50%);
+        transition:background .2s ease,color .2s ease,transform .2s ease
+      }
+      .pg-btn:hover{background:var(--rose);color:#fff}
+      .pg-btn:focus-visible{outline:2px solid #fff;outline-offset:3px}
+      .pg-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .pg-prev{left:16px}.pg-next{right:16px}
+      .pg-label,.pg-counter,.pg-zoom{
+        position:absolute;z-index:3;display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;
+        font-size:.8rem;font-weight:600;letter-spacing:.02em
+      }
+      .pg-label{left:16px;top:16px;background:rgba(255,255,255,.94);color:var(--rose);font-family:Georgia,serif;font-weight:400;letter-spacing:.06em;text-transform:uppercase}
+      .pg-counter{right:16px;top:16px;background:rgba(59,31,24,.62);backdrop-filter:blur(6px);color:#fff}
+      .pg-zoom{right:16px;bottom:16px;border:0;background:rgba(255,255,255,.94);color:var(--ink);cursor:pointer;box-shadow:0 8px 20px rgba(40,15,15,.2)}
+      .pg-zoom:hover{background:var(--rose);color:#fff}
+      .pg-zoom .ico{width:16px;height:16px}
+      .pg-thumbs{display:flex;gap:12px;margin-top:16px}
+      .pg-thumb{
+        flex:1 1 0;display:flex;align-items:center;gap:12px;min-width:0;padding:8px 14px 8px 8px;border:2px solid transparent;border-radius:18px;
+        background:rgba(255,255,255,.75);color:var(--ink);font:600 .86rem/1.2 Inter,system-ui,sans-serif;text-align:left;cursor:pointer;
+        box-shadow:0 8px 20px rgba(150,90,90,.1);transition:border-color .2s ease,background .2s ease
+      }
+      .pg-thumb img{width:56px;height:70px;flex:0 0 56px;object-fit:cover;border-radius:12px}
+      .pg-thumb[aria-current="true"]{border-color:var(--rose);background:#fff}
+      .pg-thumb:focus-visible{outline:2px solid var(--rose);outline-offset:2px}
+
+      /* ---------- informazioni prodotto ---------- */
+      .product-info{min-width:0}
+      .product-pill{display:inline-block;padding:6px 16px;border-radius:999px;background:var(--rose-soft);color:#5a2a2a;font-family:Georgia,serif;font-size:.8rem;letter-spacing:.12em;text-transform:uppercase}
+      .product-info h1{font-size:clamp(2.3rem,4.2vw,3.5rem);margin:16px 0 12px}
+      .rating-line{display:inline-flex;flex-wrap:wrap;align-items:center;gap:10px;color:var(--muted);font-size:.92rem}
+      .rating-line a{color:var(--rose);text-decoration:underline;text-underline-offset:3px}
+      .stars{position:relative;display:inline-block;font-size:1.15rem;line-height:1;letter-spacing:3px;color:#e8d3c4}
+      .stars::before{content:"★★★★★";position:absolute;left:0;top:0;width:calc(var(--voto,0) / 5 * 100%);overflow:hidden;color:var(--gold-dark);white-space:nowrap}
+      .product-course-line{margin:14px 0 0;color:var(--muted);font-size:.9rem}
+      .product-course-line strong{color:var(--ink)}
+      .product-lead{margin:18px 0 24px;font-family:Georgia,serif;font-style:italic;font-size:1.16rem;line-height:1.65;color:var(--ink)}
+
+      .price-box{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;padding:18px 22px;border-radius:20px;background:#fff;border:1px solid #f1d6d6;box-shadow:0 10px 26px rgba(150,90,90,.08)}
+      .price-box span{font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+      .price-box strong{font-family:Georgia,serif;font-size:1.6rem;color:var(--rose)}
+      .price-box small{flex:1 1 100%;color:var(--text);font-size:.86rem}
+
+      .product-highlights{list-style:none;margin:24px 0;padding:0;display:grid;gap:10px}
+      .product-highlights li{display:flex;align-items:center;gap:12px;color:var(--ink);font-size:.96rem}
+      .product-highlights li::before{
+        content:"";flex:0 0 26px;height:26px;border-radius:50%;box-shadow:0 0 0 4px #fbe6e6;
+        background:#a9505e url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12 4.5 4.5L19 7'/%3E%3C/svg%3E") center/14px no-repeat
+      }
+
+      .spec-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:0 0 26px}
+      .spec-grid div{padding:14px 16px;border-radius:16px;background:rgba(255,255,255,.7);border:1px solid #f1e1dc}
+      .spec-grid dt{font-size:.74rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+      .spec-grid dd{margin:4px 0 0;font-family:Georgia,serif;color:var(--ink);line-height:1.35}
+
+      .buy-actions{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+      .buy-actions .btn{padding:15px 20px}
+      .buy-actions .btn-wa{background:#25d366;color:#fff;box-shadow:0 10px 24px rgba(37,211,102,.28)}
+      .buy-actions .btn-wa svg{width:19px;height:19px;fill:#fff}
+      .share-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+      .share-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 2px;border:0;background:none;color:var(--rose);font:600 .9rem/1 Inter,system-ui,sans-serif;cursor:pointer}
+      .share-btn:hover{text-decoration:underline;text-underline-offset:3px}
+      .share-btn .ico{width:18px;height:18px}
+      .share-status{font-size:.84rem;color:var(--muted)}
+      .trust{list-style:none;margin:26px 0 0;padding:20px 0 0;border-top:1px dashed #ecd2d2;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+      .trust li{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;font-size:.82rem;line-height:1.35;color:var(--text)}
+      .trust .ico{width:24px;height:24px;color:var(--gold-dark)}
+      .trust a{color:var(--rose);text-decoration:underline;text-underline-offset:3px}
+
+      /* ---------- descrizione e personalizzazione ---------- */
+      .info-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:32px;align-items:start}
+      .info-card{padding:38px 40px;border-radius:28px;background:#fff;border:2px solid #fff;box-shadow:0 10px 28px rgba(150,90,90,.1)}
+      .info-card h2{font-size:clamp(1.7rem,3vw,2.3rem);margin:0 0 6px}
+      .info-card h2 em{font-style:italic;color:var(--rose)}
+      .info-card .ribbon{margin:6px 0 20px}
+      .info-card p{margin:0 0 16px;color:var(--text);line-height:1.8}
+      .info-card p:last-child{margin-bottom:0}
+      .info-card p :global(strong){color:var(--ink);font-weight:600}
+      .custom-list{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+      .custom-list li{display:flex;gap:12px;align-items:flex-start;color:var(--ink);font-size:.95rem;line-height:1.5}
+      .custom-list li::before{content:"";flex:0 0 10px;height:10px;margin-top:7px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 4px #fbe6e6}
+      .info-card.tinted{background:linear-gradient(160deg,#fff 0%,#fdf0ee 100%)}
+
+      /* ---------- domande frequenti ---------- */
+      .faq{padding-top:0}
+      .faq-list{max-width:820px;margin:0 auto;display:grid;gap:12px}
+      .faq-item{border-radius:20px;background:#fff;border:1px solid #f1e1dc;box-shadow:0 8px 22px rgba(150,90,90,.07);overflow:hidden}
+      .faq-item summary{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 24px;font-family:Georgia,serif;font-size:1.08rem;color:var(--ink);cursor:pointer;list-style:none}
+      .faq-item summary::-webkit-details-marker{display:none}
+      .faq-item summary::after{content:"+";flex:0 0 32px;height:32px;display:grid;place-items:center;border-radius:50%;background:#fbe6e6;color:var(--rose);font:600 1.2rem/1 Inter,system-ui,sans-serif;transition:transform .25s ease}
+      .faq-item[open] summary::after{transform:rotate(45deg)}
+      .faq-item summary:focus-visible{outline:2px solid var(--rose);outline-offset:-4px;border-radius:20px}
+      .faq-item p{margin:0;padding:0 24px 22px;color:var(--text);line-height:1.75}
+
+      /* ---------- recensioni ---------- */
+      .reviews{background:linear-gradient(180deg,#fbf3ef 0%,#fffaf6 100%)}
+      .reviews-grid{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:32px;align-items:start}
+      .reviews-summary{padding:32px;border-radius:28px;background:#fff;box-shadow:0 10px 28px rgba(150,90,90,.1);text-align:center}
+      .reviews-avg{font-family:Georgia,serif;font-size:3.6rem;line-height:1;color:var(--ink)}
+      .reviews-summary .stars{font-size:1.5rem;margin:10px 0 6px}
+      .reviews-count{margin:0 0 22px;color:var(--muted);font-size:.92rem}
+      .dist{list-style:none;margin:0;padding:0;display:grid;gap:8px;text-align:left}
+      .dist li{display:grid;grid-template-columns:34px 1fr 34px;align-items:center;gap:10px;font-size:.86rem;color:var(--muted)}
+      .dist-bar{height:8px;border-radius:999px;background:#f3e4df;overflow:hidden}
+      .dist-bar span{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--gold),var(--gold-dark))}
+      .reviews-empty{margin:18px 0 0;padding:16px;border-radius:16px;background:#fdf3f1;color:var(--text);font-size:.92rem}
+
+      .review-list{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:14px}
+      .review{padding:22px 24px;border-radius:22px;background:#fff;border:1px solid #f1e1dc}
+      .review-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+      .avatar{width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#b9606d,#a9505e);color:#fff;font:600 .9rem/1 Inter,system-ui,sans-serif}
+      .review-head strong{display:block;font-family:Georgia,serif;color:var(--ink)}
+      .review-head time{font-size:.8rem;color:var(--muted)}
+      .review-head .stars{margin-left:auto;font-size:1rem}
+      .review p{margin:0;color:var(--text);line-height:1.7}
+
+      .review-form{padding:34px 36px;border-radius:28px;background:#fff;border:2px solid #fff;box-shadow:0 10px 28px rgba(150,90,90,.1)}
+      .review-form h3{font-size:1.6rem;margin:0 0 6px}
+      .review-form>p{margin:0 0 22px;color:var(--text);font-size:.94rem}
+      .star-input{margin:0 0 20px;padding:0;border:0}
+      .star-input legend{margin-bottom:8px;font-weight:600;font-size:.92rem;color:var(--ink)}
+      .star-input-row{display:inline-flex;flex-direction:row-reverse;gap:4px}
+      .star-input input{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+      .star-input label{font-size:2.2rem;line-height:1;color:#e8d3c4;cursor:pointer;transition:color .15s ease,transform .15s ease}
+      .star-input label:hover,.star-input label:hover~label,.star-input input:checked~label{color:var(--gold-dark)}
+      .star-input label:hover{transform:scale(1.12)}
+      .star-input input:focus-visible+label{outline:2px solid var(--rose);outline-offset:2px;border-radius:6px}
+      .star-hint{display:block;min-height:1.3em;margin-top:6px;font-size:.86rem;color:var(--rose);font-weight:600}
+      .field{display:grid;gap:6px;margin-bottom:16px;font-weight:600;font-size:.92rem;color:var(--ink)}
+      .field input,.field textarea{
+        width:100%;padding:13px 16px;border:1.5px solid #ecd9d2;border-radius:14px;background:#fffaf6;color:var(--ink);
+        font:400 .98rem/1.5 Inter,system-ui,sans-serif;transition:border-color .2s ease,box-shadow .2s ease
+      }
+      .field textarea{min-height:130px;resize:vertical}
+      .field input:focus,.field textarea:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 4px rgba(169,80,94,.12)}
+      .field small{font-weight:400;color:var(--muted);font-size:.8rem;text-align:right}
+      .check{display:flex;gap:10px;align-items:flex-start;margin:4px 0 20px;font-size:.86rem;line-height:1.5;color:var(--text)}
+      .check input{margin-top:3px;accent-color:var(--rose)}
+      .review-form .btn{width:100%;padding:15px 20px;border:0;font-size:.98rem;cursor:pointer}
+      .form-note{margin:12px 0 0;color:var(--muted);font-size:.82rem;text-align:center}
+      .form-status{margin:12px 0 0;min-height:1.2em;font-size:.9rem;font-weight:600;text-align:center;color:var(--rose)}
+
+      /* ---------- altre torte e navigazione ---------- */
+      .related{padding-top:24px}
+      .product-pager{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;margin-top:44px}
+      .pager-link{display:flex;flex-direction:column;gap:2px;padding:16px 20px;border-radius:18px;background:#fff;border:1px solid #f1e1dc;transition:border-color .2s ease,transform .2s ease}
+      .pager-link:hover{border-color:var(--rose-line);transform:translateY(-2px)}
+      .pager-link small{font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+      .pager-link strong{font-family:Georgia,serif;color:var(--ink)}
+      .pager-next{text-align:right}
+
+      /* ---------- lightbox ---------- */
+      .lightbox{width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:0;border:0;background:rgba(28,12,10,.94);color:#fff}
+      .lightbox[open]{display:grid;place-items:center}
+      .lightbox::backdrop{background:rgba(28,12,10,.94)}
+      .lightbox img{max-width:min(92vw,1100px);max-height:86dvh;object-fit:contain;border-radius:14px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+      .lb-close{position:absolute;top:18px;right:18px;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border:0;border-radius:999px;background:rgba(255,255,255,.95);color:var(--ink);font:600 .9rem/1 Inter,system-ui,sans-serif;cursor:pointer}
+      .lb-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+      .lightbox .pg-btn{position:fixed}
+      .lb-caption{position:absolute;left:50%;bottom:18px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:rgba(255,255,255,.14);font-size:.86rem;white-space:nowrap}
+
+      /* ---------- barra acquisto mobile ---------- */
+      .buybar{display:none}
+
+      @media (max-width:900px){
+        .product-hero{padding:28px 0 64px}
+        .product-layout{grid-template-columns:1fr;gap:32px}
+        .pg{position:static}
+        .info-grid,.reviews-grid{grid-template-columns:1fr}
+        .info-card{padding:30px 26px}
+        .buybar{
+          position:fixed;left:0;right:0;bottom:0;z-index:35;display:flex;align-items:center;gap:12px;padding:12px 16px calc(12px + env(safe-area-inset-bottom));
+          background:rgba(255,250,245,.97);backdrop-filter:blur(10px);border-top:1px solid var(--line);box-shadow:0 -10px 30px rgba(72,48,34,.12);
+          transform:translateY(110%);transition:transform .3s ease
+        }
+        .buybar.is-visible{transform:none}
+        .buybar div{flex:1 1 auto;min-width:0}
+        .buybar strong{display:block;font-family:Georgia,serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .buybar small{color:var(--rose);font-weight:600}
+        .buybar .btn{flex:0 0 auto;padding:12px 18px;font-size:.9rem}
+        body:has(.buybar.is-visible) .whatsapp-floating{bottom:84px}
+      }
+      @media (max-width:600px){
+        .buy-actions{grid-template-columns:1fr}
+        .spec-grid{grid-template-columns:1fr}
+        .trust{grid-template-columns:1fr;text-align:left}
+        .trust li{flex-direction:row;text-align:left}
+        .pg-btn{width:42px;height:42px}
+        .pg-zoom span{display:none}
+        .pg-thumb{padding:6px;justify-content:center}
+        .pg-thumb span{display:none}
+        .review-form{padding:28px 22px}
+        .product-pager{grid-template-columns:1fr 1fr}
+        .product-pager .pager-all{grid-column:1 / -1;grid-row:2;justify-self:center}
+      }
+      @media (prefers-reduced-motion:reduce){.pg-track{transition:none}}
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap nav">
+        <a class="brand" href="/"><span class="brand-text">Le Dolci Meraviglie<span> di Lucy Garro</span></span><svg class="brand-ribbon" viewBox="0 0 180 16" aria-hidden="true"><path d="M4 8h66M110 8h66"/><path d="M90 8c-6-7-16-7-16 0s10 7 16 0Zm0 0c6-7 16-7 16 0s-10 7-16 0Zm0 0-6 7m6-7 6 7"/></svg></a>
+
+        <nav aria-label="Navigazione principale">
+          <a href="/biscotti-decorati">Biscotti</a>
+          <div class="nav-dropdown">
+            <a href="/torte-artistiche" class="is-current-section">Torte artistiche</a>
+            <div class="nav-submenu">
+              <a href="/torte-di-laurea" aria-current="true">Torte di Laurea</a>
+              <a href="/torte-di-compleanno-per-adulti">Torte di Compleanno per Adulti</a>
+            </div>
+          </div>
+          <a href="/sweet-table">Sweet Table</a>
+          <a href="/vip-e-collaborazioni">VIP e collab.</a>
+          <a href="/curriculum-lucia-garro">Curriculum</a>
+          <a href="/certificazioni">Certificazioni</a>
+          <a href="/contatti">Contatti</a>
+        </nav>
+
+        <a class="btn btn-primary header-etsy" href={etsyUrl} title="Vai su Etsy" target="_blank" rel="noopener"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>Vai su Etsy per acquistare online</a>
+
+        <button
+          class="mobile-menu-toggle"
+          type="button"
+          aria-label="Apri menu di navigazione"
+          aria-expanded="false"
+          aria-controls="mobile-nav-panel"
+          data-mobile-menu-toggle
+        >
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="mobile-nav-panel" id="mobile-nav-panel" data-mobile-nav>
+          <nav aria-label="Navigazione mobile">
+            <a href="/biscotti-decorati">Biscotti</a>
+            <a href="/torte-artistiche">Torte artistiche</a>
+            <a class="mobile-sub" href="/torte-di-laurea" aria-current="true">Torte di Laurea</a>
+            <a class="mobile-sub" href="/torte-di-compleanno-per-adulti">Torte di Compleanno per Adulti</a>
+            <a href="/sweet-table">Sweet Table</a>
+            <a href="/vip-e-collaborazioni">VIP e collab.</a>
+            <a href="/curriculum-lucia-garro">Curriculum</a>
+            <a href="/certificazioni">Certificazioni</a>
+            <a href="/contatti">Contatti</a>
+          </nav>
+          <a class="btn btn-primary mobile-etsy" href={etsyUrl} target="_blank" rel="noopener">
+            Vai su Etsy per acquistare online
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="product-hero">
+        <div class="wrap">
+          <nav class="breadcrumb" aria-label="Percorso">
+            <a href="/">Home</a><span aria-hidden="true">›</span><a href="/torte-artistiche">Torte artistiche</a><span aria-hidden="true">›</span><a href="/torte-di-laurea">Torte di laurea</a><span aria-hidden="true">›</span><span aria-current="page">{nome}</span>
+          </nav>
+
+          <div class="product-layout">
+            <!-- carousel foto -->
+            <div class="pg" data-carousel>
+              <div class="pg-stage" tabindex="0" role="region" aria-roledescription="carosello" aria-label={`Foto della ${nome}`} data-stage>
+                <div class="pg-track" data-track>
+                  {torta.foto.map((foto, i) => (
+                    <figure class="pg-slide" role="group" aria-roledescription="foto" aria-label={`${i + 1} di ${torta.foto.length}: ${foto.label}`} data-label={foto.label}>
+                      <div class="pg-slide-bg" style={`background-image:url('${foto.src}')`} aria-hidden="true"></div>
+                      <img
+                        src={foto.src}
+                        alt={`${nome} – ${foto.label.toLowerCase()}, realizzata da Lucia Garro`}
+                        loading={i === 0 ? 'eager' : 'lazy'}
+                        fetchpriority={i === 0 ? 'high' : undefined}
+                        decoding="async"
+                        data-zoom-img
+                      />
+                    </figure>
+                  ))}
+                </div>
+                <span class="pg-label" data-pg-label>{torta.foto[0].label}</span>
+                <span class="pg-counter" aria-hidden="true"><span data-pg-current>1</span> / {torta.foto.length}</span>
+                {torta.foto.length > 1 && (
+                  <>
+                    <button type="button" class="pg-btn pg-prev" aria-label="Foto precedente" data-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+                    <button type="button" class="pg-btn pg-next" aria-label="Foto successiva" data-next><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+                  </>
+                )}
+                <button type="button" class="pg-zoom" data-zoom><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4M11 8v6M8 11h6"/></svg><span>Ingrandisci</span></button>
+              </div>
+              {torta.foto.length > 1 && (
+                <div class="pg-thumbs" role="group" aria-label="Scegli la foto">
+                  {torta.foto.map((foto, i) => (
+                    <button type="button" class="pg-thumb" aria-current={i === 0 ? 'true' : 'false'} data-thumb={i}>
+                      <img src={foto.src} alt="" loading="lazy" decoding="async" />
+                      <span>{foto.label}</span>
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <!-- informazioni prodotto -->
+            <div class="product-info">
+              <span class="product-pill">Torta di laurea</span>
+              <h1>{nome}</h1>
+              <div class="rating-line">
+                <span class="stars" style={`--voto:${media}`} aria-hidden="true">★★★★★</span>
+                {totale > 0
+                  ? <a href="#recensioni">{media.toLocaleString('it-IT')} su 5 · {totale} {totale === 1 ? 'recensione' : 'recensioni'}</a>
+                  : <span>Nessuna recensione · <a href="#scrivi-recensione">scrivi la prima</a></span>}
+              </div>
+              <p class="product-course-line">Ispirata a: <strong>{torta.corso}</strong></p>
+              <p class="product-lead">{torta.descrizione}</p>
+
+              <div class="price-box">
+                <span>Prezzo</span>
+                <strong>Su richiesta</strong>
+                <small>Preventivo gratuito e senza impegno, in base a dimensioni, numero di piani e personalizzazioni.</small>
+              </div>
+
+              <ul class="product-highlights">
+                {torta.dettagli.map((d) => <li>{d}</li>)}
+              </ul>
+
+              <dl class="spec-grid">
+                <div><dt>Forma</dt><dd>{torta.forma}</dd></div>
+                <div><dt>Versione</dt><dd>Vera o scenografica</dd></div>
+                <div><dt>Ispirata a</dt><dd>{torta.corso}</dd></div>
+                <div><dt>Personalizzazione</dt><dd>Nome, corso, data e colori</dd></div>
+              </dl>
+
+              <div class="buy-actions">
+                <a class="btn btn-primary" href="/contatti"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 3 10 14"/><path d="m21 3-7 18-4-7-7-4 18-7Z"/></svg>Richiedi preventivo</a>
+                <a class="btn btn-wa" href={waLink} target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>Ordina su WhatsApp</a>
+              </div>
+              <div class="share-row">
+                <button type="button" class="share-btn" data-share data-title={`${nome}`}><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>Condividi questa torta</button>
+                <span class="share-status" role="status" aria-live="polite" data-share-status></span>
+              </div>
+
+              <ul class="trust">
+                <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z"/></svg>Fatta a mano a Siracusa</li>
+                <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="m14 4 6 6-9 9H5v-6l9-9Z"/><path d="m12 6 6 6"/></svg>Progetto su misura per la tua festa</li>
+                <li><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/></svg><span>Cake designer <a href="/certificazioni">certificata</a></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="details" aria-labelledby="descrizione-title">
+        <div class="wrap info-grid">
+          <article class="info-card">
+            <h2 id="descrizione-title">La <em>torta</em></h2>
+            <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+            {torta.descrizioneLunga.map((paragrafo) => <p set:html={paragrafo} />)}
+          </article>
+          <aside class="info-card tinted" aria-labelledby="personalizza-title">
+            <h2 id="personalizza-title">Cosa puoi <em>personalizzare</em></h2>
+            <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+            <ul class="custom-list">
+              {personalizzazioni.map((p) => <li>{p}</li>)}
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="faq" aria-labelledby="faq-title">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Domande frequenti</span>
+            <h2 id="faq-title">Prima di <em>ordinare</em></h2>
+          </div>
+          <div class="faq-list">
+            {faq.map((item, i) => (
+              <details class="faq-item" open={i === 0}>
+                <summary>{item.d}</summary>
+                <p>{item.r}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="reviews" id="recensioni" aria-labelledby="recensioni-title">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Recensioni</span>
+            <h2 id="recensioni-title">Cosa dicono della <em>{nomeInFrase}</em></h2>
+            <p>Hai festeggiato la laurea con questa torta? Racconta la tua esperienza e aiuta altri futuri dottori a scegliere.</p>
+          </div>
+
+          <div class="reviews-grid">
+            <div>
+              <div class="reviews-summary">
+                <div class="reviews-avg">{totale ? media.toLocaleString('it-IT', { minimumFractionDigits: 1 }) : '–'}</div>
+                <span class="stars" style={`--voto:${media}`} aria-hidden="true">★★★★★</span>
+                <p class="reviews-count">{totale ? `Media di ${totale} ${totale === 1 ? 'recensione' : 'recensioni'}` : 'Ancora nessuna recensione'}</p>
+                <ul class="dist" aria-label="Distribuzione dei voti">
+                  {distribuzione.map((riga) => (
+                    <li>
+                      <span>{riga.voto} ★</span>
+                      <span class="dist-bar" aria-hidden="true"><span style={`width:${riga.perc}%`}></span></span>
+                      <span>{riga.n}</span>
+                    </li>
+                  ))}
+                </ul>
+                {totale === 0 && <p class="reviews-empty">Sii il primo a lasciare una recensione per questa torta!</p>}
+              </div>
+
+              {totale > 0 && (
+                <ul class="review-list">
+                  {recensioni.map((r) => (
+                    <li class="review">
+                      <div class="review-head">
+                        <span class="avatar" aria-hidden="true">{iniziali(r.nome)}</span>
+                        <div><strong>{r.nome}</strong><time datetime={r.data}>{formatData(r.data)}</time></div>
+                        <span class="stars" style={`--voto:${r.voto}`} role="img" aria-label={`${r.voto} stelle su 5`}>★★★★★</span>
+                      </div>
+                      <p>{r.testo}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <form class="review-form" id="scrivi-recensione" data-review-form data-torta={nome} novalidate>
+              <h3>Scrivi una recensione</h3>
+              <p>Dai un voto da 1 a 5 stelle e raccontaci com’è andata la festa.</p>
+
+              <fieldset class="star-input">
+                <legend>Il tuo voto</legend>
+                <div class="star-input-row">
+                  {[5, 4, 3, 2, 1].map((v) => (
+                    <>
+                      <input type="radio" name="voto" id={`voto-${v}`} value={v} required />
+                      <label for={`voto-${v}`} title={`${v} ${v === 1 ? 'stella' : 'stelle'}`}><span aria-hidden="true">★</span><span class="sr-only">{v} {v === 1 ? 'stella' : 'stelle'}</span></label>
+                    </>
+                  ))}
+                </div>
+                <span class="star-hint" data-star-hint aria-live="polite"></span>
+              </fieldset>
+
+              <label class="field">Nome
+                <input type="text" name="nome" maxlength="60" autocomplete="name" placeholder="Es. Giulia R." required />
+              </label>
+              <label class="field">La tua recensione
+                <textarea name="testo" maxlength="800" placeholder="Com’era la torta? Ti è piaciuta? Cosa hanno detto gli ospiti?" required data-testo></textarea>
+                <small><span data-chars>0</span> / 800</small>
+              </label>
+              <label class="check">
+                <input type="checkbox" name="consenso" required />
+                <span>Acconsento alla pubblicazione della recensione con il mio nome sul sito.</span>
+              </label>
+
+              <button type="submit" class="btn btn-primary">Invia la recensione</button>
+              <p class="form-note">La recensione viene inviata a Lucia tramite WhatsApp e pubblicata dopo la verifica.</p>
+              <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="cakes related" aria-labelledby="correlate-title">
+        <div class="wrap">
+          <div class="section-head">
+            <span class="eyebrow">Potrebbero piacerti</span>
+            <h2 id="correlate-title">Altre torte di <em>laurea</em></h2>
+          </div>
+
+          <div class="cake-grid">
+            {correlate.map((altra) => (
+              <article class="cake-card product-card" data-cake-card data-href={urlProdotto(altra)}>
+                <div class="cake-gallery" data-cake-gallery>
+                  <span class="category">{altra.categoria}</span>
+                  <span class="zoom-cue" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg><span>Vedi la torta</span></span>
+                  {altra.foto.length > 1 && (
+                    <span class="photo-label" aria-hidden="true">
+                      <svg class="ico" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.5-2h5L16 6"/></svg>
+                      <span data-photo-label>{altra.foto[0].label}</span>
+                    </span>
+                  )}
+                  {altra.foto.map((foto, i) => (
+                    <img
+                      src={foto.src}
+                      alt={`${nomeCompleto(altra)} – ${foto.label.toLowerCase()}`}
+                      class:list={[{ 'is-active': i === 0 }]}
+                      data-label={foto.label}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ))}
+                  {altra.foto.length > 1 && (
+                    <>
+                      <div class="gallery-dots" role="group" aria-label={`Foto di ${nomeCompleto(altra)}`}>
+                        {altra.foto.map((foto, i) => (
+                          <button type="button" aria-label={`Mostra foto: ${foto.label}`} aria-pressed={i === 0 ? 'true' : 'false'} data-index={i}></button>
+                        ))}
+                      </div>
+                      <span class="gallery-progress" aria-hidden="true"></span>
+                    </>
+                  )}
+                </div>
+                <div class="cake-body">
+                  <span class="product-course">Ispirata a: {altra.corso}</span>
+                  <h3><a class="card-open" href={urlProdotto(altra)}>{nomeCompleto(altra)}</a></h3>
+                  <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+                  <p>{altra.descrizione}</p>
+                  <div class="product-price"><span>Prezzo</span><strong>Su richiesta</strong></div>
+                  <div class="cake-actions">
+                    <a class="btn btn-primary" href={urlProdotto(altra)}>Scopri la torta<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <nav class="product-pager" aria-label="Altre torte di laurea">
+            <a class="pager-link pager-prev" href={urlProdotto(precedente)} rel="prev"><small>‹ Precedente</small><strong>{nomeCompleto(precedente)}</strong></a>
+            <a class="btn btn-outline pager-all" href="/torte-di-laurea#catalogo">Tutte le torte di laurea</a>
+            <a class="pager-link pager-next" href={urlProdotto(successiva)} rel="next"><small>Successiva ›</small><strong>{nomeCompleto(successiva)}</strong></a>
+          </nav>
+        </div>
+      </section>
+
+      <section class="final">
+        <div class="wrap">
+          <div class="cta">
+            <div>
+              <svg class="ribbon" viewBox="0 0 120 12" aria-hidden="true"><path d="M2 6h46M72 6h46"/><path d="M60 6c-4-5-11-5-11 0s7 5 11 0Zm0 0c4-5 11-5 11 0s-7 5-11 0Zm0 0-4 5m4-5 4 5"/></svg>
+              <h2>Ti piace la {nomeInFrase}?</h2>
+              <p>Raccontami corso di laurea, data, numero di invitati e colori della festa: la personalizziamo insieme per il tuo traguardo.</p>
+            </div>
+            <div class="cta-actions">
+              <a class="btn btn-light" href="/contatti">Compila il modulo</a>
+              <a class="btn btn-ghost" href={waLink} target="_blank" rel="noopener noreferrer">Scrivi su WhatsApp</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="buybar" data-buybar aria-hidden="true">
+      <div><strong>{nome}</strong><small>Prezzo su richiesta</small></div>
+      <a class="btn btn-primary" href={waLink} target="_blank" rel="noopener noreferrer" tabindex="-1">Ordina su WhatsApp</a>
+    </div>
+
+    <dialog class="lightbox" aria-label={`Foto ingrandita: ${nome}`} data-lightbox>
+      <button type="button" class="lb-close" data-lb-close><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>Chiudi</button>
+      <img src={torta.foto[0].src} alt="" data-lb-img />
+      {torta.foto.length > 1 && (
+        <>
+          <button type="button" class="pg-btn pg-prev" aria-label="Foto precedente" data-lb-prev><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6"/></svg></button>
+          <button type="button" class="pg-btn pg-next" aria-label="Foto successiva" data-lb-next><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg></button>
+        </>
+      )}
+      <span class="lb-caption" data-lb-caption></span>
+    </dialog>
+
+    <footer><div class="wrap">© 2026 Le Dolci Meraviglie di Lucy Garro · Torte artistiche, biscotti decorati e Sweet Table · Siracusa</div></footer>
+
+    <a class="whatsapp-floating" href={waGenerico} target="_blank" rel="noopener noreferrer" aria-label="Contatta Lucia Garro su WhatsApp">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4a.5.5 0 0 0 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.7-1.2 2.2 2.2 0 0 0 .2-1.2c-.1-.1-.3-.2-.5-.3Z"/></svg>
+      <span>WhatsApp</span>
+    </a>
+
+    <script>
+      /* ---------- menu mobile (come nelle altre pagine) ---------- */
+      const mobileMenuToggle = document.querySelector('[data-mobile-menu-toggle]');
+      const mobileNav = document.querySelector('[data-mobile-nav]');
+
+      const closeMobileMenu = () => {
+        if (!(mobileMenuToggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        mobileMenuToggle.setAttribute('aria-label', 'Apri menu di navigazione');
+        mobileNav.classList.remove('is-open');
+      };
+
+      const openMobileMenu = () => {
+        if (!(mobileMenuToggle instanceof HTMLButtonElement) || !(mobileNav instanceof HTMLElement)) return;
+        mobileMenuToggle.setAttribute('aria-expanded', 'true');
+        mobileMenuToggle.setAttribute('aria-label', 'Chiudi menu di navigazione');
+        mobileNav.classList.add('is-open');
+      };
+
+      if (mobileMenuToggle instanceof HTMLButtonElement && mobileNav instanceof HTMLElement) {
+        mobileMenuToggle.addEventListener('click', (event) => {
+          event.stopPropagation();
+          const isOpen = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+          isOpen ? closeMobileMenu() : openMobileMenu();
+        });
+        mobileNav.addEventListener('click', (event) => {
+          event.stopPropagation();
+          if (event.target instanceof HTMLAnchorElement) closeMobileMenu();
+        });
+        document.addEventListener('click', closeMobileMenu);
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeMobileMenu();
+        });
+        window.addEventListener('resize', () => {
+          if (window.innerWidth > 900) closeMobileMenu();
+        });
+      }
+
+      /* ---------- card con doppia foto che si alterna ---------- */
+      const SWAP_MS = 4000;
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      document.querySelectorAll('[data-cake-gallery]').forEach((gallery, galleryIndex) => {
+        if (!(gallery instanceof HTMLElement)) return;
+        const images = Array.from(gallery.querySelectorAll('img'));
+        if (images.length < 2) return;
+
+        const dots = Array.from(gallery.querySelectorAll('.gallery-dots button'));
+        const label = gallery.querySelector('[data-photo-label]');
+        let current = 0;
+        let timer = 0;
+        let visible = false;
+
+        gallery.style.setProperty('--swap-ms', `${SWAP_MS}ms`);
+
+        const show = (index) => {
+          current = (index + images.length) % images.length;
+          images.forEach((img, i) => img.classList.toggle('is-active', i === current));
+          dots.forEach((dot, i) => dot.setAttribute('aria-pressed', i === current ? 'true' : 'false'));
+          if (label) label.textContent = images[current].dataset.label ?? '';
+        };
+
+        const restartProgress = () => {
+          gallery.classList.remove('is-running');
+          void gallery.offsetWidth; // riavvia l'animazione della barra
+          gallery.classList.add('is-running');
+        };
+
+        const stop = () => { window.clearInterval(timer); timer = 0; gallery.classList.remove('is-running'); };
+        const start = () => {
+          if (reduceMotion || timer || !visible) return;
+          restartProgress();
+          timer = window.setInterval(() => { show(current + 1); }, SWAP_MS);
+        };
+
+        dots.forEach((dot) => {
+          dot.addEventListener('click', () => {
+            show(Number(dot.dataset.index ?? 0));
+            stop();
+            start();
+          });
+        });
+
+        // le card partono sfalsate, e girano solo quando sono visibili
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            visible = entry.isIntersecting;
+            if (visible) window.setTimeout(start, (galleryIndex % 3) * 700);
+            else stop();
+          });
+        }, { threshold: 0.35 });
+        observer.observe(gallery);
+      });
+
+      /* ---------- card prodotto: il clic porta alla pagina della torta ---------- */
+      document.querySelectorAll('[data-cake-card]').forEach((card) => {
+        if (!(card instanceof HTMLElement)) return;
+        card.addEventListener('click', (event) => {
+          // link, bottoni e pallini delle foto mantengono il loro comportamento
+          if (event.target instanceof Element && event.target.closest('a, button, .gallery-dots')) return;
+          if (card.dataset.href) window.location.href = card.dataset.href;
+        });
+      });
+
+      /* ================= pagina prodotto ================= */
+
+      /* ---------- carousel foto ---------- */
+      const slides = Array.from(document.querySelectorAll('.pg-slide'));
+      const track = document.querySelector('[data-track]');
+      const stage = document.querySelector('[data-stage]');
+      const thumbs = Array.from(document.querySelectorAll('[data-thumb]'));
+      const slideLabel = document.querySelector('[data-pg-label]');
+      const slideCurrent = document.querySelector('[data-pg-current]');
+      let slideIndex = 0;
+
+      const goTo = (index) => {
+        if (!slides.length || !(track instanceof HTMLElement)) return;
+        slideIndex = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(${-100 * slideIndex}%)`;
+        slides.forEach((slide, i) => slide.setAttribute('aria-hidden', i === slideIndex ? 'false' : 'true'));
+        thumbs.forEach((thumb, i) => thumb.setAttribute('aria-current', i === slideIndex ? 'true' : 'false'));
+        if (slideLabel) slideLabel.textContent = slides[slideIndex].dataset.label ?? '';
+        if (slideCurrent) slideCurrent.textContent = String(slideIndex + 1);
+      };
+      goTo(0);
+
+      document.querySelector('[data-prev]')?.addEventListener('click', () => goTo(slideIndex - 1));
+      document.querySelector('[data-next]')?.addEventListener('click', () => goTo(slideIndex + 1));
+      thumbs.forEach((thumb) => thumb.addEventListener('click', () => goTo(Number(thumb.dataset.thumb ?? 0))));
+
+      if (stage instanceof HTMLElement) {
+        stage.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowLeft') { event.preventDefault(); goTo(slideIndex - 1); }
+          if (event.key === 'ArrowRight') { event.preventDefault(); goTo(slideIndex + 1); }
+        });
+        // scorrimento con il dito
+        let touchX = null;
+        stage.addEventListener('touchstart', (event) => { touchX = event.touches[0].clientX; }, { passive: true });
+        stage.addEventListener('touchend', (event) => {
+          if (touchX === null) return;
+          const dx = event.changedTouches[0].clientX - touchX;
+          touchX = null;
+          if (Math.abs(dx) > 40) goTo(slideIndex + (dx < 0 ? 1 : -1));
+        });
+      }
+
+      /* ---------- foto ingrandita (lightbox) ---------- */
+      const lightbox = document.querySelector('[data-lightbox]');
+      if (lightbox instanceof HTMLDialogElement) {
+        const lbImg = lightbox.querySelector('[data-lb-img]');
+        const lbCaption = lightbox.querySelector('[data-lb-caption]');
+        const renderLightbox = () => {
+          const img = slides[slideIndex]?.querySelector('img');
+          if (!(img instanceof HTMLImageElement) || !(lbImg instanceof HTMLImageElement)) return;
+          lbImg.src = img.currentSrc || img.src;
+          lbImg.alt = img.alt;
+          if (lbCaption) lbCaption.textContent = `${slides[slideIndex].dataset.label ?? ''} · ${slideIndex + 1} / ${slides.length}`;
+        };
+        const openLightbox = () => {
+          renderLightbox();
+          document.documentElement.style.overflow = 'hidden';
+          lightbox.showModal();
+        };
+        const step = (delta) => { goTo(slideIndex + delta); renderLightbox(); };
+
+        document.querySelector('[data-zoom]')?.addEventListener('click', openLightbox);
+        document.querySelectorAll('[data-zoom-img]').forEach((img) => img.addEventListener('click', openLightbox));
+        lightbox.querySelector('[data-lb-close]')?.addEventListener('click', () => lightbox.close());
+        lightbox.querySelector('[data-lb-prev]')?.addEventListener('click', () => step(-1));
+        lightbox.querySelector('[data-lb-next]')?.addEventListener('click', () => step(1));
+        lightbox.addEventListener('click', (event) => { if (event.target === lightbox) lightbox.close(); });
+        lightbox.addEventListener('keydown', (event) => {
+          if (event.key === 'ArrowLeft') step(-1);
+          if (event.key === 'ArrowRight') step(1);
+        });
+        lightbox.addEventListener('close', () => {
+          document.documentElement.style.overflow = '';
+          if (stage instanceof HTMLElement) stage.focus({ preventScroll: true });
+        });
+      }
+
+      /* ---------- condividi ---------- */
+      const shareBtn = document.querySelector('[data-share]');
+      const shareStatus = document.querySelector('[data-share-status]');
+      if (shareBtn instanceof HTMLButtonElement) {
+        shareBtn.addEventListener('click', async () => {
+          const data = { title: shareBtn.dataset.title ?? document.title, url: window.location.href };
+          if (navigator.share) {
+            try { await navigator.share(data); } catch { /* condivisione annullata */ }
+            return;
+          }
+          try {
+            await navigator.clipboard.writeText(data.url);
+            if (shareStatus) shareStatus.textContent = 'Link copiato!';
+          } catch {
+            if (shareStatus) shareStatus.textContent = 'Copia il link dalla barra degli indirizzi.';
+          }
+          window.setTimeout(() => { if (shareStatus) shareStatus.textContent = ''; }, 3000);
+        });
+      }
+
+      /* ---------- recensione con stelline (inviata a Lucia su WhatsApp) ---------- */
+      const reviewForm = document.querySelector('[data-review-form]');
+      if (reviewForm instanceof HTMLFormElement) {
+        const hint = reviewForm.querySelector('[data-star-hint]');
+        const status = reviewForm.querySelector('[data-form-status]');
+        const chars = reviewForm.querySelector('[data-chars]');
+        const testo = reviewForm.querySelector('[data-testo]');
+        const giudizi = ['', 'Pessima', 'Scarsa', 'Nella media', 'Molto buona', 'Eccellente!'];
+
+        reviewForm.querySelectorAll('input[name="voto"]').forEach((radio) => {
+          radio.addEventListener('change', () => {
+            if (hint && radio instanceof HTMLInputElement) hint.textContent = giudizi[Number(radio.value)] ?? '';
+          });
+        });
+        if (testo instanceof HTMLTextAreaElement && chars) {
+          testo.addEventListener('input', () => { chars.textContent = String(testo.value.length); });
+        }
+
+        reviewForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const dati = new FormData(reviewForm);
+          const voto = Number(dati.get('voto') ?? 0);
+          const nome = String(dati.get('nome') ?? '').trim();
+          const recensione = String(dati.get('testo') ?? '').trim();
+          const say = (msg) => { if (status) status.textContent = msg; };
+
+          if (!voto) return say('Scegli un voto da 1 a 5 stelle.');
+          if (nome.length < 2) return say('Inserisci il tuo nome.');
+          if (recensione.length < 10) return say('Scrivi almeno qualche parola sulla torta (minimo 10 caratteri).');
+          if (!dati.get('consenso')) return say('Per inviare la recensione serve il consenso alla pubblicazione.');
+
+          const stelle = '★'.repeat(voto) + '☆'.repeat(5 - voto);
+          const messaggio = [
+            `Ciao Lucia, ecco la mia recensione per la "${reviewForm.dataset.torta ?? ''}":`,
+            '',
+            `Voto: ${stelle} (${voto}/5)`,
+            `Nome: ${nome}`,
+            '',
+            recensione,
+            '',
+            `Pagina: ${window.location.href}`,
+            'Acconsento alla pubblicazione con il mio nome.',
+          ].join('\n');
+          window.open(`https://wa.me/393519425808?text=${encodeURIComponent(messaggio)}`, '_blank', 'noopener');
+          say('Grazie! Si è aperto WhatsApp con la tua recensione: premi Invia per mandarla a Lucia.');
+          reviewForm.reset();
+          if (hint) hint.textContent = '';
+          if (chars) chars.textContent = '0';
+        });
+      }
+
+      /* ---------- barra "Ordina" fissa su mobile quando i bottoni principali non sono visibili ---------- */
+      const buybar = document.querySelector('[data-buybar]');
+      const buyActions = document.querySelector('.buy-actions');
+      if (buybar instanceof HTMLElement && buyActions) {
+        const buybarLink = buybar.querySelector('a');
+        new IntersectionObserver(([entry]) => {
+          const show = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          buybar.classList.toggle('is-visible', show);
+          buybar.setAttribute('aria-hidden', show ? 'false' : 'true');
+          buybarLink?.setAttribute('tabindex', show ? '0' : '-1');
+        }).observe(buyActions);
+      }
+    </script>
+  </body>
+</html>

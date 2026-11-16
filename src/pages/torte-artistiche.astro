@@ -1,4 +1,7 @@
 ---
+import { torteLaurea as torteLaureaDati, nomeCompleto } from '../data/torte-laurea';
+import { torteCompleannoAdulti as torteAdultiDati, nomeCompleto as nomeCompletoAdulti } from '../data/torte-compleanno-adulti';
+
 const seoTitle = 'Torte Artistiche e Wedding Cake Personalizzate | Lucia Garro Cake Designer';
 const seoDescription = 'Torte artistiche personalizzate di Lucia Garro, cake designer a Siracusa: wedding cake, torte di compleanno, torte scenografiche vere o finte, realizzate con pasta di zucchero, royal icing e fiori in zucchero.';
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/torte-artistiche';
@@ -96,8 +99,16 @@ const torteCompleanno: Torta[] = [
   { titolo: 'Whisky il ragnetto', categoria: 'Compleanno', descrizione: 'Torta ispirata a Whisky il ragnetto, simpatica e colorata, per una festa piena di sorrisi.', foto: [{ src: '/images/torta-compleanno-bambina-tema-whisky-ragnetto.webp', label: 'La torta' }] },
 ];
 
+// le torte di laurea sono condivise con la pagina /torte-di-laurea
+const torteLaurea: Torta[] = torteLaureaDati.map((t) => ({ titolo: nomeCompleto(t), categoria: t.categoria, descrizione: t.descrizione, foto: t.foto }));
+
+// le torte di compleanno per adulti sono condivise con la pagina /torte-di-compleanno-per-adulti
+const torteCompleannoAdulti: Torta[] = torteAdultiDati.map((t) => ({ titolo: nomeCompletoAdulti(t), categoria: t.categoria, descrizione: t.descrizione, foto: t.foto }));
+
 const sezioni = [
   { id: 'nuziali', eyebrow: 'Wedding Cake', titolo: 'Torte <em>nuziali</em>', testo: 'Torte a più piani progettate insieme agli sposi, coordinate con fiori, colori e stile del matrimonio.', torte: torteNuziali },
+  { id: 'laurea', eyebrow: 'Traguardi e lauree', titolo: 'Torte di <em>laurea</em>', testo: 'Tocchi, pergamene, libri e dediche personalizzate per celebrare il giorno della laurea, coordinate con i colori della festa.', torte: torteLaurea, link: { href: '/torte-di-laurea', testo: 'Scopri tutte le torte di laurea' } },
+  { id: 'compleanno-adulti', eyebrow: 'Compleanni da grandi', titolo: 'Torte di compleanno <em>per adulti</em>', testo: 'Drip cake, torte a tema moda, cinema, mare e Sicilia, personalizzate con nome, età e dedica per i compleanni importanti.', torte: torteCompleannoAdulti, link: { href: '/torte-di-compleanno-per-adulti', testo: 'Scopri tutte le torte di compleanno per adulti' } },
   { id: 'compleanno', eyebrow: 'Feste e compleanni', titolo: 'Torte di <em>compleanno</em>', testo: 'Personaggi, animali e mondi fantastici modellati a mano per rendere unica ogni festa.', torte: torteCompleanno },
 ];
 
@@ -107,6 +118,8 @@ const waLink = (titolo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia
 const dettagliPerCategoria: Record<string, string[]> = {
   Matrimonio: ['Progettata insieme agli sposi', 'Fiori e dettagli in zucchero fatti a mano', 'Vera da gustare o scenografica'],
   Compleanno: ['Personaggi e decori modellati a mano', 'Tema e colori su misura', 'Vera da gustare o scenografica'],
+  'Compleanno adulti': ['Nome, età e dedica personalizzati', 'Tema e decori in zucchero fatti a mano', 'Vera da gustare o scenografica'],
+  Laurea: ['Dedica e corso di laurea personalizzati', 'Tocco, pergamena e libri in zucchero fatti a mano', 'Vera da gustare o scenografica'],
 };
 const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Progetto su misura', 'Decorazioni fatte a mano', 'Vera da gustare o scenografica'];
 ---
@@ -319,6 +332,10 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
       .cake-actions{margin-top:auto;width:100%;display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px dashed #ecd2d2}
       .cake-actions .btn{width:100%;padding:11px 18px;font-size:.9rem}
       .cake-actions .ico{width:17px;height:17px}
+      .section-more{display:flex;justify-content:center;margin-top:44px}
+      .section-more .btn{padding:15px 30px}
+      .section-more .btn .ico{transition:transform .2s ease}
+      .section-more .btn:hover .ico{transform:translateX(4px)}
 
       /* ---------- CTA finale ---------- */
       .final{padding:88px 0}
@@ -491,6 +508,22 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
         .cake-modal.is-entering .cm-reveal{animation:none}
       }
     </style>
+    <style>
+      /* ---------- sottomenu "Torte artistiche" > torte di laurea e di compleanno per adulti ---------- */
+      .nav-submenu{display:flex;flex-direction:column;gap:8px}
+      .nav-dropdown{position:relative;display:flex;align-items:center}
+      .nav-dropdown>a{display:inline-flex;align-items:center;gap:6px}
+      .nav-dropdown>a::after{content:"";width:6px;height:6px;margin-top:-4px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);transition:transform .2s ease,margin .2s ease}
+      .nav-dropdown:hover>a::after,.nav-dropdown:focus-within>a::after{transform:rotate(225deg);margin-top:3px}
+      .nav-submenu{position:absolute;left:50%;top:100%;z-index:40;padding-top:14px;transform:translate(-50%,6px);opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease,visibility .2s ease}
+      .nav-dropdown:hover .nav-submenu,.nav-dropdown:focus-within .nav-submenu{opacity:1;visibility:visible;transform:translate(-50%,0)}
+      .nav .nav-submenu a{display:block;padding:12px 20px;border-radius:16px;background:#fffaf6;border:1px solid #eadfd5;box-shadow:0 18px 40px rgba(72,48,34,.16);font-family:Georgia,serif;color:#3b1f18;white-space:nowrap;text-decoration:none;transition:color .2s ease,background .2s ease}
+      .nav .nav-submenu a:hover,.nav .nav-submenu a:focus-visible,.nav .nav-submenu a[aria-current="page"]{color:#a9505e;background:#fff;text-decoration:none}
+      .nav>nav a.is-current-section{color:#a9505e}
+      .mobile-nav-panel nav a.mobile-sub{position:relative;margin-left:18px;padding-left:32px;font-size:.95rem;font-weight:600;color:#7a5a50}
+      .mobile-nav-panel nav a.mobile-sub::before{content:"";position:absolute;left:12px;top:50%;width:10px;height:10px;margin-top:-9px;border-left:1.5px solid #c98a93;border-bottom:1.5px solid #c98a93;border-radius:0 0 0 4px}
+      .mobile-nav-panel nav a.mobile-sub[aria-current="page"]{color:#a9505e}
+    </style>
   </head>
   <body>
     <header>
@@ -499,7 +532,13 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
 
         <nav aria-label="Navigazione principale">
           <a href="/biscotti-decorati">Biscotti</a>
-          <a href="/torte-artistiche" aria-current="page">Torte artistiche</a>
+          <div class="nav-dropdown">
+            <a href="/torte-artistiche" aria-current="page">Torte artistiche</a>
+            <div class="nav-submenu">
+              <a href="/torte-di-laurea">Torte di Laurea</a>
+              <a href="/torte-di-compleanno-per-adulti">Torte di Compleanno per Adulti</a>
+            </div>
+          </div>
           <a href="/sweet-table">Sweet Table</a>
           <a href="/vip-e-collaborazioni">VIP e collab.</a>
           <a href="/curriculum-lucia-garro">Curriculum</a>
@@ -524,6 +563,8 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
           <nav aria-label="Navigazione mobile">
             <a href="/biscotti-decorati">Biscotti</a>
             <a href="/torte-artistiche" aria-current="page">Torte artistiche</a>
+            <a class="mobile-sub" href="/torte-di-laurea">Torte di Laurea</a>
+            <a class="mobile-sub" href="/torte-di-compleanno-per-adulti">Torte di Compleanno per Adulti</a>
             <a href="/sweet-table">Sweet Table</a>
             <a href="/vip-e-collaborazioni">VIP e collab.</a>
             <a href="/curriculum-lucia-garro">Curriculum</a>
@@ -635,6 +676,15 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
                 </article>
               ))}
             </div>
+
+            {sezione.link && (
+              <div class="section-more">
+                <a class="btn btn-primary" href={sezione.link.href}>
+                  {sezione.link.testo}
+                  <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+              </div>
+            )}
           </div>
         </section>
         </Fragment>
