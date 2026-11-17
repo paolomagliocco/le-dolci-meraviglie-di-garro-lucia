@@ -1,4 +1,5 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 const categorie = [
   { nome: 'Compleanni', icona: 'torta', testo: 'Biscotti personalizzati per feste, età e temi speciali.', crop: { x: 232, y: 235 } },
   { nome: 'Battesimi', icona: 'colomba', testo: 'Set delicati per battesimi, bomboniere e sweet table.', crop: { x: 606, y: 235 } },
@@ -300,36 +301,15 @@ const biscottiCategorie = [
   },
 ];
 
-const seoTitle = 'Biscotti Decorati Personalizzati | Le Dolci Meraviglie';
-const seoDescription = 'Biscotti decorati artigianalmente per compleanni, battesimi, comunioni, baby shower e matrimoni. Le Dolci Meraviglie di Lucy Garro, ordina su Etsy.';
+const seoTitle = 'Torte Artistiche e Biscotti Decorati a Siracusa | Lucy Garro';
+const seoDescription = 'Torte artistiche, biscotti decorati, sweet table, cupcake e cake pops per compleanni, battesimi, comunioni, matrimoni e baby shower a Siracusa. Lucy Garro.';
+const seoKeywords = keywordsPagina('home');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const whatsappUrl = 'https://wa.me/393519425808';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/biscotti-decorati-a-tema-rose-e-cuori.png';
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Bakery',
-  name: 'Le Dolci Meraviglie di Lucy Garro',
-  url: canonicalUrl,
-  telephone: '+39 351 942 5808',
-  image: ogImage,
-  description: seoDescription,
-  priceRange: '€€',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Viale Zecchino 72A',
-    addressLocality: 'Siracusa',
-    addressRegion: 'Sicilia',
-    addressCountry: 'IT'
-  },
-  areaServed: [
-    { '@type': 'City', name: 'Siracusa' },
-    { '@type': 'AdministrativeArea', name: 'Sicilia' },
-    { '@type': 'Country', name: 'Italia' }
-  ],
-  sameAs: [etsyUrl]
-};
+const structuredData = attivitaSeo;
 
 const productListStructuredData = {
   '@context': 'https://schema.org',
@@ -361,6 +341,9 @@ const productListStructuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
+    <meta name="keywords" content={seoKeywords} />
+    <meta name="geo.region" content="IT-SR" />
+    <meta name="geo.placename" content="Siracusa" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon.png" />

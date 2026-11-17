@@ -1,6 +1,8 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 const seoTitle = 'Contatti | Richiedi biscotti decorati e Sweet Table | Lucia Garro';
-const seoDescription = 'Contatta Lucia Garro per biscotti decorati personalizzati e sweet table per compleanni, battesimi, baby shower, comunioni, cresime e matrimoni. Compila il modulo e ricevi una risposta.';
+const seoDescription = 'Contatta Lucia Garro per torte, biscotti decorati, sweet table, cupcake e cake pops per compleanni, battesimi, comunioni e matrimoni a Siracusa.';
+const seoKeywords = keywordsPagina('contatti');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/contatti';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/biscotti-decorati-a-tema-rose-e-cuori.png';
@@ -38,6 +40,9 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
+<meta name="keywords" content={seoKeywords} />
+<meta name="geo.region" content="IT-SR" />
+<meta name="geo.placename" content="Siracusa" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -58,6 +63,7 @@ const occasioni = ['Compleanno', 'Battesimo', 'Baby Shower', 'Gender Reveal', 'N
 <meta name="twitter:image" content={ogImage} />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
     <style>
       :root {
         --cream: #fffaf6;

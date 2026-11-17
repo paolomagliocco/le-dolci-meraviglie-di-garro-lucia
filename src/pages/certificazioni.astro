@@ -1,6 +1,8 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 const seoTitle = 'Diplomi e Certificazioni Cake Design | Lucia Garro';
 const seoDescription = 'Scopri certificazioni, diplomi professionali e riconoscimenti internazionali di Lucia Garro nel cake design, sugarpaste, royal icing e decorazione artistica.';
+const seoKeywords = keywordsPagina('certificazioni');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/certificazioni';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/premio-cake-international-lucia-garro.png';
@@ -36,6 +38,9 @@ const structuredData = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
+    <meta name="keywords" content={seoKeywords} />
+    <meta name="geo.region" content="IT-SR" />
+    <meta name="geo.placename" content="Siracusa" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -56,6 +61,7 @@ const structuredData = {
     <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
     <style>
       :root {
         --cream: #fffaf6;

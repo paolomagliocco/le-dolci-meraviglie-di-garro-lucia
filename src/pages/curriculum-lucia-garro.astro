@@ -1,6 +1,8 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 const seoTitle = 'Curriculum Lucia Garro | Cake Designer, Diplomi e Formazione';
 const seoDescription = 'Curriculum di Lucia Garro: cake designer e pasticcera, formazione internazionale, PME Professional Diploma, Squires Kitchen e Cake International.';
+const seoKeywords = keywordsPagina('curriculum-lucia-garro');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/curriculum-lucia-garro';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/foto-curriculum-lucia-garro.jpg';
@@ -100,6 +102,9 @@ const iconeMilestone = [
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{seoTitle}</title>
     <meta name="description" content={seoDescription} />
+    <meta name="keywords" content={seoKeywords} />
+    <meta name="geo.region" content="IT-SR" />
+    <meta name="geo.placename" content="Siracusa" />
     <meta name="robots" content="index,follow,max-image-preview:large" />
     <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -120,6 +125,7 @@ const iconeMilestone = [
     <meta name="twitter:image" content={ogImage} />
 
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+    <script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
 
     <style>
       :root {

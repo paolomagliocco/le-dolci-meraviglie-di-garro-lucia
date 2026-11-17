@@ -1,8 +1,10 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 import { torteCompleannoAdulti, mediaVoti, nomeCompleto, urlProdotto } from '../data/torte-compleanno-adulti';
 
 const seoTitle = 'Torte di Compleanno per Adulti a Siracusa | Lucia Garro';
 const seoDescription = 'Torte di compleanno per adulti a Siracusa: drip cake e torte a tema moda, cinema, mare e Sicilia, vere o scenografiche. Chiedi un preventivo gratuito.';
+const seoKeywords = keywordsPagina('torte-di-compleanno-per-adulti');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/torte-di-compleanno-per-adulti';
 const siteUrl = 'https://www.ledolcimeravigliedigarrolucia.com';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
@@ -60,6 +62,9 @@ const passi = [
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
+<meta name="keywords" content={seoKeywords} />
+<meta name="geo.region" content="IT-SR" />
+<meta name="geo.placename" content="Siracusa" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -81,6 +86,7 @@ const passi = [
 <meta name="twitter:image:alt" content="Torta di compleanno Limoni e Maioliche Siciliane realizzata da Lucia Garro, con la festeggiata" />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
     <style>
       :root {
         --cream: #fffaf6;

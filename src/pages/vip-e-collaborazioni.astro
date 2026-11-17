@@ -1,6 +1,8 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 const seoTitle = 'Personaggi VIP e Collaborazioni | Lucia Garro Cake Designer';
-const seoDescription = 'Le torte di Lucia Garro per personaggi VIP: la torta per gli 80 anni di Stephan Remmler, voce dei Trio e di “Da Da Da”, i compleanni dei figli di Alessia Cammarota e Aldo Palmieri, il battesimo di Alessio e il Trend Wedding 2024 con Cira Lombardo.';
+const seoDescription = 'Le torte di Lucia Garro per VIP: gli 80 anni di Stephan Remmler dei Trio, le feste dei figli di Alessia Cammarota e Aldo Palmieri e il Trend Wedding 2024.';
+const seoKeywords = keywordsPagina('vip-e-collaborazioni');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/vip-e-collaborazioni';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/evento-mastroianni-scuderi-og.jpg';
@@ -150,6 +152,9 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
+<meta name="keywords" content={seoKeywords} />
+<meta name="geo.region" content="IT-SR" />
+<meta name="geo.placename" content="Siracusa" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -170,6 +175,7 @@ const waLink = (testo: string) => whatsappBase + encodeURIComponent(`Ciao Lucia,
 <meta name="twitter:image" content={ogImage} />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
     <style>
       :root {
         --cream: #fffaf6;

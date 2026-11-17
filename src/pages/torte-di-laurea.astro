@@ -1,8 +1,10 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 import { torteLaurea, mediaVoti, nomeCompleto, urlProdotto } from '../data/torte-laurea';
 
 const seoTitle = 'Torte di Laurea Personalizzate a Siracusa | Lucia Garro';
 const seoDescription = 'Torte di laurea personalizzate a Siracusa: tocco, pergamena e dedica in pasta di zucchero, vere o scenografiche. Scopri il catalogo e chiedi un preventivo.';
+const seoKeywords = keywordsPagina('torte-di-laurea');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/torte-di-laurea';
 const siteUrl = 'https://www.ledolcimeravigliedigarrolucia.com';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
@@ -60,6 +62,9 @@ const passi = [
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
+<meta name="keywords" content={seoKeywords} />
+<meta name="geo.region" content="IT-SR" />
+<meta name="geo.placename" content="Siracusa" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -81,6 +86,7 @@ const passi = [
 <meta name="twitter:image:alt" content="Torta di laurea Ingegneria Prestige realizzata da Lucia Garro, con i laureati" />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
     <style>
       :root {
         --cream: #fffaf6;

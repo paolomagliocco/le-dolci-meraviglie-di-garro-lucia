@@ -1,4 +1,5 @@
 ---
+import { keywordsPagina } from '../../data/seo';
 /*
   Pagina prodotto di ogni torta di laurea: /torte-di-laurea/<slug>
   Generata da src/data/torte-laurea.ts (una pagina per torta).
@@ -23,6 +24,7 @@ const whatsappBase = 'https://wa.me/393519425808?text=';
 // title ~60 caratteri: prodotto + brand + città; description dedicata (120-160 caratteri) dai dati della torta
 const seoTitle = `${nome} | Lucia Garro Siracusa`;
 const seoDescription = torta.seoDescription;
+const seoKeywords = keywordsPagina('torte-di-laurea', [nome.toLowerCase()]);
 const fotoSocial = torta.foto[torta.foto.length - 1];
 const ogImage = `${siteUrl}${fotoSocial.src}`;
 const ogImageAlt = `${nome} – ${fotoSocial.label.toLowerCase()}, realizzata da Lucia Garro a Siracusa`;
@@ -126,6 +128,7 @@ const structuredData = [
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
+<meta name="keywords" content={seoKeywords} />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <meta name="author" content="Lucia Garro" />
 <meta name="geo.region" content="IT-SR" />

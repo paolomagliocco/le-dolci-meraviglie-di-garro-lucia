@@ -1,9 +1,11 @@
 ---
+import { keywordsPagina, attivitaSeo } from '../data/seo';
 import { torteLaurea as torteLaureaDati, nomeCompleto } from '../data/torte-laurea';
 import { torteCompleannoAdulti as torteAdultiDati, nomeCompleto as nomeCompletoAdulti } from '../data/torte-compleanno-adulti';
 
-const seoTitle = 'Torte Artistiche e Wedding Cake Personalizzate | Lucia Garro Cake Designer';
-const seoDescription = 'Torte artistiche personalizzate di Lucia Garro, cake designer a Siracusa: wedding cake, torte di compleanno, torte scenografiche vere o finte, realizzate con pasta di zucchero, royal icing e fiori in zucchero.';
+const seoTitle = 'Torte Artistiche e Wedding Cake a Siracusa | Lucia Garro';
+const seoDescription = 'Torte artistiche a Siracusa per matrimoni, compleanni, diciottesimi, battesimi, comunioni e cresime. Vere o scenografiche, in pasta di zucchero.';
+const seoKeywords = keywordsPagina('torte-artistiche');
 const canonicalUrl = 'https://www.ledolcimeravigliedigarrolucia.com/torte-artistiche';
 const etsyUrl = 'https://sweetwondersoflucy.etsy.com';
 const ogImage = 'https://www.ledolcimeravigliedigarrolucia.com/images/torta-nuziale-eleganza-rosa-cipria-con-sposi.jpg';
@@ -130,6 +132,9 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{seoTitle}</title>
 <meta name="description" content={seoDescription} />
+<meta name="keywords" content={seoKeywords} />
+<meta name="geo.region" content="IT-SR" />
+<meta name="geo.placename" content="Siracusa" />
 <meta name="robots" content="index,follow,max-image-preview:large" />
 <link rel="canonical" href={canonicalUrl} />
 <link rel="icon" type="image/png" href="/favicon.png" />
@@ -150,6 +155,7 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
 <meta name="twitter:image" content={ogImage} />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+<script type="application/ld+json" set:html={JSON.stringify(attivitaSeo)}></script>
     <style>
       :root {
         --cream: #fffaf6;
