@@ -2,6 +2,7 @@
 import { keywordsPagina, attivitaSeo } from '../data/seo';
 import { torteLaurea as torteLaureaDati, nomeCompleto } from '../data/torte-laurea';
 import { torteCompleannoAdulti as torteAdultiDati, nomeCompleto as nomeCompletoAdulti } from '../data/torte-compleanno-adulti';
+import { torteBattesimoComunione as torteCerimonieDati, nomeCompleto as nomeCompletoCerimonie } from '../data/torte-battesimo-comunione';
 
 const seoTitle = 'Torte Artistiche e Wedding Cake a Siracusa | Lucia Garro';
 const seoDescription = 'Torte artistiche a Siracusa per matrimoni, compleanni, diciottesimi, battesimi, comunioni e cresime. Vere o scenografiche, in pasta di zucchero.';
@@ -107,10 +108,14 @@ const torteLaurea: Torta[] = torteLaureaDati.map((t) => ({ titolo: nomeCompleto(
 // le torte di compleanno per adulti sono condivise con la pagina /torte-di-compleanno-per-adulti
 const torteCompleannoAdulti: Torta[] = torteAdultiDati.map((t) => ({ titolo: nomeCompletoAdulti(t), categoria: t.categoria, descrizione: t.descrizione, foto: t.foto }));
 
+// le torte per battesimi e comunioni sono condivise con la pagina /torte-per-battesimi-e-comunioni
+const torteBattesimoComunione: Torta[] = torteCerimonieDati.map((t) => ({ titolo: nomeCompletoCerimonie(t), categoria: t.categoria, descrizione: t.descrizione, foto: t.foto }));
+
 const sezioni = [
   { id: 'nuziali', eyebrow: 'Wedding Cake', titolo: 'Torte <em>nuziali</em>', testo: 'Torte a più piani progettate insieme agli sposi, coordinate con fiori, colori e stile del matrimonio.', torte: torteNuziali },
   { id: 'laurea', eyebrow: 'Traguardi e lauree', titolo: 'Torte di <em>laurea</em>', testo: 'Tocchi, pergamene, libri e dediche personalizzate per celebrare il giorno della laurea, coordinate con i colori della festa.', torte: torteLaurea, link: { href: '/torte-di-laurea', testo: 'Scopri tutte le torte di laurea' } },
   { id: 'compleanno-adulti', eyebrow: 'Compleanni da grandi', titolo: 'Torte di compleanno <em>per adulti</em>', testo: 'Drip cake, torte a tema moda, cinema, mare e Sicilia, personalizzate con nome, età e dedica per i compleanni importanti.', torte: torteCompleannoAdulti, link: { href: '/torte-di-compleanno-per-adulti', testo: 'Scopri tutte le torte di compleanno per adulti' } },
+  { id: 'battesimo-comunione', eyebrow: 'Battesimi e comunioni', titolo: 'Torte per battesimi <em>e comunioni</em>', testo: 'Orsetti, angioletti, mongolfiere, fiocchi e tema marino, con il nome del bambino e la data della cerimonia.', torte: torteBattesimoComunione, link: { href: '/torte-per-battesimi-e-comunioni', testo: 'Scopri tutte le torte per battesimi e comunioni' } },
   { id: 'compleanno', eyebrow: 'Feste e compleanni', titolo: 'Torte di <em>compleanno</em>', testo: 'Personaggi, animali e mondi fantastici modellati a mano per rendere unica ogni festa.', torte: torteCompleanno },
 ];
 
@@ -122,6 +127,8 @@ const dettagliPerCategoria: Record<string, string[]> = {
   Compleanno: ['Personaggi e decori modellati a mano', 'Tema e colori su misura', 'Vera da gustare o scenografica'],
   'Compleanno adulti': ['Nome, età e dedica personalizzati', 'Tema e decori in zucchero fatti a mano', 'Vera da gustare o scenografica'],
   Laurea: ['Dedica e corso di laurea personalizzati', 'Tocco, pergamena e libri in zucchero fatti a mano', 'Vera da gustare o scenografica'],
+  Battesimo: ['Nome e data della cerimonia personalizzati', 'Orsetti, angioletti e decori in zucchero fatti a mano', 'Vera da gustare o scenografica'],
+  Comunione: ['Nome e data della cerimonia personalizzati', 'Decori in zucchero fatti a mano', 'Vera da gustare o scenografica'],
 };
 const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Progetto su misura', 'Decorazioni fatte a mano', 'Vera da gustare o scenografica'];
 ---
@@ -543,6 +550,7 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
             <div class="nav-submenu">
               <a href="/torte-di-laurea">Torte di Laurea</a>
               <a href="/torte-di-compleanno-per-adulti">Torte di Compleanno per Adulti</a>
+              <a href="/torte-per-battesimi-e-comunioni">Torte per Battesimi e Comunioni</a>
             </div>
           </div>
           <a href="/sweet-table">Sweet Table</a>
@@ -571,6 +579,7 @@ const dettagli = (categoria: string) => dettagliPerCategoria[categoria] ?? ['Pro
             <a href="/torte-artistiche" aria-current="page">Torte artistiche</a>
             <a class="mobile-sub" href="/torte-di-laurea">Torte di Laurea</a>
             <a class="mobile-sub" href="/torte-di-compleanno-per-adulti">Torte di Compleanno per Adulti</a>
+            <a class="mobile-sub" href="/torte-per-battesimi-e-comunioni">Torte per Battesimi e Comunioni</a>
             <a href="/sweet-table">Sweet Table</a>
             <a href="/vip-e-collaborazioni">VIP e collab.</a>
             <a href="/curriculum-lucia-garro">Curriculum</a>

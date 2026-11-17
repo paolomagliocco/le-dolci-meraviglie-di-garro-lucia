@@ -50,6 +50,12 @@ const keywordsPagine: Record<string, string[]> = {
     'torta 18 anni', 'torta 30 anni', 'torta 40 anni', 'torta 50 anni', 'drip cake', 'torta compleanno donna',
     'torta compleanno uomo', 'cupcake', 'cake pops', 'torte di compleanno Siracusa',
   ],
+  'torte-per-battesimi-e-comunioni': [
+    'torte per battesimi', 'torta battesimo', 'torta battesimo bambino', 'torta battesimo bambina',
+    'torta battesimo con orsetto', 'torta battesimo angioletti', 'torta prima comunione', 'torta comunione',
+    'torta comunione tema mare', 'sweet table battesimo', 'sweet table comunione', 'biscotti decorati battesimo',
+    'torte battesimo Siracusa', 'torte comunione Siracusa',
+  ],
   contatti: [
     'preventivo torta personalizzata', 'ordinare biscotti decorati', 'preventivo sweet table', 'ordinare cupcake',
     'ordinare cake pops', 'contatti cake designer Siracusa', 'dolci per eventi Siracusa',
